@@ -254,4 +254,4 @@ Figma：[画面遷移図](https://www.figma.com/design/6rH7xvD0kMm6SuhPm2uqBo/%E
 
 ## ER図
 
-[![Image from Gyazo](https://i.gyazo.com/18cdb8646fbda3f47e9b81903ef7dd94.png)](https://gyazo.com/18cdb8646fbda3f47e9b81903ef7dd94)
+[![Image from Gyazo](https://i.gyazo.com/39fde195782a471869d270976e3e5ffe.png)](https://gyazo.com/39fde195782a471869d270976e3e5ffe)
