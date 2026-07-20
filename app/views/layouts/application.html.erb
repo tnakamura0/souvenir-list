@@ -23,10 +23,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="min-h-screen flex flex-col">
     <%= render 'shared/header' %>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="container mx-auto mt-28 px-5 flex-1">
       <%= yield %>
     </main>
+    <%= render 'shared/footer' %>
   </body>
 </html>
