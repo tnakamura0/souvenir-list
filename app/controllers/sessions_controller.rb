@@ -9,19 +9,19 @@ class SessionsController < ApplicationController
 
     if user.persisted?
       login user
-      redirect_to root_path
+      redirect_to root_path, notice: "ログインしました"
     else
-      redirect_to login_path
+      redirect_to login_path, alert: "ログインできませんでした"
     end
   end
 
   def destroy
     logout
-    redirect_to login_path, status: :see_other
+    redirect_to login_path, notice: "ログアウトしました", status: :see_other
   end
 
   def failure
-    redirect_to login_path
+    redirect_to login_path, alert: "ログインできませんでした"
   end
 
   private
