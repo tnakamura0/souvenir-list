@@ -2,12 +2,12 @@ FROM ruby:3.4.10
 
 ENV LANG=C.UTF-8
 ENV TZ=Asia/Tokyo
-ENV RAILS_ENV=development
 
 RUN apt-get update -qq \
   && apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
+    vim \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
