@@ -1,21 +1,27 @@
 class SessionsController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
+  skip_before_action :require_login, only: %i[new create failure]
 
   def new
   end
 
   def create
-    if (user = User.find_or_create_from_auth_hash(auth_hash))
+    user = User.find_or_create_from_auth_hash(auth_hash)
+
+    if user.persisted?
       login user
       redirect_to root_path
     else
-      render root_path, status: :unprocessable_entity
+      redirect_to login_path
     end
   end
 
   def destroy
     logout
-    redirect_to root_path, status: :see_other
+    redirect_to login_path, status: :see_other
+  end
+
+  def failure
+    redirect_to login_path
   end
 
   private

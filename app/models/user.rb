@@ -7,7 +7,7 @@ class User < ApplicationRecord
     def find_or_create_from_auth_hash(auth_hash)
       user_params = user_params_from_auth_hash(auth_hash)
       user = find_or_initialize_by(google_uid: user_params[:google_uid])
-      user.update!(user_params)
+      user.update(user_params)
       user
     end
 
