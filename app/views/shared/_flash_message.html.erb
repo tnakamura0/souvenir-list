@@ -1,0 +1,15 @@
+<% flash.each do |key, message| %>
+  <%
+    is_notice = (key == "notice")
+
+    text_color_class   = is_notice ? "text-green-500" : "text-red-500"
+    border_color_class = is_notice ? "border-green-500" : "border-red-500"
+    bg_color_class     = is_notice ? "bg-green-500/10" : "bg-red-500/10"
+    icon_name          = is_notice ? "check_circle" : "warning"
+  %>
+
+  <div class="flex gap-2 rounded-lg border my-3 p-3 <%= text_color_class %> <%= border_color_class %> <%= bg_color_class %>">
+    <span class="material-symbols-rounded"><%= icon_name %></span>
+    <%= message %>
+  </div>
+<% end %>

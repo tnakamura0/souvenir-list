@@ -26,7 +26,8 @@
 
   <body class="min-h-screen flex flex-col">
     <%= render 'shared/header' %>
-    <main class="container mx-auto mt-28 px-5 flex-1">
+    <main class="container mx-auto max-w-2xl px-5 flex-1">
+      <%= render 'shared/flash_message' %>
       <%= yield %>
     </main>
     <%= render 'shared/footer' %>

@@ -30,6 +30,7 @@ RSpec.describe "Sessions", type: :request do
         }.to change(User, :count).by(1)
 
         expect(response).to redirect_to(root_path)
+        expect(flash[:notice]).to eq("ログインしました")
       end
 
       it "ログイン状態になる" do
@@ -58,6 +59,7 @@ RSpec.describe "Sessions", type: :request do
         follow_redirect!
 
         expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("ログインできませんでした")
       end
     end
   end
@@ -67,6 +69,7 @@ RSpec.describe "Sessions", type: :request do
       get "/auth/failure"
 
       expect(response).to redirect_to(login_path)
+      expect(flash[:alert]).to eq("ログインできませんでした")
     end
   end
 
@@ -83,6 +86,7 @@ RSpec.describe "Sessions", type: :request do
 
       expect(response).to redirect_to(login_path)
       expect(response).to have_http_status(:see_other)
+      expect(flash[:notice]).to eq("ログアウトしました")
     end
 
     it "ログイン状態を解除する" do
@@ -99,6 +103,7 @@ RSpec.describe "Sessions", type: :request do
       get root_path
 
       expect(response).to redirect_to(login_path)
+      expect(flash[:alert]).to eq("ログインしてください")
     end
   end
 
