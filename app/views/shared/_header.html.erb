@@ -1,9 +1,12 @@
 <header class="bg-white shadow-sm sticky top-0 z-10">
   <div class="px-4 py-3 flex items-center justify-between">
     <%= link_to "おみやげリスト", root_path, class: "text-navy-600 font-bold text-lg" %>
-    <%= button_to "#", class: "flex gap-0.5 text-red-500 bg-red-50 px-1.5 py-1 rounded" do %>
-      <span class="material-symbols-rounded">logout</span>
-      ログアウト
+
+    <% if logged_in? %>
+      <%= button_to logout_path, method: :delete, class: "flex gap-0.5 text-red-500 bg-red-50 px-1.5 py-1 rounded" do %>
+        <span class="material-symbols-rounded">logout</span>
+        ログアウト
+      <% end %>
     <% end %>
   </div>
 </header>
