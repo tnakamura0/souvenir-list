@@ -13,9 +13,8 @@ Rails.application.routes.draw do
   root "static_pages#home"
 
   # GoogleのOAuth用設定
-  get "auth/:provider/callback", to: "sessions#create"
-  get "auth/failure", to: redirect("/")
   get "login", to: "sessions#new"
-  post "login", to: "sessions#create"
+  get "auth/:provider/callback", to: "sessions#create"
+  get "auth/failure", to: "sessions#failure"
   delete "logout", to: "sessions#destroy"
 end
