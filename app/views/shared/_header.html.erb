@@ -5,7 +5,7 @@
     <% if logged_in? %>
       <%= button_to logout_path, method: :delete, class: "flex gap-0.5 text-red-500 bg-red-50 px-1.5 py-1 rounded" do %>
         <span class="material-symbols-rounded">logout</span>
-        <span><%= t('.logout') %></span>
+        <span><%= t(".logout") %></span>
       <% end %>
     <% end %>
   </div>
