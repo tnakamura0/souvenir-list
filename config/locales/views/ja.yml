@@ -1,0 +1,10 @@
+ja:
+  shared:
+    header:
+      logout: ログアウト
+    footer:
+      terms: 利用規約
+      privacy_policy: プライバシーポリシー
+  sessions:
+    new:
+      google_sign_in_alt: Googleでログイン

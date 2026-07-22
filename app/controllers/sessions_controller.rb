@@ -9,19 +9,19 @@ class SessionsController < ApplicationController
 
     if user.persisted?
       login user
-      redirect_to root_path, notice: "ログインしました"
+      redirect_to root_path, notice: t('sessions.login_success')
     else
-      redirect_to login_path, alert: "ログインできませんでした"
+      redirect_to login_path, alert: t('sessions.login_failure')
     end
   end
 
   def destroy
     logout
-    redirect_to login_path, notice: "ログアウトしました", status: :see_other
+    redirect_to login_path, notice: t('sessions.logout_success'), status: :see_other
   end
 
   def failure
-    redirect_to login_path, alert: "ログインできませんでした"
+    redirect_to login_path, alert: t('sessions.login_failure')
   end
 
   private

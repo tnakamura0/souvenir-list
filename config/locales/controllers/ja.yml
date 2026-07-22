@@ -1,0 +1,7 @@
+ja:
+  application:
+    require_login: ログインしてください
+  sessions:
+    login_success: ログインしました
+    login_failure: ログインできませんでした
+    logout_success: ログアウトしました
