@@ -9,6 +9,11 @@ ja:
       trips: 旅行
       today: 今日
       recipients: 相手
+    sidebar:
+      trips: 旅行
+      today: 今日
+      recipients: 相手
+      logout: ログアウト
   sessions:
     new:
       google_sign_in_alt: Googleでログイン
