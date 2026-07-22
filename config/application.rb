@@ -28,5 +28,7 @@ module App
       generate.test_framework :rspec
       generate.fixture_replacement :factory_bot, dir: "spec/factories"
     end
+
+    config.i18n.default_locale = :ja
   end
 end
