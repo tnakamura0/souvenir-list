@@ -24,12 +24,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
   </head>
 
-  <body class="min-h-screen flex flex-col">
+  <body class="<%= class_names("min-h-screen flex flex-col", { "pb-16 md:pb-0" => logged_in? } ) %>">
     <%= render "shared/header" %>
     <main class="container mx-auto max-w-2xl px-5 flex-1">
       <%= render "shared/flash_message" %>
       <%= yield %>
     </main>
     <%= render "shared/footer" %>
+    <% if logged_in? %>
+      <%= render "shared/bottom_navigation" %>
+    <% end %>
   </body>
 </html>

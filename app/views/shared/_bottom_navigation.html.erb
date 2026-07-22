@@ -1,0 +1,18 @@
+<nav class="md:hidden fixed bottom-0 inset-x-0 z-20 bg-white border-t border-mist-200">
+  <div class="flex h-16">
+    <%= link_to "#", class: "flex-1 flex flex-col items-center justify-center gap-0.5" do %>
+      <span class="material-symbols-rounded">travel</span>
+      <span class="text-xs font-medium"><%= t(".trips") %></span>
+    <% end %>
+
+    <%= link_to "#", class: "flex-1 flex flex-col items-center justify-center gap-0.5" do %>
+      <span class="material-symbols-rounded">today</span>
+      <span class="text-xs font-medium"><%= t(".today") %></span>
+    <% end %>
+
+    <%= link_to "#", class: "flex-1 flex flex-col items-center justify-center gap-0.5" do %>
+      <span class="material-symbols-rounded">group</span>
+      <span class="text-xs font-medium"><%= t(".recipients") %></span>
+    <% end %>
+  </div>
+</nav>
