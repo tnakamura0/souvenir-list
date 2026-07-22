@@ -26,11 +26,18 @@
 
   <body class="<%= class_names("min-h-screen flex flex-col", { "pb-16 md:pb-0" => logged_in? } ) %>">
     <%= render "shared/header" %>
-    <main class="container mx-auto max-w-2xl px-5 flex-1">
-      <%= render "shared/flash_message" %>
-      <%= yield %>
-    </main>
-    <%= render "shared/footer" %>
+    <% if logged_in? %>
+      <%= render "shared/sidebar" %>
+    <% end %>
+
+    <div class="flex flex-col flex-1 <%= "md:pl-56" if logged_in? %>">
+      <main class="container mx-auto max-w-2xl px-5 flex-1 pt-10 pb-24">
+        <%= render "shared/flash_message" %>
+        <%= yield %>
+      </main>
+      <%= render "shared/footer" %>
+    </div>
+
     <% if logged_in? %>
       <%= render "shared/bottom_navigation" %>
     <% end %>

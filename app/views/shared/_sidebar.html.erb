@@ -1,0 +1,39 @@
+<aside class="hidden md:flex flex-col fixed left-0 top-14 bottom-0 w-56 overflow-y-auto bg-white border-r border-mist-200 z-5">
+
+  <%# ユーザー情報 %>
+  <div class="p-4 border-b border-mist-100 flex items-center gap-3">
+    <% if current_user.avatar_url.present? %>
+      <img src="<%= current_user.avatar_url %>" alt="<%= current_user.name %>" class="w-8 h-8 rounded-full shrink-0">
+    <% else %>
+      <span class="material-symbols-rounded text-[32px]! shrink-0">account_circle</span>
+    <% end %>
+    <p class="text-sm font-medium text-mist-900 truncate"><%= current_user.name %></p>
+  </div>
+
+  <%# ナビゲーション %>
+  <nav class="flex flex-1 flex-col gap-0.5 px-2 py-3">
+    <%= link_to "#", class: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium" do %>
+      <span class="material-symbols-rounded">travel</span>
+      <span class="text-sm font-medium"><%= t(".trips") %></span>
+    <% end %>
+
+    <%= link_to "#", class: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium" do %>
+      <span class="material-symbols-rounded">today</span>
+      <span class="text-sm font-medium"><%= t(".today") %></span>
+    <% end %>
+
+    <%= link_to "#", class: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium" do %>
+      <span class="material-symbols-rounded">group</span>
+      <span class="text-sm font-medium"><%= t(".recipients") %></span>
+    <% end %>
+  </nav>
+
+  <%# ログアウト %>
+  <div class="px-2 py-3 border-t border-mist-100">
+    <%= button_to logout_path, method: :delete, class: "flex gap-2 text-red-500 bg-red-50 px-3 py-2.5 rounded" do %>
+      <span class="material-symbols-rounded">logout</span>
+      <span><%= t(".logout") %></span>
+      <% end %>
+  </div>
+
+</aside>
