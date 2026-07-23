@@ -1,0 +1,19 @@
+<div class="flex items-center justify-between mb-6">
+  <h1 class="font-bold text-2xl text-mist-900">旅行一覧</h1>
+  <%= link_to "#", class: "flex items-center gap-1.5 px-4 py-2 text-sm text-white bg-mist-600 hover:bg-mist-700 rounded-xl" do %>
+    <span class="material-symbols-rounded">add</span>
+    <span>新しい旅行</span>
+  <% end %>
+</div>
+
+<% if @trips.present? %>
+  <div class="space-y-3">
+    <%= render @trips %>
+  </div>
+<% else %>
+  <div class="text-center py-10">
+    <p class="font-medium text-mist-500 mb-2">旅行がまだありません</p>
+    <p class="text-sm text-mist-400 mb-6">旅行・出張を作成して、お土産をチェックしましょう。</p>
+    <%= link_to "最初の旅行を作成する", "#", class: "px-6 py-3 font-medium text-white bg-mist-600 hover:bg-mist-700 rounded-2xl" %>
+  </div>
+<% end %>
