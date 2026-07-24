@@ -12,7 +12,7 @@
 
   <%# ナビゲーション %>
   <nav class="flex flex-1 flex-col gap-0.5 px-2 py-3">
-    <%= link_to "#", class: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium" do %>
+    <%= link_to trips_path, class: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium" do %>
       <span class="material-symbols-rounded">travel</span>
       <span class="text-sm font-medium"><%= t(".trips") %></span>
     <% end %>

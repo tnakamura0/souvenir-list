@@ -1,0 +1,17 @@
+<div class="bg-white hover:bg-mist-50 rounded-3xl border border-mist-100 hover:border-mist-200 shadow-md">
+  <%= link_to "#", class: "block p-5" do %>
+    <div class="flex justify-between">
+      <div>
+        <h2 class="text-lg font-bold"><%= trip.name %></h2>
+        <p class="text-sm flex items-center gap-1">
+          <span class="material-symbols-rounded">location_on</span><%= trip.destination %>
+        </p>
+      </div>
+      <div class="text-right">
+        <span class="text-xs">
+          <%= trip.departure_date.strftime("%Y/%-m/%-d") %> 〜 <%= trip.return_date.strftime("%Y/%-m/%-d") %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>
