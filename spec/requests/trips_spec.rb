@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Trips", type: :request do
-
   describe "GET /trips" do
     context "ログインしている場合" do
       let(:user) { create(:user) }
@@ -23,7 +22,6 @@ RSpec.describe "Trips", type: :request do
         get trips_path
 
         expect(response).to have_http_status(:ok)
-        puts response.body
         expect(response.body).to include("京都")
       end
 
@@ -33,7 +31,7 @@ RSpec.describe "Trips", type: :request do
         get trips_path
 
         expect(response).to have_http_status(:ok)
-        expect(response.body).not_to include("大阪") 
+        expect(response.body).not_to include("大阪")
       end
     end
 
@@ -45,5 +43,4 @@ RSpec.describe "Trips", type: :request do
       end
     end
   end
-
 end
