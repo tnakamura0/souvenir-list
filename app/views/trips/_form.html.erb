@@ -1,0 +1,30 @@
+<%= form_with model: @trip, class: "space-y-5" do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+
+  <div>
+    <%= f.label :name, t("trips.form.name.label"), class: "block mb-1" %>
+    <%= f.text_field :name, placeholder: t("trips.form.name.placeholder"), class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
+  </div>
+
+  <div>
+    <%= f.label :destination, t("trips.form.destination.label"), class: "block mb-1" %>
+    <%= f.text_field :destination, placeholder: t("trips.form.destination.placeholder"), class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <%= f.label :departure_date, t("trips.form.departure_date.label"), class: "block mb-1" %>
+      <%= f.date_field :departure_date, class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
+    </div>
+
+    <div>
+      <%= f.label :return_date, t("trips.form.return_date.label"), class: "block mb-1" %>
+      <%= f.date_field :return_date, class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <%= f.submit class: "font-medium text-white bg-mist-600 block w-full px-4 py-3 border border-mist-500 rounded-2xl" %>
+    <%= link_to t("trips.form.cancel"), trips_path, class: "font-medium text-center px-4 py-3 border border-mist-400 rounded-2xl" %>
+  </div>
+<% end %>

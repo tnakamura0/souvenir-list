@@ -5,3 +5,7 @@ ja:
     login_success: ログインしました
     login_failure: ログインできませんでした
     logout_success: ログアウトしました
+  trips:
+    create:
+      success: 旅行を作成しました
+      failure: 旅行を作成できませんでした
