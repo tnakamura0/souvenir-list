@@ -1,4 +1,6 @@
 ja:
+  common:
+    back: 戻る
   shared:
     header:
       logout: ログアウト
@@ -17,3 +19,25 @@ ja:
   sessions:
     new:
       google_sign_in_alt: Googleでログイン
+  trips:
+    index:
+      title: 旅行一覧
+      new_trip: 新しい旅行
+      empty:
+        title: 旅行がまだありません
+        description: 旅行・出張を作成して、お土産をチェックしましょう。
+        action: 最初の旅行を作成する
+    new:
+      title: 新しい旅行を作成
+    form:
+      name:
+        label: 旅行名
+        placeholder: 例：札幌出張、大阪家族旅行
+      destination:
+        label: 目的地
+        placeholder: 例：北海道、大阪
+      departure_date:
+        label: 出発日
+      return_date:
+        label: 帰宅日
+      cancel: キャンセル

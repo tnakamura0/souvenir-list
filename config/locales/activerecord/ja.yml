@@ -2,10 +2,15 @@ ja:
   activerecord:
     models:
       user: ユーザー
-    
+      trip: 旅行
     attributes:
       user:
         name: 名前
         email: メールアドレス
         avatar_url: プロフィール画像
         google_uid: Google UID
+      trip:
+        name: 旅行名
+        destination: 目的地
+        departure_date: 出発日
+        return_date: 帰宅日
