@@ -1,5 +1,5 @@
 <div class="mb-6">
-  <%= link_to trips_path, class: "inline-flex items-center gap-1 text-sm text-mist-400 hover:text-mist-700" do %>
+  <%= link_to trip_path(@trip), class: "inline-flex items-center gap-1 text-sm text-mist-400 hover:text-mist-700" do %>
     <span class="material-symbols-rounded">chevron_left</span>
     <span><%= t("common.back") %></span>
   <% end %>
@@ -7,5 +7,5 @@
 
 <div>
   <h1 class="font-bold text-xl mb-6"><%= t(".title") %></h1>
-  <%= render "form", trip: @trip, cancel_path: trips_path %>
+  <%= render "form", trip: @trip, cancel_path: trip_path(@trip) %>
 </div>

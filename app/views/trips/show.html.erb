@@ -5,7 +5,7 @@
   <% end %>
 
   <div class="flex gap-2">
-    <%= link_to t(".edit"), "#", class: "text-xs px-3 py-1.5 border rounded-xl" %>
+    <%= link_to t(".edit"), edit_trip_path(@trip), class: "text-xs px-3 py-1.5 border rounded-xl" %>
     <%= button_to t(".delete"), "#", class: "text-xs px-3 py-1.5 border rounded-xl" %>
   </div>
 </div>
