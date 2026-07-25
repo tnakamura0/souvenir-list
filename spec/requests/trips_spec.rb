@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Trips", type: :request do
   describe "GET /trips" do
@@ -17,7 +17,7 @@ RSpec.describe "Trips", type: :request do
       end
 
       it "自分の旅行を表示する" do
-        trip = create(:trip, user:, destination: "京都")
+        create(:trip, user:, destination: "京都")
 
         get trips_path
 
@@ -79,12 +79,7 @@ RSpec.describe "Trips", type: :request do
       it "正常な値なら旅行を作成できる" do
         expect {
           post trips_path, params: {
-            trip: {
-              name: "東京出張",
-              destination: "東京",
-              departure_date: Date.today,
-              return_date: Date.today
-            }
+            trip: attributes_for(:trip)
           }
         }.to change(user.trips, :count).by(1)
 
@@ -95,12 +90,7 @@ RSpec.describe "Trips", type: :request do
       it "不正な値なら旅行が作成できない" do
         expect {
           post trips_path, params: {
-            trip: {
-              name: "東京出張",
-              destination: "",
-              departure_date: Date.today,
-              return_date: Date.today
-            }
+            trip: attributes_for(:trip, destination: "")
           }
         }.not_to change(user.trips, :count)
 
@@ -112,12 +102,7 @@ RSpec.describe "Trips", type: :request do
     context "ログインしていない場合" do
       it "ログイン画面へリダイレクトする" do
         post trips_path, params: {
-          trip: {
-            name: "東京出張",
-            destination: "東京",
-            departure_date: Date.today,
-            return_date: Date.today
-          }
+          trip: attributes_for(:trip)
         }
 
         expect(response).to redirect_to(login_path)
