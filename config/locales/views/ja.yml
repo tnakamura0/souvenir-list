@@ -1,6 +1,6 @@
 ja:
   common:
-    back: 戻る
+    back: 一覧に戻る
   shared:
     header:
       logout: ログアウト
@@ -29,6 +29,14 @@ ja:
         action: 最初の旅行を作成する
     new:
       title: 新しい旅行を作成
+    show:
+      edit: 編集
+      delete: 削除
+      souvenir_list: お土産リスト
+      add_recipient: 相手を追加
+      empty:
+        message: まだ相手が追加されていません
+        action: 相手を追加する
     form:
       name:
         label: 旅行名
