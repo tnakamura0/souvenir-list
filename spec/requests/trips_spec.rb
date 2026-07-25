@@ -125,4 +125,55 @@ RSpec.describe "Trips", type: :request do
       end
     end
   end
+
+  describe "GET /trips/:id" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+
+      before do
+        login_as(user)
+      end
+
+      context "自分の旅行を指定した場合" do
+        let(:trip) { create(:trip, user:) }
+
+        it "旅行詳細画面を表示する" do
+          get trip_path(trip)
+
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include(trip.destination)
+        end
+      end
+
+      context "他のユーザーの旅行を指定した場合" do
+        let(:other_user) { create(:user) }
+        let(:trip) { create(:trip, user: other_user) }
+
+        it "旅行詳細画面を表示しない" do
+          get trip_path(trip)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context "存在しない旅行を指定した場合" do
+        it "旅行詳細画面を表示しない" do
+          get trip_path(id: 0)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      let(:trip) { create(:trip) }
+
+      it "ログイン画面へリダイレクトする" do
+        get trip_path(trip)
+
+        expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("ログインしてください")
+      end
+    end
+  end
 end
