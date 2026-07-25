@@ -21,6 +21,20 @@ class TripsController < ApplicationController
     @trip = current_user.trips.find(params[:id])
   end
 
+  def edit
+    @trip = current_user.trips.find(params[:id])
+  end
+
+  def update
+    @trip = current_user.trips.find(params[:id])
+    if @trip.update(trip_params)
+      redirect_to trip_path(@trip), notice: t(".success")
+    else
+      flash.now[:alert] = t(".failure")
+      render :edit, status: :unprocessable_content
+    end
+  end
+
   private
 
   def trip_params

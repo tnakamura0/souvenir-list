@@ -9,3 +9,6 @@ ja:
     create:
       success: 旅行を作成しました
       failure: 旅行を作成できませんでした
+    update:
+      success: 更新しました
+      failure: 更新できませんでした
