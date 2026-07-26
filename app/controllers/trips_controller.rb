@@ -35,6 +35,12 @@ class TripsController < ApplicationController
     end
   end
 
+  def destroy
+    trip = current_user.trips.find(params[:id])
+    trip.destroy!
+    redirect_to trips_path, notice: t(".success")
+  end
+
   private
 
   def trip_params
