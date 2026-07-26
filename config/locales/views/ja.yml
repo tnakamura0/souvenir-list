@@ -32,6 +32,7 @@ ja:
     show:
       edit: 編集
       delete: 削除
+      delete_confirmation: "%{trip_name}を削除しますか？"
       souvenir_list: お土産リスト
       add_recipient: 相手を追加
       empty:

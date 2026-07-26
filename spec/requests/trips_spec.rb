@@ -290,4 +290,52 @@ RSpec.describe "Trips", type: :request do
       end
     end
   end
+
+  describe "DELETE /trips/:id" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+
+      before do
+        login_as(user)
+      end
+
+      context "自分の旅行を指定した場合" do
+        let!(:trip) { create(:trip, user:) }
+
+        it "旅行を削除できる" do
+          expect {
+            delete trip_path(trip)
+          }.to change(Trip, :count).by(-1)
+
+          expect(response).to redirect_to(trips_path)
+          follow_redirect!
+          expect(flash[:notice]).to eq("旅行を削除しました")
+        end
+      end
+
+      context "他のユーザーの旅行を指定した場合" do
+        let(:other_user) { create(:user) }
+        let!(:trip) { create(:trip, user: other_user) }
+
+        it "旅行を削除できない" do
+          expect {
+            delete trip_path(trip)
+          }.not_to change(Trip, :count)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      let!(:trip) { create(:trip) }
+      it "ログイン画面へリダイレクトする" do
+        expect {
+          delete trip_path(trip)
+        }.not_to change(Trip, :count)
+
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
 end
