@@ -1,6 +1,8 @@
 ja:
   common:
     back: 戻る
+    edit: 編集
+    delete: 削除
   shared:
     header:
       logout: ログアウト
@@ -50,3 +52,15 @@ ja:
       return_date:
         label: 帰宅日
       cancel: キャンセル
+  recipients:
+    index:
+      title: 相手一覧
+      description: お土産を渡す相手の管理
+      new_recipient: 新しい相手
+
+      empty:
+        title: 相手がまだ登録されていません
+        description: 家族・同僚・友人などを登録しましょう
+        button: 最初の相手を登録する
+    recipient:
+      group_badge: グループ
