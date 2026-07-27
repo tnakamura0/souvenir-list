@@ -62,5 +62,22 @@ ja:
         title: 相手がまだ登録されていません
         description: 家族・同僚・友人などを登録しましょう
         button: 最初の相手を登録する
+    new:
+      title: 新しい相手を登録
+    form:
+      name:
+        label: 名前
+        placeholder: 例：父親、営業部 A 部長、山田さん
+      kind:
+        label: 種別
+        individual: 個人
+        group: グループ
+      people_count:
+        label: 人数
+        placeholder: 例：10
+      memo:
+        label: メモ（任意）
+        placeholder: 例：お酒好き、甘いものは苦手
+      cancel: キャンセル
     recipient:
       group_badge: グループ

@@ -1,0 +1,43 @@
+<%= form_with model: @recipient, class: "space-y-5" do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+
+  <%# 名前 %>
+  <div>
+    <%= f.label :name, t("recipients.form.name.label"), class: "block mb-1" %>
+    <%= f.text_field :name, placeholder: t("recipients.form.name.placeholder"), class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
+  </div>
+
+  <%# 種別 %>
+  <p class=" mb-2"><%= t("recipients.form.kind.label") %></p>
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <%= f.radio_button :kind, "individual", class: "peer sr-only" %>
+      <%= f.label :kind_individual, t("recipients.form.kind.individual"), class: "flex cursor-pointer items-center justify-center rounded-xl border border-mist-300 px-4 py-3 text-sm font-medium text-mist-700 transition peer-checked:border-mist-600 peer-checked:bg-mist-300" %>
+    </div>
+
+    <div>
+      <%= f.radio_button :kind, "group", class: "peer sr-only" %>
+      <%= f.label :kind_group, t("recipients.form.kind.group"), class: "flex cursor-pointer items-center justify-center rounded-xl border border-mist-300 px-4 py-3 text-sm font-medium text-mist-700 transition peer-checked:border-mist-600 peer-checked:bg-mist-300" %>
+    </div>
+  </div>
+
+  <%# グループの人数 %>
+  <div>
+    <%= f.label :people_count, t("recipients.form.people_count.label"), class: "block mb-1" %>
+    <%= f.number_field :people_count, placeholder: t("recipients.form.people_count.placeholder"), min: 2, step: 1, class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
+  </div>
+
+  <%# メモ %>
+  <div>
+    <%= f.label :memo, t("recipients.form.memo.label"), class: "block mb-1" %>
+    <%= f.textarea :memo, placeholder: t("recipients.form.memo.placeholder"), class: "w-full border border-mist-200 rounded px-4 py-3 text-sm focus:border-2 focus:border-mist-400" %>
+  </div>
+
+  <%# タグ関連 %>
+
+  <%# 登録・キャンセルボタン %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <%= f.submit class: "font-medium text-white bg-mist-600 block w-full px-4 py-3 border border-mist-500 rounded-2xl" %>
+    <%= link_to t("recipients.form.cancel"), cancel_path, class: "font-medium text-center px-4 py-3 border border-mist-400 rounded-2xl" %>
+  </div>
+<% end %>
