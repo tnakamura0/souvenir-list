@@ -13,4 +13,8 @@ class Recipient < ApplicationRecord
 
   validates :name, presence: true
   validates :people_count, presence: true
+
+  def display_name
+    kind_group? ? "#{name}（#{people_count}人）" : name
+  end
 end

@@ -1,0 +1,28 @@
+<div class="bg-white hover:bg-mist-50 rounded-3xl border border-mist-100 hover:border-mist-200 shadow-md p-5 flex items-start justify-between">
+  <%= link_to "#" do %>
+    <div>
+      <%# 名前 %>
+      <span><%= recipient.display_name %></span>
+
+      <%# タグ %>
+
+      <%# 種別がグループであることを明示 %>
+      <% if recipient.kind_group? %>
+        <div>
+          <span class="text-xs bg-mist-100 text-mist-700 px-2 py-0.5 rounded-full">
+            <%= t("recipients.recipient.group_badge") %>
+          </span>
+        </div>
+      <% end %>
+
+      <%# メモ %>
+      <% if recipient.memo.present? %>
+        <p class="text-xs text-mist-400 mt-1 truncate"><%= recipient.memo %></p>
+      <% end %>
+    </div>
+    <div class="flex items-center gap-2 shrink-0">
+      <%= link_to t("common.edit"), "#", class: "text-xs text-mist-400 hover:text-mist-700 px-3 py-1.5 border border-mist-200 rounded-xl" %>
+      <%= button_to t("common.delete"), "#", class: "text-xs text-red-400 hover:text-red-600 px-3 py-1.5 border border-red-100 rounded-xl" %>
+    </div>
+  <% end %>
+</div>

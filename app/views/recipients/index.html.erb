@@ -1,0 +1,25 @@
+<div class="flex items-center justify-between mb-6">
+  <div>
+    <h1 class="font-bold text-2xl text-mist-900 mb-0.5"><%= t(".title") %></h1>
+    <p class="text-sm text-mist-500"><%= t(".description") %></p>
+  </div>
+  <%= link_to "#", class: "flex items-center gap-1.5 px-4 py-2 text-sm text-white bg-mist-600 hover:bg-mist-700 rounded-xl" do %>
+    <span class="material-symbols-rounded">add</span>
+    <span><%= t(".new_recipient") %></span>
+  <% end %>
+</div>
+
+<%# タグ関係 %>
+
+<% if @recipients.present? %>
+  <div class="space-y-3">
+    <%= render @recipients %>
+  </div>
+<% else %>
+  <%# 相手を1つも作成していない場合の表示 %>
+  <div class="text-center py-10">
+    <p class="font-medium text-mist-500 mb-2"><%= t(".empty.title") %></p>
+    <p class="text-sm text-mist-400 mb-6"><%= t(".empty.description") %></p>
+    <%= link_to t(".empty.button"), "#", class: "px-6 py-3 font-medium text-white bg-mist-600 hover:bg-mist-700 rounded-2xl" %>
+  </div>
+<% end %>
