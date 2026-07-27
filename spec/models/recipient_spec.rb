@@ -28,8 +28,23 @@ RSpec.describe Recipient, type: :model do
       end
     end
 
-    context "people_countが空の場合" do
-      before { recipient.people_count = nil }
+    context "kindがindividualでpeople_countが空の場合" do
+      before do
+        recipient.kind = :individual
+        recipient.people_count = nil
+      end
+
+      it "people_countに1が設定され、有効である" do
+        expect(recipient).to be_valid
+        expect(recipient.people_count).to eq(1)
+      end
+    end
+
+    context "kindがgroupでpeople_countが空の場合" do
+      before do
+        recipient.kind = :group
+        recipient.people_count = nil
+      end
 
       it "無効である" do
         expect(recipient).to be_invalid
