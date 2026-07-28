@@ -131,4 +131,159 @@ RSpec.describe "Recipients", type: :request do
       end
     end
   end
+
+  describe "GET /recipients/:id/edit" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+
+      before do
+        login_as(user)
+      end
+
+      context "自分が作成した相手を指定した場合" do
+        let(:recipient) { create(:recipient, user:) }
+
+        it "相手編集画面を表示する" do
+          get edit_recipient_path(recipient)
+
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include(recipient.name)
+        end
+      end
+
+      context "他ユーザーが作成した相手を指定した場合" do
+        let(:other_user) { create(:user) }
+        let(:recipient) { create(:recipient, user: other_user) }
+
+        it "相手編集画面を表示しない" do
+          get edit_recipient_path(recipient)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context "存在しない相手を指定した場合" do
+        it "相手編集画面を表示しない" do
+          get edit_recipient_path(id: 0)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      let(:recipient) { create(:recipient) }
+
+      it "ログイン画面へリダイレクトする" do
+        get edit_recipient_path(recipient)
+
+        expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("ログインしてください")
+      end
+    end
+  end
+
+  describe "PATCH /recipients/:id" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+
+      before do
+        login_as(user)
+      end
+
+      context "自分が作成した相手を指定した場合" do
+        let(:recipient) { create(:recipient, user:, name: "更新前の名前") }
+
+        context "正常な値の場合" do
+          it "相手を更新できる" do
+            expect {
+              patch recipient_path(recipient), params: {
+                recipient: {
+                  name: "更新後の名前"
+                }
+              }
+            }.to change { recipient.reload.name }.from("更新前の名前").to("更新後の名前")
+          end
+
+          it "相手一覧画面へリダイレクトする" do
+            patch recipient_path(recipient), params: {
+              recipient: {
+                name: "更新後の名前"
+              }
+            }
+
+            expect(response).to redirect_to(recipients_path)
+            expect(flash[:notice]).to eq("相手を更新しました")
+          end
+        end
+
+        context "不正な値の場合" do
+          it "相手を更新できない" do
+            expect {
+              patch recipient_path(recipient), params: {
+                recipient: {
+                  name: ""
+                }
+              }
+            }.not_to change { recipient.reload.name }
+          end
+
+          it "相手編集画面を再表示する" do
+            patch recipient_path(recipient), params: {
+              recipient: {
+                name: ""
+              }
+            }
+
+            expect(response).to have_http_status(:unprocessable_content)
+            expect(flash[:alert]).to eq("相手を更新できませんでした")
+          end
+        end
+      end
+
+      context "他ユーザーが作成した相手を指定した場合" do
+        let(:other_user) { create(:user) }
+        let(:recipient) { create(:recipient, user: other_user) }
+
+        it "相手を更新できない" do
+          expect {
+            patch recipient_path(recipient), params: {
+              recipient: {
+                name: "更新後の名前"
+              }
+            }
+          }.not_to change { recipient.reload.name }
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context "存在しない相手を指定した場合" do
+        it "相手を更新できない" do
+          patch recipient_path(id: 0), params: {
+            recipient: {
+              name: "更新後の名前"
+            }
+          }
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      let(:recipient) { create(:recipient) }
+
+      it "ログイン画面へリダイレクトする" do
+        patch recipient_path(recipient), params: {
+          recipient: {
+            name: "更新後の旅行名"
+          }
+        }
+
+        expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("ログインしてください")
+      end
+    end
+  end
 end
