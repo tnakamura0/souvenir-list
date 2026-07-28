@@ -230,7 +230,7 @@ RSpec.describe "Trips", type: :request do
           }
 
           expect(response).to redirect_to(trip_path(trip))
-          expect(flash[:notice]).to eq("更新しました")
+          expect(flash[:notice]).to eq("旅行を更新しました")
           expect(trip.reload.name).to eq("更新後の旅行名")
         end
 
@@ -240,7 +240,7 @@ RSpec.describe "Trips", type: :request do
           }
 
           expect(response).to have_http_status(:unprocessable_content)
-          expect(flash[:alert]).to eq("更新できませんでした")
+          expect(flash[:alert]).to eq("旅行を更新できませんでした")
           expect(trip.reload.name).to eq("更新前の旅行名")
         end
       end

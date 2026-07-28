@@ -17,6 +17,20 @@ class RecipientsController < ApplicationController
     end
   end
 
+  def edit
+    @recipient = current_user.recipients.find(params[:id])
+  end
+
+  def update
+    @recipient = current_user.recipients.find(params[:id])
+    if @recipient.update(recipient_params)
+      redirect_to recipients_path, notice: t(".success")
+    else
+      flash.now[:alert] = t(".failure")
+      render :edit, status: :unprocessable_content
+    end
+  end
+
   private
 
   def recipient_params

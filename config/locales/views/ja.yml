@@ -64,6 +64,8 @@ ja:
         button: 最初の相手を登録する
     new:
       title: 新しい相手を登録
+    edit:
+      title: 相手情報を編集
     form:
       name:
         label: 名前

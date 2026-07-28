@@ -11,12 +11,25 @@
   <p class=" mb-2"><%= t("recipients.form.kind.label") %></p>
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <%= f.radio_button :kind, "individual", class: "peer sr-only", data: { action: "change->people-count-toggle#toggle" } %>
+      <%= f.radio_button :kind,
+                        "individual",
+                        class: "peer sr-only",
+                        data: {
+                          action: "change->people-count-toggle#toggle",
+                        }
+      %>
       <%= f.label :kind_individual, t("recipients.form.kind.individual"), class: "flex cursor-pointer items-center justify-center rounded-xl border border-mist-300 px-4 py-3 text-sm font-medium text-mist-700 transition peer-checked:border-mist-600 peer-checked:bg-mist-300" %>
     </div>
 
     <div>
-      <%= f.radio_button :kind, "group", class: "peer sr-only", data: { action: "people-count-toggle#toggle" } %>
+      <%= f.radio_button :kind,
+                        "group",
+                        class: "peer sr-only",
+                        data: {
+                          action: "change->people-count-toggle#toggle",
+                          people_count_toggle_target: "groupRadio"
+                        }
+      %>
       <%= f.label :kind_group, t("recipients.form.kind.group"), class: "flex cursor-pointer items-center justify-center rounded-xl border border-mist-300 px-4 py-3 text-sm font-medium text-mist-700 transition peer-checked:border-mist-600 peer-checked:bg-mist-300" %>
     </div>
   </div>
@@ -24,7 +37,13 @@
   <%# グループの人数 %>
   <div class="hidden" data-people-count-toggle-target="field">
     <%= f.label :people_count, t("recipients.form.people_count.label"), class: "block mb-1" %>
-    <%= f.number_field :people_count, placeholder: t("recipients.form.people_count.placeholder"), min: 2, step: 1, class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
+    <%= f.number_field :people_count,
+                      placeholder: t("recipients.form.people_count.placeholder"),
+                      min: 2,
+                      step: 1,
+                      class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400",
+                      data: { people_count_toggle_target: "input" }
+    %>
   </div>
 
   <%# メモ %>
