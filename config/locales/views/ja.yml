@@ -83,3 +83,4 @@ ja:
       cancel: キャンセル
     recipient:
       group_badge: グループ
+      delete_confirmation: "%{recipient_name}を削除しますか？"

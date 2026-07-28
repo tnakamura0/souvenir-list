@@ -31,6 +31,12 @@ class RecipientsController < ApplicationController
     end
   end
 
+  def destroy
+    recipient = current_user.recipients.find(params[:id])
+    recipient.destroy!
+    redirect_to recipients_path, notice: t(".success")
+  end
+
   private
 
   def recipient_params
