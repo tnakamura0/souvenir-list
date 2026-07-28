@@ -21,3 +21,5 @@ ja:
     update:
       success: 相手を更新しました
       failure: 相手を更新できませんでした
+    destroy:
+      success: 相手を削除しました
