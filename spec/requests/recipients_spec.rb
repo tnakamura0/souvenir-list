@@ -277,9 +277,59 @@ RSpec.describe "Recipients", type: :request do
       it "ログイン画面へリダイレクトする" do
         patch recipient_path(recipient), params: {
           recipient: {
-            name: "更新後の旅行名"
+            name: "更新後の名前"
           }
         }
+
+        expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("ログインしてください")
+      end
+    end
+  end
+
+  describe "DELETE /recipients/:id" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+
+      before do
+        login_as(user)
+      end
+
+      context "自分が作成した相手を指定した場合" do
+        let!(:recipient) { create(:recipient, user:) }
+
+        it "相手を削除できる" do
+          expect {
+            delete recipient_path(recipient)
+          }.to change {
+            Recipient.exists?(recipient.id)
+          }.from(true).to(false)
+
+          expect(response).to redirect_to(recipients_path)
+          expect(flash[:notice]).to eq("相手を削除しました")
+        end
+      end
+
+      context "他のユーザーの相手を指定した場合" do
+        let(:other_user) { create(:user) }
+        let!(:recipient) { create(:recipient, user: other_user) }
+
+        it "相手を削除できない" do
+          expect {
+            delete recipient_path(recipient)
+          }.not_to change(Recipient, :count)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      let!(:recipient) { create(:recipient) }
+      it "相手を削除せずにログイン画面へリダイレクトする" do
+        expect {
+          delete recipient_path(recipient)
+        }.not_to change(Recipient, :count)
 
         expect(response).to redirect_to(login_path)
         expect(flash[:alert]).to eq("ログインしてください")
