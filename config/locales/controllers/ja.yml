@@ -14,3 +14,7 @@ ja:
       failure: 更新できませんでした
     destroy:
       success: 旅行を削除しました
+  recipients:
+    create:
+      success: 相手を作成しました
+      failure: 相手を作成できませんでした

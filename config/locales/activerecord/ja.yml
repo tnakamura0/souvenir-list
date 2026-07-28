@@ -3,6 +3,7 @@ ja:
     models:
       user: ユーザー
       trip: 旅行
+      recipient: 相手
     attributes:
       user:
         name: 名前
@@ -14,3 +15,8 @@ ja:
         destination: 目的地
         departure_date: 出発日
         return_date: 帰宅日
+      recipient:
+        name: 名前
+        kind: 種別
+        people_count: 人数
+        memo: メモ
