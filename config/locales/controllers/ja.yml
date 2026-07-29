@@ -23,3 +23,8 @@ ja:
       failure: 相手を更新できませんでした
     destroy:
       success: 相手を削除しました
+  trip_recipients:
+    create:
+      empty: 相手を選択してください
+      invalid: 追加できない相手が含まれています
+      success: 相手を旅行へ追加しました
