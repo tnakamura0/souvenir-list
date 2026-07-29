@@ -84,3 +84,12 @@ ja:
     recipient:
       group_badge: グループ
       delete_confirmation: "%{recipient_name}を削除しますか？"
+  trip_recipients:
+    new:
+      title: 旅行に相手を追加
+      description: "%{trip_name}でお土産を渡す相手を選んでください"
+      submit: 選択した相手を追加
+      empty: 追加できる相手がいません
+      recipient:
+        group: グループ
+        people_count: "%{count}人"
