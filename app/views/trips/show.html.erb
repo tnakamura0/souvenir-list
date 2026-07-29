@@ -34,11 +34,11 @@
   <h2 class="text-lg font-semibold"><%= t(".souvenir_list") %></h2>
   <div class="flex gap-1 px-3 py-1.5 border rounded-xl">
     <span class="material-symbols-rounded">add</span>
-    <%= link_to t(".add_recipient"), "#" %>
+    <%= link_to t(".add_recipient"), new_trip_trip_recipient_path(@trip) %>
   </div>
 </div>
 
 <div class="text-center py-12 border border-mist-100 rounded-2xl shadow-md">
   <p class="text-sm mb-4"><%= t(".empty.message") %></p>
-  <%= button_to t(".empty.action"), "#", class: "px-3 py-2 border rounded-xl" %>
+  <%= link_to t(".empty.action"), new_trip_trip_recipient_path(@trip), class: "px-3 py-2 border rounded-xl" %>
 </div>

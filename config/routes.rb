@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get "auth/failure", to: "sessions#failure"
   delete "logout", to: "sessions#destroy"
 
-  resources :trips, only: %i[index new create show edit update destroy]
+  resources :trips, only: %i[index new create show edit update destroy] do
+    resources :trip_recipients, only: %i[new create]
+  end
   resources :recipients, only: %i[index new create edit update destroy]
 end

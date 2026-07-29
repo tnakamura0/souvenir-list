@@ -1,0 +1,42 @@
+<label class="block cursor-pointer">
+  <%= check_box_tag "recipient_ids[]",
+                    recipient.id,
+                    false,
+                    class: "peer sr-only" %>
+
+  <div
+    class="
+      relative flex items-center gap-3 rounded-xl
+      border border-mist-200 bg-white p-4
+      transition
+      hover:border-mist-400
+      peer-checked:border-mist-600
+      peer-checked:bg-mist-50
+      peer-checked:ring-1
+      peer-checked:ring-mist-600
+      peer-focus-visible:ring-2
+      peer-focus-visible:ring-mist-500
+      peer-focus-visible:ring-offset-2
+    "
+  >
+    <div class="min-w-0 flex-1">
+      <p class="truncate font-medium text-mist-900">
+        <%= recipient.name %>
+      </p>
+
+      <p class="mt-1 text-sm text-mist-500">
+        <% if recipient.kind_group? %>
+          <%= t("trip_recipients.new.recipient.group") %>
+          ・
+          <%= t("trip_recipients.new.recipient.people_count", count: recipient.people_count) %>
+        <% end %>
+      </p>
+
+      <% if recipient.memo.present? %>
+        <p class="mt-2 line-clamp-2 text-sm text-mist-600">
+          <%= recipient.memo %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</label>

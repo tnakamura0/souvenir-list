@@ -1,6 +1,9 @@
 class Recipient < ApplicationRecord
   belongs_to :user
 
+  has_many :trip_recipients, dependent: :destroy
+  has_many :trips, through: :trip_recipients
+
   before_validation :set_people_count_for_individual
 
   enum :kind,
