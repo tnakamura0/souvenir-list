@@ -32,12 +32,10 @@ ja:
     new:
       title: 新しい旅行を作成
     show:
-      edit: 編集
-      delete: 削除
       delete_confirmation: "%{trip_name}を削除しますか？"
-      souvenir_list: お土産リスト
       add_recipient: 相手を追加
       recipients:
+        title: お土産を渡す相手
         people_count: "%{count}人"
         remove: 旅行から外す
       empty:
