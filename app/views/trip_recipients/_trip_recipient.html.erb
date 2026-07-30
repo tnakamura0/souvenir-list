@@ -1,0 +1,22 @@
+<div class="flex items-center justify-between gap-4 rounded-xl border border-mist-200 bg-white p-4">
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-medium text-mist-900">
+      <%= trip_recipient.recipient.name %>
+    </p>
+
+    <% if trip_recipient.recipient.kind_group? %>
+      <p class="mt-0.5 text-sm text-mist-500">
+        <%= t(
+              "trips.show.recipients.people_count",
+              count: trip_recipient.recipient.people_count
+            ) %>
+      </p>
+    <% end %>
+  </div>
+
+  <%= button_to "#", class: "inline-flex shrink-0 items-center gap-1 rounded-lg px-2 py-1.5 text-sm text-mist-500 hover:bg-mist-50 hover:text-mist-900" do %>
+    <span class="material-symbols-rounded text-[20px]!">close</span>
+
+    <span class="sr-only"><%= t("trips.show.recipients.remove") %></span>
+  <% end %>
+</div>

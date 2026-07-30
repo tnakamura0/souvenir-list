@@ -37,6 +37,9 @@ ja:
       delete_confirmation: "%{trip_name}を削除しますか？"
       souvenir_list: お土産リスト
       add_recipient: 相手を追加
+      recipients:
+        people_count: "%{count}人"
+        remove: 旅行から外す
       empty:
         message: まだ相手が追加されていません
         action: 相手を追加する
