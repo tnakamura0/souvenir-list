@@ -19,6 +19,7 @@ class TripsController < ApplicationController
 
   def show
     @trip = current_user.trips.find(params[:id])
+    @trip_recipients = @trip.trip_recipients.includes(:recipient)
   end
 
   def edit

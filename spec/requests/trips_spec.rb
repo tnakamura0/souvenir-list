@@ -128,6 +128,42 @@ RSpec.describe "Trips", type: :request do
           expect(response).to have_http_status(:ok)
           expect(response.body).to include(trip.destination)
         end
+
+        it "旅行に追加済みの相手と人数を表示する" do
+          recipient = create(
+            :recipient,
+            user:,
+            name: "職場",
+            kind: "group",
+            people_count: 5
+          )
+          create(:trip_recipient, trip:, recipient:)
+
+          get trip_path(trip)
+
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include("職場")
+          expect(response.body).to include("5人")
+        end
+
+        it "他の旅行に追加されている相手を表示しない" do
+          other_trip = create(:trip, user:)
+          recipient = create(:recipient, user:, name: "別の旅行に追加した相手")
+          create(:trip_recipient, trip: other_trip, recipient:)
+
+          get trip_path(trip)
+
+          expect(response).to have_http_status(:ok)
+          expect(response.body).not_to include("別の旅行に追加した相手")
+        end
+
+        it "相手が追加されていない場合は空状態を表示する" do
+          get trip_path(trip)
+
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include("まだ相手が追加されていません")
+          expect(response.body).to include("相手を追加する")
+        end
       end
 
       context "他のユーザーの旅行を指定した場合" do
@@ -305,10 +341,11 @@ RSpec.describe "Trips", type: :request do
         it "旅行を削除できる" do
           expect {
             delete trip_path(trip)
-          }.to change(Trip, :count).by(-1)
+          }.to change {
+            Trip.exists?(trip.id)
+          }.from(true).to(false)
 
           expect(response).to redirect_to(trips_path)
-          follow_redirect!
           expect(flash[:notice]).to eq("旅行を削除しました")
         end
       end
@@ -329,12 +366,13 @@ RSpec.describe "Trips", type: :request do
 
     context "ログインしていない場合" do
       let!(:trip) { create(:trip) }
-      it "ログイン画面へリダイレクトする" do
+      it "旅行を削除せずにログイン画面へリダイレクトする" do
         expect {
           delete trip_path(trip)
         }.not_to change(Trip, :count)
 
         expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("ログインしてください")
       end
     end
   end
