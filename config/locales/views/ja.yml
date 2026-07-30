@@ -37,6 +37,8 @@ ja:
       recipients:
         title: お土産を渡す相手
         people_count: "%{count}人"
+        purchased: 購入済み
+        not_purchased: 未購入
         remove_confirmation: "%{recipient_name}をこの旅行から外しますか？"
         remove: 旅行から外す
       empty:
