@@ -14,7 +14,13 @@
     <% end %>
   </div>
 
-  <%= button_to "#", class: "inline-flex shrink-0 items-center gap-1 rounded-lg px-2 py-1.5 text-sm text-mist-500 hover:bg-mist-50 hover:text-mist-900" do %>
+  <%= button_to trip_trip_recipient_path(trip_recipient.trip, trip_recipient),
+                method: :delete,
+                data: { turbo_confirm: t(
+                  "trips.show.recipients.remove_confirmation",
+                  recipient_name: trip_recipient.recipient.name
+                ) },
+                class: "inline-flex shrink-0 items-center gap-1 rounded-lg px-2 py-1.5 text-sm text-mist-500 hover:bg-mist-50 hover:text-mist-900" do %>
     <span class="material-symbols-rounded text-[20px]!">close</span>
 
     <span class="sr-only"><%= t("trips.show.recipients.remove") %></span>

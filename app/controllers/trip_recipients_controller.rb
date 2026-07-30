@@ -28,4 +28,13 @@ class TripRecipientsController < ApplicationController
 
     redirect_to trip_path(@trip), notice: t(".success")
   end
+
+  def destroy
+    @trip = current_user.trips.find(params[:trip_id])
+    @trip_recipient = @trip.trip_recipients.find(params[:id])
+
+    @trip_recipient.destroy!
+
+    redirect_to trip_path(@trip), notice: t(".success")
+  end
 end
