@@ -29,6 +29,15 @@ class TripRecipientsController < ApplicationController
     redirect_to trip_path(@trip), notice: t(".success")
   end
 
+  def update
+    @trip = current_user.trips.find(params[:trip_id])
+    trip_recipient = @trip.trip_recipients.find(params[:id])
+
+    trip_recipient.update!(trip_recipient_params)
+
+    redirect_to trip_path(@trip), notice: t(".success")
+  end
+
   def destroy
     @trip = current_user.trips.find(params[:trip_id])
     @trip_recipient = @trip.trip_recipients.find(params[:id])
@@ -36,5 +45,11 @@ class TripRecipientsController < ApplicationController
     @trip_recipient.destroy!
 
     redirect_to trip_path(@trip), notice: t(".success")
+  end
+
+  private
+
+  def trip_recipient_params
+    params.require(:trip_recipient).permit(:purchased)
   end
 end

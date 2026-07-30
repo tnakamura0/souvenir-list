@@ -27,4 +27,12 @@ RSpec.describe TripRecipient, type: :model do
       end
     end
   end
+
+  describe "デフォルト値" do
+    it "purchasedがfalseである" do
+      trip_recipient = create(:trip_recipient, trip:, recipient:)
+
+      expect(trip_recipient.purchased).to be(false)
+    end
+  end
 end
