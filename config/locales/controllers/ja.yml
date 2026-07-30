@@ -28,3 +28,5 @@ ja:
       empty: 相手を選択してください
       invalid: 追加できない相手が含まれています
       success: 相手を旅行へ追加しました
+    destroy:
+      success: 相手を外しました

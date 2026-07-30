@@ -174,4 +174,76 @@ RSpec.describe "TripRecipients", type: :request do
       end
     end
   end
+
+  describe "DELETE /trips/:trip_id/trip_recipients/:id" do
+    let(:user) { create(:user) }
+    let(:trip) { create(:trip, user:) }
+    let(:recipient) { create(:recipient, user:) }
+    let!(:trip_recipient) { create(:trip_recipient, trip:, recipient:) }
+
+    context "ログインしている場合" do
+      before do
+        login_as(user)
+      end
+
+      context "自分の旅行に紐づく相手の場合" do
+        it "自分と相手の紐づけを削除する" do
+          expect {
+            delete trip_trip_recipient_path(trip, trip_recipient)
+        }.to change(TripRecipient, :count).by(-1)
+        end
+
+        it "旅行詳細画面へリダイレクトする" do
+          delete trip_trip_recipient_path(trip, trip_recipient)
+
+          expect(response).to redirect_to(trip_path(trip))
+        end
+
+        it "成功メッセージを設定する" do
+          delete trip_trip_recipient_path(trip, trip_recipient)
+
+          expect(flash[:notice]).to eq("相手を外しました")
+        end
+      end
+
+      context "別の旅行に紐づくTripRecipientを指定した場合" do
+        let(:another_trip) { create(:trip, user:) }
+        let(:another_recipient) { create(:recipient, user:) }
+        let!(:another_trip_recipient) { create(:trip_recipient, trip: another_trip, recipient: another_recipient) }
+
+        it "旅行と相手の紐づけを削除しない" do
+          expect {
+            delete trip_trip_recipient_path(trip, another_trip_recipient)
+          }.not_to change(TripRecipient, :count)
+        end
+      end
+
+      context "他のユーザーの旅行の場合" do
+        let(:other_user) { create(:user) }
+        let(:other_trip) { create(:trip, user: other_user) }
+        let(:other_recipient) { create(:recipient, user: other_user) }
+        let!(:other_trip_recipient) { create(:trip_recipient, trip: other_trip, recipient: other_recipient) }
+
+        it "旅行と相手の紐づけを削除しない" do
+          expect {
+            delete trip_trip_recipient_path(other_trip, other_trip_recipient)
+          }.not_to change(TripRecipient, :count)
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      it "旅行と相手の紐づけを削除しない" do
+        expect {
+          delete trip_trip_recipient_path(trip, trip_recipient)
+        }.not_to change(TripRecipient, :count)
+      end
+
+      it "ログイン画面へリダイレクトする" do
+        delete trip_trip_recipient_path(trip, trip_recipient)
+
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
 end
