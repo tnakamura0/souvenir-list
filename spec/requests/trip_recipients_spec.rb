@@ -175,6 +175,89 @@ RSpec.describe "TripRecipients", type: :request do
     end
   end
 
+  describe "PATCH /trips/:trip_id/trip_recipients/:id" do
+    let(:user) { create(:user) }
+    let(:trip) { create(:trip, user:) }
+    let(:recipient) { create(:recipient, user:) }
+    let(:trip_recipient) { create(:trip_recipient, trip:, recipient:) }
+
+    context "ログインしている場合" do
+      before do
+        login_as(user)
+      end
+
+      context "未購入の場合" do
+        it "購入済みに変更する" do
+          patch trip_trip_recipient_path(trip, trip_recipient), params: {
+            trip_recipient: {
+              purchased: true
+            }
+          }
+
+          expect(trip_recipient.reload).to be_purchased
+        end
+
+        it "旅行詳細画面へリダイレクトする" do
+          patch trip_trip_recipient_path(trip, trip_recipient), params: {
+            trip_recipient: {
+              purchased: true
+            }
+          }
+
+          expect(response).to redirect_to(trip_path(trip))
+        end
+      end
+
+      context "購入済みの場合" do
+        before do
+          trip_recipient.update!(purchased: true)
+        end
+
+        it "未購入に変更する" do
+          patch trip_trip_recipient_path(trip, trip_recipient), params: {
+            trip_recipient: {
+              purchased: false
+            }
+          }
+
+          expect(trip_recipient.reload).not_to be_purchased
+        end
+      end
+
+      context "他のユーザーの旅行の場合" do
+        let(:other_user) { create(:user) }
+        let(:other_trip) { create(:trip, user: other_user) }
+        let(:other_recipient) { create(:recipient, user: other_user) }
+        let(:other_trip_recipient) { create(:trip_recipient, trip: other_trip, recipient: other_recipient, purchased: false) }
+
+        it "購入状況を変更できない" do
+          patch trip_trip_recipient_path(other_trip, other_trip_recipient), params: {
+            trip_recipient: {
+              purchased: true
+            }
+          }
+
+          expect(response).to have_http_status(:not_found)
+          expect(other_trip_recipient.reload).not_to be_purchased
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      it "購入状況を変更できず、ログイン画面へリダイレクトする" do
+        expect {
+          patch trip_trip_recipient_path(trip, trip_recipient), params: {
+            trip_recipient: {
+              purchased: true
+            }
+          }
+        }.not_to change { trip_recipient.reload.purchased }
+
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
+
   describe "DELETE /trips/:trip_id/trip_recipients/:id" do
     let(:user) { create(:user) }
     let(:trip) { create(:trip, user:) }
