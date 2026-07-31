@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_31_113040) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_31_114504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "recipient_tags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "recipient_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id", "tag_id"], name: "index_recipient_tags_on_recipient_id_and_tag_id", unique: true
+    t.index ["recipient_id"], name: "index_recipient_tags_on_recipient_id"
+    t.index ["tag_id"], name: "index_recipient_tags_on_tag_id"
+  end
 
   create_table "recipients", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -67,6 +77,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_31_113040) do
     t.index ["google_uid"], name: "index_users_on_google_uid", unique: true
   end
 
+  add_foreign_key "recipient_tags", "recipients"
+  add_foreign_key "recipient_tags", "tags"
   add_foreign_key "recipients", "users"
   add_foreign_key "tags", "users"
   add_foreign_key "trip_recipients", "recipients"
