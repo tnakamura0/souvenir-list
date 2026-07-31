@@ -44,6 +44,10 @@ ja:
       empty:
         message: まだ相手が追加されていません
         action: 相手を追加する
+      progress:
+        title: 購入進捗
+        completed: 全員分購入できました！
+        purchased: "%{purchased_count} / %{total_count} 件購入済み"
     form:
       name:
         label: 旅行名

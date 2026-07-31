@@ -79,4 +79,78 @@ RSpec.describe Trip, type: :model do
       end
     end
   end
+
+  describe "#total_count" do
+    let(:trip) { create(:trip) }
+
+    context "相手が追加されている場合" do
+      before do
+        create_list(:trip_recipient, 3, trip:)
+      end
+
+      it "追加されている相手の件数を返す" do
+        expect(trip.total_count).to eq(3)
+      end
+    end
+
+    context "相手が追加されていない場合" do
+      it "0を返す" do
+        expect(trip.total_count).to eq(0)
+      end
+    end
+  end
+
+  describe "#purchased_count" do
+    let(:trip) { create(:trip) }
+
+    before do
+      create_list(:trip_recipient, 2, trip:, purchased: true)
+      create(:trip_recipient, trip:, purchased: false)
+    end
+
+    it "購入済みの相手の件数を返す" do
+      expect(trip.purchased_count).to eq(2)
+    end
+  end
+
+  describe "#progress_percentage" do
+    let(:trip) { create(:trip) }
+
+    context "相手が追加されていない場合" do
+      it "0を返す" do
+        expect(trip.progress_percentage).to eq(0)
+      end
+    end
+
+    context "購入済みの相手がいない場合" do
+      before do
+        create_list(:trip_recipient, 3, trip:, purchased: false)
+      end
+
+      it "0を返す" do
+        expect(trip.progress_percentage).to eq(0)
+      end
+    end
+
+    context "一部の相手が購入済みの場合" do
+      before do
+        create(:trip_recipient, trip:, purchased: true)
+        create_list(:trip_recipient, 2, trip:, purchased: false)
+      end
+
+      it "購入済み件数の割合を四捨五入して返す" do
+        expect(trip.progress_percentage).to eq(33)
+      end
+    end
+
+    context "すべての相手が購入済みの場合" do
+      before do
+        create_list(:trip_recipient, 3, trip:, purchased: true)
+      end
+
+      it "100を返す" do
+        expect(trip.progress_percentage).to eq(100)
+      end
+    end
+  end
 end

@@ -27,6 +27,9 @@
   </div>
 
   <%# 進捗バー %>
+  <% if @trip.total_count > 0 %>
+    <%= render "progress", trip: @trip %>
+  <% end %>
 </div>
 
 <%# お土産リスト %>
@@ -39,7 +42,7 @@
   <% end %>
 </div>
 
-<% if @trip.trip_recipients.present? %>
+<% if @trip_recipients.present? %>
   <div class="space-y-3">
     <%= render @trip_recipients %>
   </div>
