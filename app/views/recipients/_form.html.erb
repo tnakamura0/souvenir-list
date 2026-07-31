@@ -4,7 +4,7 @@
   <%# 名前 %>
   <div>
     <%= f.label :name, t("recipients.form.name.label"), class: "block mb-1" %>
-    <%= f.text_field :name, placeholder: t("recipients.form.name.placeholder"), class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
+    <%= f.text_field :name, placeholder: t("recipients.form.name.placeholder"), class: "w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
   </div>
 
   <%# 種別 %>
@@ -41,7 +41,7 @@
                       placeholder: t("recipients.form.people_count.placeholder"),
                       min: 2,
                       step: 1,
-                      class: "text-sm w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400",
+                      class: "w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400",
                       data: { people_count_toggle_target: "input" }
     %>
   </div>
@@ -49,7 +49,7 @@
   <%# メモ %>
   <div>
     <%= f.label :memo, t("recipients.form.memo.label"), class: "block mb-1" %>
-    <%= f.textarea :memo, placeholder: t("recipients.form.memo.placeholder"), class: "w-full border border-mist-200 rounded px-4 py-3 text-sm focus:border-2 focus:border-mist-400" %>
+    <%= f.textarea :memo, placeholder: t("recipients.form.memo.placeholder"), class: "w-full border border-mist-200 rounded px-4 py-3 focus:border-2 focus:border-mist-400" %>
   </div>
 
   <%# タグ関連 %>
