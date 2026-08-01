@@ -4,6 +4,9 @@ class Recipient < ApplicationRecord
   has_many :trip_recipients, dependent: :destroy
   has_many :trips, through: :trip_recipients
 
+  has_many :recipient_tags, dependent: :destroy
+  has_many :tags, through: :recipient_tags
+
   before_validation :set_people_count_for_individual
 
   enum :kind,

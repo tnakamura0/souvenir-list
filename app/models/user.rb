@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :trips, dependent: :destroy
   has_many :recipients, dependent: :destroy
+  has_many :tags, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
