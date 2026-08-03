@@ -101,3 +101,13 @@ ja:
       recipient:
         group: グループ
         people_count: "%{count}人"
+  tags:
+    index:
+      title: タグ一覧
+      description: タグを作成すると、相手を分類して探しやすくできます。
+      empty:
+        message: タグがまだ作成されていません
+    form:
+      name:
+        placeholder: 例：家族、職場、友人
+      create: 作成する
