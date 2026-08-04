@@ -32,3 +32,7 @@ ja:
       success: 購入状況を切り替えました
     destroy:
       success: 相手を外しました
+  tags:
+    create:
+      success: タグを作成しました
+      failure: タグを作成できませんでした
