@@ -152,10 +152,10 @@ RSpec.describe "Tags", type: :request do
 
       context "他のユーザーが作成したタグを指定した場合" do
         let(:other_user) { create(:user) }
-        let(:other_tag) { create(:tag, user: other_user) }
+        let(:tag) { create(:tag, user: other_user) }
 
         it "タグ編集画面を表示しない" do
-          get edit_tag_path(other_tag)
+          get edit_tag_path(tag)
 
           expect(response).to have_http_status(:not_found)
         end
@@ -251,7 +251,7 @@ RSpec.describe "Tags", type: :request do
 
       context "他のユーザーが作成したタグを指定した場合" do
         let(:other_user) { create(:user) }
-        let(:other_tag) { create(:tag, user: other_user) }
+        let(:tag) { create(:tag, user: other_user) }
         let(:valid_params) do
           {
             tag: {
@@ -262,12 +262,12 @@ RSpec.describe "Tags", type: :request do
 
         it "タグを更新できない" do
           expect {
-            patch tag_path(other_tag), params: valid_params
-          }.not_to change { other_tag.reload.name }
+            patch tag_path(tag), params: valid_params
+          }.not_to change { tag.reload.name }
         end
 
         it "404を返す" do
-          patch tag_path(other_tag), params: valid_params
+          patch tag_path(tag), params: valid_params
 
           expect(response).to have_http_status(:not_found)
         end
@@ -295,6 +295,63 @@ RSpec.describe "Tags", type: :request do
             name: "更新後の名前"
           }
         }
+
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
+
+  describe "DELETE /tags/:id" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+
+      before do
+        login_as(user)
+      end
+
+      context "自分が作成したタグを指定した場合" do
+        let(:tag) { create(:tag, user:) }
+
+        it "タグを削除できる" do
+          expect {
+            delete tag_path(tag)
+          }.to change {
+            Tag.exists?(tag.id)
+          }.from(true).to(false)
+        end
+
+        it "タグ一覧画面へリダイレクトする" do
+          delete tag_path(tag)
+
+          expect(response).to redirect_to(tags_path)
+        end
+
+        it "成功時のフラッシュメッセージが表示される" do
+          delete tag_path(tag)
+
+          expect(flash[:notice]).to eq("タグを削除しました")
+        end
+      end
+
+      context "他のユーザーのタグを指定した場合" do
+        let(:other_user) { create(:user) }
+        let!(:tag) { create(:tag, user: other_user) }
+
+        it "タグを削除できない" do
+          expect {
+            delete tag_path(tag)
+          }.not_to change(Tag, :count)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      let(:tag) { create(:tag) }
+
+      it "ログイン画面へリダイレクトする" do
+        delete tag_path(tag)
 
         expect(response).to redirect_to(login_path)
       end

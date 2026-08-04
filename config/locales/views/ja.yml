@@ -114,3 +114,5 @@ ja:
       name:
         placeholder: 例：家族、職場、友人
       create: 作成する
+    tag:
+      delete_confirmation: "%{tag_name}を削除しますか？"

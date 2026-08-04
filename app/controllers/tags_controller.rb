@@ -31,6 +31,12 @@ class TagsController < ApplicationController
     end
   end
 
+  def destroy
+    tag = current_user.tags.find(params[:id])
+    tag.destroy!
+    redirect_to tags_path, notice: t(".success")
+  end
+
   private
 
   def tag_params

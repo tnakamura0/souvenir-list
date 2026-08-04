@@ -39,3 +39,5 @@ ja:
     update:
       success: タグを更新しました
       failure: タグを更新できませんでした
+    destroy:
+      success: タグを削除しました
