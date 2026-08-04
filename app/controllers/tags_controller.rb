@@ -16,6 +16,21 @@ class TagsController < ApplicationController
     end
   end
 
+  def edit
+    @tag = current_user.tags.find(params[:id])
+  end
+
+  def update
+    @tag = current_user.tags.find(params[:id])
+
+    if @tag.update(tag_params)
+      redirect_to tags_path, notice: t(".success")
+    else
+      flash.now[:alert] = t(".failure")
+      render :edit, status: :unprocessable_content
+    end
+  end
+
   private
 
   def tag_params

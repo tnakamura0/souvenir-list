@@ -107,6 +107,9 @@ ja:
       description: タグを作成すると、相手を分類して探しやすくできます。
       empty:
         message: タグがまだ作成されていません
+    edit:
+      title: タグ編集
+      description: タグの名前を変更できます
     form:
       name:
         placeholder: 例：家族、職場、友人

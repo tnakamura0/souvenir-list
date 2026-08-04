@@ -131,4 +131,173 @@ RSpec.describe "Tags", type: :request do
       end
     end
   end
+
+  describe "GET /tags/:id/edit" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+
+      before do
+        login_as(user)
+      end
+
+      context "自分が作成したタグを指定した場合" do
+        let(:tag) { create(:tag, user:) }
+
+        it "タグ編集画面を表示する" do
+          get edit_tag_path(tag)
+
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
+      context "他のユーザーが作成したタグを指定した場合" do
+        let(:other_user) { create(:user) }
+        let(:other_tag) { create(:tag, user: other_user) }
+
+        it "タグ編集画面を表示しない" do
+          get edit_tag_path(other_tag)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context "存在しないタグを指定した場合" do
+        it "タグ編集画面を表示しない" do
+          get edit_tag_path(id: 0)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      let(:tag) { create(:tag) }
+
+      it "ログイン画面へリダイレクトする" do
+        get edit_tag_path(tag)
+
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
+
+  describe "PATCH /tags/:id" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+
+      before do
+        login_as(user)
+      end
+
+      context "自分が作成したタグを指定した場合" do
+        let(:tag) { create(:tag, user:, name: "更新前の名前") }
+
+        context "正常な値の場合" do
+          let(:valid_params) do
+            {
+              tag: {
+                name: "更新後の名前"
+              }
+            }
+          end
+
+          it "タグを更新できる" do
+            expect {
+              patch tag_path(tag), params: valid_params
+            }.to change { tag.reload.name }.from("更新前の名前").to("更新後の名前")
+          end
+
+          it "タグ一覧画面へリダイレクトする" do
+            patch tag_path(tag), params: valid_params
+
+            expect(response).to redirect_to(tags_path)
+          end
+
+          it "成功時のフラッシュメッセージを設定する" do
+            patch tag_path(tag), params: valid_params
+
+            expect(flash[:notice]).to eq("タグを更新しました")
+          end
+        end
+
+        context "不正な値の場合" do
+          let(:invalid_params) do
+            {
+              tag: {
+                name: ""
+              }
+            }
+          end
+
+          it "タグを更新できない" do
+            expect {
+              patch tag_path(tag), params: invalid_params
+            }.not_to change { tag.reload.name }
+          end
+
+          it "422ステータスを返す" do
+            patch tag_path(tag), params: invalid_params
+
+            expect(response).to have_http_status(:unprocessable_content)
+          end
+
+          it "失敗時のフラッシュメッセージを設定する" do
+            patch tag_path(tag), params: invalid_params
+
+            expect(flash[:alert]).to eq("タグを更新できませんでした")
+          end
+        end
+      end
+
+      context "他のユーザーが作成したタグを指定した場合" do
+        let(:other_user) { create(:user) }
+        let(:other_tag) { create(:tag, user: other_user) }
+        let(:valid_params) do
+          {
+            tag: {
+              name: "更新後の名前"
+            }
+          }
+        end
+
+        it "タグを更新できない" do
+          expect {
+            patch tag_path(other_tag), params: valid_params
+          }.not_to change { other_tag.reload.name }
+        end
+
+        it "404を返す" do
+          patch tag_path(other_tag), params: valid_params
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context "存在しないタグを指定した場合" do
+        it "タグを更新できない" do
+          patch tag_path(id: 0), params: {
+            tag: {
+              name: "更新後の名前"
+            }
+          }
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      let(:tag) { create(:tag) }
+
+      it "ログイン画面へリダイレクトする" do
+        patch tag_path(tag), params: {
+          tag: {
+            name: "更新後の名前"
+          }
+        }
+
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
 end

@@ -3,7 +3,7 @@
     <%= tag.name %>
   </div>
   <div class="flex items-center gap-2 shrink-0">
-    <%= link_to t("common.edit"), "#", class: "text-xs text-mist-400 hover:text-mist-700 px-3 py-1.5 border border-mist-200 rounded-xl" %>
+    <%= link_to t("common.edit"), edit_tag_path(tag), class: "text-xs text-mist-400 hover:text-mist-700 px-3 py-1.5 border border-mist-200 rounded-xl" %>
     <%= button_to t("common.delete"), "#", class: "text-xs text-red-400 hover:text-red-600 px-3 py-1.5 border border-red-100 rounded-xl" %>
   </div>
 </div>
