@@ -1,6 +1,10 @@
 class RecipientsController < ApplicationController
   def index
+    @tags = current_user.tags.order(:name)
+    @selected_tag = current_user.tags.find_by(id: params[:tag_id])
+
     @recipients = current_user.recipients
+    @recipients = @recipients.with_tag(@selected_tag.id) if @selected_tag
   end
 
   def new

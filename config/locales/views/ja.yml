@@ -65,7 +65,10 @@ ja:
       title: 相手一覧
       description: お土産を渡す相手の管理
       new_recipient: 新しい相手
-
+      tag_filter:
+        label: タグで絞り込み
+        all: すべて表示
+        submit: 絞り込む
       empty:
         title: 相手がまだ登録されていません
         description: 家族・同僚・友人などを登録しましょう
@@ -103,6 +106,9 @@ ja:
     new:
       title: 旅行に相手を追加
       description: "%{trip_name}でお土産を渡す相手を選んでください"
+      tag_filter:
+        all: すべて表示
+        submit: 絞り込む
       submit: 選択した相手を追加
       empty: 追加できる相手がいません
       recipient:

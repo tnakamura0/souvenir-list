@@ -10,6 +10,23 @@
   <p class="mt-1 text-sm text-mist-500"><%= t(".description", trip_name: @trip.name) %></p>
 </div>
 
+<%= form_with url: new_trip_trip_recipient_path(@trip), method: :get, class: "mb-4" do |f| %>
+  <div class="flex items-end gap-2">
+    <div class="min-w-0 flex-1">
+      <%= f.collection_select :tag_id,
+                              @tags,
+                              :id,
+                              :name,
+                              {
+                                include_blank: t(".tag_filter.all"),
+                                selected: @selected_tag&.id
+                              },
+                              class: "w-full border border-mist-200 px-3 py-2" %>
+    </div>
+    <%= f.submit t(".tag_filter.submit"), class: "shrink-0 rounded-xl bg-mist-600 px-4 py-2 text-white" %>
+  </div>
+<% end %>
+
 <% if @recipients.present? %>
   <%= form_with url: trip_trip_recipients_path(@trip) do %>
     <div class="space-y-3">
