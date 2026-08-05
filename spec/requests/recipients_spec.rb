@@ -92,6 +92,37 @@ RSpec.describe "Recipients", type: :request do
 
           expect(response).to redirect_to(recipients_path)
         end
+
+        it "選択したタグを相手に関連付ける" do
+          tags = create_list(:tag, 2, user:)
+
+          post recipients_path, params: {
+              recipient: attributes_for(:recipient).merge(
+                tag_ids: tags.map(&:id)
+              )
+            }
+
+          recipient = user.recipients.last
+
+          expect(recipient.tags).to contain_exactly(*tags)
+        end
+
+        it "自分のタグだけを相手に関連付ける" do
+          own_tag = create(:tag, user:)
+          other_user = create(:user)
+          other_tag = create(:tag, user: other_user)
+
+          post recipients_path, params: {
+            recipient: attributes_for(:recipient).merge(
+              tag_ids: [ own_tag.id, other_tag.id ]
+            )
+          }
+
+          recipient = user.recipients.last
+
+          expect(response).to redirect_to(recipients_path)
+          expect(recipient.tags).to contain_exactly(own_tag)
+        end
       end
 
       context "不正な値の場合" do
@@ -214,6 +245,58 @@ RSpec.describe "Recipients", type: :request do
 
             expect(response).to redirect_to(recipients_path)
             expect(flash[:notice]).to eq("相手を更新しました")
+          end
+
+          it "相手に関連付けるタグを変更する" do
+            old_tag = create(:tag, user:)
+            new_tag = create(:tag, user:)
+            recipient = create(:recipient, user:, tags: [ old_tag ])
+
+            patch recipient_path(recipient), params: {
+              recipient: {
+                name: recipient.name,
+                kind: recipient.kind,
+                people_count: recipient.people_count,
+                memo: recipient.memo,
+                tag_ids: [ new_tag.id ]
+              }
+            }
+
+            expect(recipient.reload.tags).to contain_exactly(new_tag)
+          end
+
+          it "相手に関連付いているタグをすべて解除する" do
+            tag = create(:tag, user:)
+            recipient = create(:recipient, user:, tags: [ tag ])
+
+            patch recipient_path(recipient), params: {
+              recipient: {
+                name: recipient.name,
+                kind: recipient.kind,
+                people_count: recipient.people_count,
+                memo: recipient.memo,
+                tag_ids: [ "" ]
+              }
+            }
+
+            expect(recipient.reload.tags).to be_empty
+          end
+
+          it "他のユーザーのタグを相手に関連付けず、自分のタグだけ更新する" do
+            old_tag = create(:tag, user:, name: "家族")
+            own_tag = create(:tag, user:, name: "職場")
+            other_user = create(:user)
+            other_tag = create(:tag, user: other_user, name: "友人")
+            recipient = create(:recipient, user:, tags: [ old_tag ])
+
+            patch recipient_path(recipient), params: {
+              recipient: attributes_for(:recipient).merge(
+                tag_ids: [ own_tag.id, other_tag.id ]
+              )
+            }
+
+            expect(response).to redirect_to(recipients_path)
+            expect(recipient.reload.tags).to contain_exactly(own_tag)
           end
         end
 
