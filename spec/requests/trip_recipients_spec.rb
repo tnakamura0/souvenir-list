@@ -43,6 +43,25 @@ RSpec.describe "TripRecipients", type: :request do
 
           expect(response.body).not_to include("他のユーザーの友人")
         end
+
+        it "選択したタグが関連付いている未追加の相手だけを表示する" do
+          tag = create(:tag, user:, name: "家族")
+
+          matching_recipient = create(:recipient, user:, name: "母親")
+          non_matching_recipient = create(:recipient, user:, name: "職場の同僚")
+          added_recipient = create(:recipient, user:, name: "父親")
+
+          matching_recipient.tags << tag
+          added_recipient.tags << tag
+
+          create(:trip_recipient, trip:, recipient: added_recipient)
+
+          get new_trip_trip_recipient_path(trip), params: { tag_id: tag.id }
+
+          expect(response.body).to include(matching_recipient.name)
+          expect(response.body).not_to include(non_matching_recipient.name)
+          expect(response.body).not_to include(added_recipient.name)
+        end
       end
 
       context "他のユーザーの旅行を指定した場合" do

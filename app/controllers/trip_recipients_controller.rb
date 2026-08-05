@@ -1,7 +1,12 @@
 class TripRecipientsController < ApplicationController
   def new
     @trip = current_user.trips.find(params[:trip_id])
+    @tags = current_user.tags.order(:name)
+    @selected_tag = current_user.tags.find_by(id: params[:tag_id])
+
     @recipients = current_user.recipients.where.not(id: @trip.recipient_ids)
+
+    @recipients = @recipients.with_tag(@selected_tag.id) if @selected_tag
   end
 
   def create
