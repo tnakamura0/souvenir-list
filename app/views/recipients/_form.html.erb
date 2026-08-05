@@ -53,6 +53,42 @@
   </div>
 
   <%# タグ関連 %>
+  <div>
+    <p class="mb-2 block">
+      <%= t("recipients.form.tags.label") %>
+    </p>
+
+    <% if @tags.present? %>
+      <div class="flex flex-wrap gap-2">
+        <%= f.collection_check_boxes :tag_ids, @tags, :id, :name do |tag| %>
+          <%= tag.label class: "cursor-pointer" do %>
+            <%= tag.check_box class: "peer sr-only" %>
+
+            <span
+              class="
+                inline-flex rounded-full border border-mist-200
+                px-3 py-1.5 text-sm text-mist-600
+                transition
+                hover:border-mist-400
+                peer-checked:border-mist-600
+                peer-checked:bg-mist-600
+                peer-checked:text-white
+                peer-focus-visible:ring-2
+                peer-focus-visible:ring-mist-500
+                peer-focus-visible:ring-offset-2
+              "
+            >
+              <%= tag.text %>
+            </span>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-sm text-mist-500">
+        <%= t("recipients.form.tags.empty") %>
+      </p>
+    <% end %>
+  </div>
 
   <%# 登録・キャンセルボタン %>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

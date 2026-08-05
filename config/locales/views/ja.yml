@@ -88,6 +88,10 @@ ja:
       memo:
         label: メモ（任意）
         placeholder: 例：お酒好き、甘いものは苦手
+      tags:
+        label: タグ
+        description: この相手に付けるタグを選択してください
+        empty: 登録されているタグはありません
       cancel: キャンセル
     recipient:
       group_badge: グループ
