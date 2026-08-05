@@ -25,6 +25,43 @@ RSpec.describe "Recipients", type: :request do
         expect(response.body).to include("自分の友人")
         expect(response.body).not_to include("他のユーザーの友人")
       end
+
+      it "タグが指定されていない場合は自分の相手を全て表示する" do
+        recipient1 = create(:recipient, user:, name: "母親")
+        recipient2 = create(:recipient, user:, name: "職場の同僚")
+
+        get recipients_path
+
+        expect(response.body).to include(recipient1.name)
+        expect(response.body).to include(recipient2.name)
+      end
+
+      it "選択したタグが関連付いている相手だけを表示する" do
+        family_tag = create(:tag, user:, name: "家族")
+
+        family_recipient = create(:recipient, user:, name: "母親")
+        coworker_recipient = create(:recipient, user:, name: "職場の同僚")
+
+        family_recipient.tags << family_tag
+
+        get recipients_path, params: { tag_id: family_tag.id }
+
+        expect(response.body).to include(family_recipient.name)
+        expect(response.body).not_to include(coworker_recipient.name)
+      end
+
+      it "他のユーザーが所有するタグを指定しても他人の相手を表示しない" do
+        own_recipient = create(:recipient, user:, name: "自分の相手")
+
+        other_tag = create(:tag, user: other_user)
+        other_recipient = create(:recipient, user: other_user, name: "他人の相手")
+        other_recipient.tags << other_tag
+
+        get recipients_path, params: { tag_id: other_tag.id }
+
+        expect(response.body).to include(own_recipient.name)
+        expect(response.body).not_to include(other_recipient.name)
+      end
     end
 
     context "ログインしていない場合" do
