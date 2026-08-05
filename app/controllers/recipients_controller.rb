@@ -5,6 +5,7 @@ class RecipientsController < ApplicationController
 
   def new
     @recipient = Recipient.new
+    @tags = current_user.tags
   end
 
   def create
@@ -12,6 +13,7 @@ class RecipientsController < ApplicationController
     if @recipient.save
       redirect_to recipients_path, notice: t(".success")
     else
+      @tags = current_user.tags
       flash.now[:alert] = t(".failure")
       render :new, status: :unprocessable_content
     end
@@ -19,6 +21,7 @@ class RecipientsController < ApplicationController
 
   def edit
     @recipient = current_user.recipients.find(params[:id])
+    @tags = current_user.tags
   end
 
   def update
@@ -26,6 +29,7 @@ class RecipientsController < ApplicationController
     if @recipient.update(recipient_params)
       redirect_to recipients_path, notice: t(".success")
     else
+      @tags = current_user.tags
       flash.now[:alert] = t(".failure")
       render :edit, status: :unprocessable_content
     end
@@ -40,6 +44,10 @@ class RecipientsController < ApplicationController
   private
 
   def recipient_params
-    params.require(:recipient).permit(:name, :kind, :people_count, :memo)
+    permitted = params.require(:recipient).permit(:name, :kind, :people_count, :memo, tag_ids: [])
+
+    permitted[:tag_ids] = current_user.tags.where(id: permitted[:tag_ids]).pluck(:id)
+
+    permitted
   end
 end
