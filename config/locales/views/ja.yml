@@ -92,6 +92,9 @@ ja:
         label: タグ
         description: この相手に付けるタグを選択してください
         empty: 登録されているタグはありません
+      new_tag_name:
+        placeholder: 新しいタグ名を入力
+        description: 既存のタグか新しいタグを設定できます
       cancel: キャンセル
     recipient:
       group_badge: グループ

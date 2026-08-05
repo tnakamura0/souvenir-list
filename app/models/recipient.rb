@@ -1,4 +1,6 @@
 class Recipient < ApplicationRecord
+  attr_accessor :new_tag_name
+
   belongs_to :user
 
   has_many :trip_recipients, dependent: :destroy

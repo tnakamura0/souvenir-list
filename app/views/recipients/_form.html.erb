@@ -53,6 +53,7 @@
   </div>
 
   <%# タグ関連 %>
+  <%# 既存タグ一覧表示 %>
   <div>
     <p class="mb-2 block">
       <%= t("recipients.form.tags.label") %>
@@ -88,6 +89,21 @@
         <%= t("recipients.form.tags.empty") %>
       </p>
     <% end %>
+  </div>
+
+  <%# タグ新規作成フォーム %>
+  <div>
+    <%= f.text_field :new_tag_name,
+                    placeholder: t("recipients.form.new_tag_name.placeholder"),
+                    class: "
+                      w-full rounded border border-mist-200
+                      px-4 py-3 text-sm
+                      focus:border-mist-400 focus:ring-mist-400
+                    " %>
+
+    <p class="mt-1 text-sm text-mist-500">
+      <%= t("recipients.form.new_tag_name.description") %>
+    </p>
   </div>
 
   <%# 登録・キャンセルボタン %>
