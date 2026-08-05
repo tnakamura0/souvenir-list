@@ -24,6 +24,10 @@ class Recipient < ApplicationRecord
   validates :name, presence: true
   validates :people_count, presence: true
 
+  scope :with_tag, ->(tag_id) {
+    joins(:recipient_tags).where(recipient_tags: { tag_id: })
+  }
+
   def display_name
     kind_group? ? "#{name}（#{people_count}人）" : name
   end

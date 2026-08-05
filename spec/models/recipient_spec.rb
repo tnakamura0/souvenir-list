@@ -52,4 +52,20 @@ RSpec.describe Recipient, type: :model do
       end
     end
   end
+
+  describe ".with_tag" do
+    let(:user) { create(:user) }
+    let(:tag) { create(:tag, user:) }
+
+    it "指定したタグが関連付いている相手だけを返す" do
+      matching_recipient = create(:recipient, user:)
+      other_recipient = create(:recipient, user:)
+
+      matching_recipient.tags << tag
+
+      expect(described_class.with_tag(tag.id)).to contain_exactly(
+        matching_recipient
+      )
+    end
+  end
 end
