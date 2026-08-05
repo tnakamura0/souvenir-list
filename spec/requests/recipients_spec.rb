@@ -123,6 +123,93 @@ RSpec.describe "Recipients", type: :request do
           expect(response).to redirect_to(recipients_path)
           expect(recipient.tags).to contain_exactly(own_tag)
         end
+
+        it "新しいタグ名が入力されるとタグを作成して相手に関連付ける" do
+          expect {
+            post recipients_path, params: {
+              recipient: attributes_for(:recipient).merge(
+                new_tag_name: "家族"
+              )
+            }
+          }.to change(Tag, :count).by(1).and change(RecipientTag, :count).by(1)
+
+          recipient = user.recipients.last
+          tag = user.tags.find_by(name: "家族")
+
+          expect(recipient.tags).to include(tag)
+        end
+
+        it "同名のタグが既にある場合は既存タグを関連付ける" do
+          tag = create(:tag, user:, name: "家族")
+
+          expect {
+            post recipients_path, params: {
+              recipient: attributes_for(:recipient).merge(
+                new_tag_name: "家族"
+              )
+            }
+          }.not_to change(Tag, :count)
+
+          recipient = user.recipients.last
+
+          expect(recipient.tags).to contain_exactly(tag)
+        end
+
+        it "既存タグと新しいタグの両方を相手に関連付ける" do
+          existing_tag = create(:tag, user:, name: "友人")
+
+          post recipients_path, params: {
+            recipient: attributes_for(:recipient).merge(
+              tag_ids: [ existing_tag.id ],
+              new_tag_name: "旅行仲間"
+            )
+          }
+
+          recipient = user.recipients.last
+
+          expect(recipient.tags.pluck(:name)).to contain_exactly("友人", "旅行仲間")
+        end
+
+        it "新しいタグ名が空の場合はタグを作成しない" do
+          expect {
+            post recipients_path, params: {
+              recipient: attributes_for(:recipient).merge(
+                new_tag_name: ""
+              )
+            }
+          }.not_to change(Tag, :count)
+
+          expect(user.recipients.last.tags).to be_empty
+        end
+
+        it "新しいタグ名の前後の空白を除去して作成する" do
+          post recipients_path, params: {
+            recipient: attributes_for(:recipient).merge(
+              new_tag_name: "  家族  "
+            )
+          }
+
+          expect(user.tags).to exist(name: "家族")
+          expect(user.tags).not_to exist(name: "  家族  ")
+        end
+
+        it "他のユーザーに同名タグがある場合は自分のタグとして新規作成する" do
+          other_user = create(:user)
+          create(:tag, user: other_user, name: "家族")
+
+          expect {
+            post recipients_path, params: {
+              recipient: attributes_for(:recipient).merge(
+                new_tag_name: "家族"
+              )
+            }
+          }.to change(user.tags, :count).by(1)
+
+          recipient = user.recipients.last
+
+          expect(recipient.tags.first.user).to eq(user)
+          expect(recipient.tags.first.name).to eq("家族")
+        end
       end
 
       context "不正な値の場合" do
@@ -297,6 +384,22 @@ RSpec.describe "Recipients", type: :request do
 
             expect(response).to redirect_to(recipients_path)
             expect(recipient.reload.tags).to contain_exactly(own_tag)
+          end
+
+          it "新しいタグ名が入力されるとタグを作成して相手に追加する" do
+            expect {
+              patch recipient_path(recipient), params: {
+                recipient: {
+                  name: recipient.name,
+                  kind: recipient.kind,
+                  people_count: recipient.people_count,
+                  memo: recipient.memo,
+                  new_tag_name: "職場"
+                }
+              }
+            }.to change(Tag, :count).by(1).and change(RecipientTag, :count).by(1)
+
+            expect(recipient.reload.tags.pluck(:name)).to include("職場")
           end
         end
 
