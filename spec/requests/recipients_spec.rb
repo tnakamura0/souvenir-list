@@ -62,6 +62,17 @@ RSpec.describe "Recipients", type: :request do
         expect(response.body).to include(own_recipient.name)
         expect(response.body).not_to include(other_recipient.name)
       end
+
+      it "相手に関連付いているタグを表示する" do
+        recipient = create(:recipient, user:)
+        tag = create(:tag, user:, name: "家族")
+
+        create(:recipient_tag, recipient:, tag:)
+
+        get recipients_path
+
+        expect(response.body).to include("家族")
+      end
     end
 
     context "ログインしていない場合" do
