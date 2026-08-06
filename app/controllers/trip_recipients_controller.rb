@@ -4,7 +4,7 @@ class TripRecipientsController < ApplicationController
     @tags = current_user.tags.order(:name)
     @selected_tag = current_user.tags.find_by(id: params[:tag_id])
 
-    @recipients = current_user.recipients.where.not(id: @trip.recipient_ids)
+    @recipients = current_user.recipients.includes(:tags).where.not(id: @trip.recipient_ids)
 
     @recipients = @recipients.with_tag(@selected_tag.id) if @selected_tag
   end

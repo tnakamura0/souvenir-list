@@ -20,23 +20,10 @@
     "
   >
     <div class="min-w-0 flex-1">
-      <p class="truncate font-medium text-mist-900">
-        <%= recipient.name %>
-      </p>
-
-      <p class="mt-1 text-sm text-mist-500">
-        <% if recipient.kind_group? %>
-          <%= t("trip_recipients.new.recipient.group") %>
-          ・
-          <%= t("trip_recipients.new.recipient.people_count", count: recipient.people_count) %>
-        <% end %>
-      </p>
-
-      <% if recipient.memo.present? %>
-        <p class="mt-2 line-clamp-2 text-sm text-mist-600">
-          <%= recipient.memo %>
-        </p>
-      <% end %>
+      <%= render(
+            "shared/recipient_summary",
+            recipient: recipient
+          ) %>
     </div>
   </div>
 </label>

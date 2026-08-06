@@ -6,18 +6,11 @@
   }
 ) %>">
   <div class="min-w-0 flex-1">
-    <p class="truncate font-medium text-mist-900">
-      <%= trip_recipient.recipient.name %>
-    </p>
-
-    <% if trip_recipient.recipient.kind_group? %>
-      <p class="mt-0.5 text-sm text-mist-500">
-        <%= t(
-              "trips.show.recipients.people_count",
-              count: trip_recipient.recipient.people_count
-            ) %>
-      </p>
-    <% end %>
+    <%= render(
+          "shared/recipient_summary",
+          recipient: trip_recipient.recipient,
+          show_memo: false
+        ) %>
   </div>
 
   <div class="flex shrink-0 items-center gap-2">
@@ -31,13 +24,20 @@
                       purchased: !trip_recipient.purchased?
                     }
                   },
-                  class: "inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm" do %>
+                  class: "
+                    inline-flex items-center gap-1
+                    rounded-lg px-2 py-1.5 text-sm
+                  " do %>
       <span class="material-symbols-rounded text-[20px]!">
-        <%= trip_recipient.purchased? ? "check_circle" : "radio_button_unchecked" %>
+        <%= trip_recipient.purchased? ?
+              "check_circle" :
+              "radio_button_unchecked" %>
       </span>
 
       <span>
-        <%= trip_recipient.purchased? ? t("trips.show.recipients.purchased") : t("trips.show.recipients.not_purchased") %>
+        <%= trip_recipient.purchased? ?
+              t("trips.show.recipients.purchased") :
+              t("trips.show.recipients.not_purchased") %>
       </span>
     <% end %>
 
@@ -52,8 +52,14 @@
                       recipient_name: trip_recipient.recipient.name
                     )
                   },
-                  class: "inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm text-mist-500 hover:bg-mist-50 hover:text-mist-900" do %>
-      <span class="material-symbols-rounded text-[20px]!">close</span>
+                  class: "
+                    inline-flex items-center gap-1 rounded-lg
+                    px-2 py-1.5 text-sm text-mist-500
+                    hover:bg-mist-50 hover:text-mist-900
+                  " do %>
+      <span class="material-symbols-rounded text-[20px]!">
+        close
+      </span>
 
       <span class="sr-only">
         <%= t("trips.show.recipients.remove") %>
