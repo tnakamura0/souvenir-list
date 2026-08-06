@@ -62,11 +62,13 @@ ja:
   recipients:
     index:
       title: 相手一覧
-      description: お土産を渡す相手の管理
+      description: お土産を渡す相手を管理できます
       new_recipient: 新しい相手
+      manage_tags: タグを管理
       tag_filter:
-        label: タグで絞り込み
-        all: すべて表示
+        title: タグで絞り込む
+        label: タグ
+        all: すべてのタグ
         submit: 絞り込む
       empty:
         title: 相手がまだ登録されていません
