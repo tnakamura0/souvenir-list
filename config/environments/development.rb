@@ -9,6 +9,12 @@ Rails.application.configure do
     Bullet.rails_logger  = true
     Bullet.add_footer    = false
     Bullet.raise = true
+
+    Bullet.add_safelist(
+      type: :unused_eager_loading,
+      class_name: "Recipient",
+      association: :recipient_tags
+    )
   end
 
   # Settings specified here will take precedence over those in config/application.rb.
