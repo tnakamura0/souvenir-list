@@ -31,15 +31,73 @@
 <% end %>
 
 <% if @recipients.present? %>
-  <%= form_with url: trip_trip_recipients_path(@trip) do %>
+  <%= form_with url: trip_trip_recipients_path(@trip),
+                data: { controller: "recipient-selection" },
+                class: "md:pb-4" do %>
+
+    <div class="mb-4 flex items-center justify-between">
+      <p class="text-sm text-mist-500">
+        <%= t(".recipient_count", count: @recipients.size) %>
+      </p>
+
+      <% if @recipients.present? %>
+        <button
+          type="button"
+          class="rounded-xl border border-mist-300 px-3 py-2 text-sm text-mist-700 hover:bg-mist-100 hover:border-mist-500"
+          data-action="recipient-selection#selectAll"
+        >
+          <%= t(".select_all", count: @recipients.size) %>
+        </button>
+      <% end %>
+    </div>
+
     <div class="space-y-3">
       <%= render partial: "selectable_recipient",
                    collection: @recipients,
                    as: :recipient %>
     </div>
-    <div class="mt-6">
-      <%= submit_tag t(".submit"),
-                       class: "w-full rounded-xl bg-mist-600 px-4 py-3 text-sm font-medium text-white hover:bg-mist-700" %>
+
+    <div
+      class="
+        fixed inset-x-0 bottom-0 z-20
+        border-t border-mist-200 bg-white
+        px-4 py-3
+        md:static md:mt-6 md:border-0 md:bg-transparent md:px-0
+      "
+    >
+      <div class="mx-auto max-w-3xl">
+        <p class="mb-2 text-center text-sm text-mist-600">
+          <span
+            class="font-bold text-mist-900"
+            data-recipient-selection-target="selectedCount"
+          >
+            0
+          </span>
+          <%= t(".selected_count_prefix") %>
+          <%= t(".selected_count_suffix") %>
+        </p>
+
+        <div class="flex gap-3">
+          <%= link_to t("common.cancel"),
+                      trip_path(@trip),
+                      class: "
+                        flex-1 rounded-xl border border-mist-300
+                        px-4 py-3 text-center text-sm text-mist-700
+                      " %>
+
+          <%= submit_tag t(".submit"),
+                        disabled: true,
+                        data: {
+                          recipient_selection_target: "submit"
+                        },
+                        class: "
+                          flex-1 rounded-xl bg-mist-600 px-4 py-3
+                          text-sm font-medium text-white
+                          disabled:cursor-not-allowed
+                          disabled:bg-mist-300
+                        " %>
+        </div>
+      </div>
     </div>
   <% end %>
 <% else %>
