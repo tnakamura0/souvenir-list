@@ -3,6 +3,7 @@ ja:
     back: 戻る
     edit: 編集
     delete: 削除
+    update: 更新
     cancel: キャンセル
   shared:
     header:

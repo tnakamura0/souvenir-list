@@ -207,16 +207,10 @@ RSpec.describe "Tags", type: :request do
             }.to change { tag.reload.name }.from("更新前の名前").to("更新後の名前")
           end
 
-          it "タグ一覧画面へリダイレクトする" do
+          it "正常なレスポンスを返す" do
             patch tag_path(tag), params: valid_params
 
-            expect(response).to redirect_to(tags_path)
-          end
-
-          it "成功時のフラッシュメッセージを設定する" do
-            patch tag_path(tag), params: valid_params
-
-            expect(flash[:notice]).to eq("タグを更新しました")
+            expect(response).to have_http_status(:ok)
           end
         end
 

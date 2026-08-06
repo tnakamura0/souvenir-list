@@ -11,5 +11,7 @@
     <p class="mt-1 text-sm text-mist-500"><%= t(".description") %></p>
   </div>
 
-  <%= render "form", tag: @tag %>
+  <%= turbo_frame_tag @tag do %>
+    <%= render "form", tag: @tag %>
+  <% end %>
 </div>

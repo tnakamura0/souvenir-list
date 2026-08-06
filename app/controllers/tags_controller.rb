@@ -24,7 +24,7 @@ class TagsController < ApplicationController
     @tag = current_user.tags.find(params[:id])
 
     if @tag.update(tag_params)
-      redirect_to tags_path, notice: t(".success")
+      render partial: "tag", locals: { tag: @tag }
     else
       flash.now[:alert] = t(".failure")
       render :edit, status: :unprocessable_content

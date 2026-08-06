@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       trip: 旅行
       recipient: 相手
+      tag: タグ
     attributes:
       user:
         name: 名前
@@ -20,3 +21,5 @@ ja:
         kind: 種別
         people_count: 人数
         memo: メモ
+      tag:
+        name: タグ名
