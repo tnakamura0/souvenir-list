@@ -2,7 +2,12 @@
   <%= check_box_tag "recipient_ids[]",
                     recipient.id,
                     false,
-                    class: "peer sr-only" %>
+                    id: "recipient_#{recipient.id}",
+                    class: "peer sr-only",
+                    data: {
+                      recipient_selection_target: "checkbox",
+                      action: "change->recipient-selection#update"
+                    } %>
 
   <div
     class="

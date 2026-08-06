@@ -35,10 +35,10 @@
         <%= render "shared/flash_message" %>
         <%= yield %>
       </main>
-      <%= render "shared/footer" %>
+      <%= render "shared/footer" unless content_for?(:hide_footer) %>
     </div>
 
-    <% if logged_in? %>
+    <% if logged_in? && !content_for?(:hide_bottom_navigation) %>
       <%= render "shared/bottom_navigation" %>
     <% end %>
   </body>
