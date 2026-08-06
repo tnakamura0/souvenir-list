@@ -62,6 +62,17 @@ RSpec.describe "TripRecipients", type: :request do
           expect(response.body).not_to include(non_matching_recipient.name)
           expect(response.body).not_to include(added_recipient.name)
         end
+
+        it "相手に関連付いているタグを表示する" do
+          recipient = create(:recipient, user:)
+          tag = create(:tag, user:, name: "会社")
+
+          create(:recipient_tag, recipient:, tag:)
+
+          get new_trip_trip_recipient_path(trip)
+
+          expect(response.body).to include("会社")
+        end
       end
 
       context "他のユーザーの旅行を指定した場合" do

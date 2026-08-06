@@ -28,10 +28,6 @@ class Recipient < ApplicationRecord
     joins(:recipient_tags).where(recipient_tags: { tag_id: })
   }
 
-  def display_name
-    kind_group? ? "#{name}（#{people_count}人）" : name
-  end
-
   private
 
   def set_people_count_for_individual

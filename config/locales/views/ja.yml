@@ -36,7 +36,6 @@ ja:
       add_recipient: 相手を追加
       recipients:
         title: お土産を渡す相手
-        people_count: "%{count}人"
         purchased: 購入済み
         not_purchased: 未購入
         remove_confirmation: "%{recipient_name}をこの旅行から外しますか？"
@@ -100,7 +99,7 @@ ja:
         description: 既存のタグか新しいタグを設定できます
       cancel: キャンセル
     recipient:
-      group_badge: グループ
+      group_badge: "%{people_count}人グループ"
       delete_confirmation: "%{recipient_name}を削除しますか？"
   trip_recipients:
     new:
@@ -111,9 +110,6 @@ ja:
         submit: 絞り込む
       submit: 選択した相手を追加
       empty: 追加できる相手がいません
-      recipient:
-        group: グループ
-        people_count: "%{count}人"
   tags:
     index:
       title: タグ一覧

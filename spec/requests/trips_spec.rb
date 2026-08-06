@@ -164,6 +164,18 @@ RSpec.describe "Trips", type: :request do
           expect(response.body).to include("まだ相手が追加されていません")
           expect(response.body).to include("相手を追加する")
         end
+
+        it "追加済みの相手のタグを表示する" do
+          recipient = create(:recipient, user:)
+          tag = create(:tag, user:, name: "友人")
+
+          create(:recipient_tag, recipient:, tag:)
+          create(:trip_recipient, trip:, recipient:)
+
+          get trip_path(trip)
+
+          expect(response.body).to include("友人")
+        end
       end
 
       context "他のユーザーの旅行を指定した場合" do

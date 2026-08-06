@@ -3,7 +3,7 @@ class RecipientsController < ApplicationController
     @tags = current_user.tags.order(:name)
     @selected_tag = current_user.tags.find_by(id: params[:tag_id])
 
-    @recipients = current_user.recipients
+    @recipients = current_user.recipients.includes(:tags)
     @recipients = @recipients.with_tag(@selected_tag.id) if @selected_tag
   end
 
