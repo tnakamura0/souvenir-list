@@ -1,5 +1,9 @@
 class TodayController < ApplicationController
+  skip_before_action :require_login, only: :show
+
   def show
+    return redirect_to login_path unless logged_in?
+
     @today_trips = current_user.trips
                               .where(departure_date: ..Date.current)
                               .where(return_date: Date.current..)

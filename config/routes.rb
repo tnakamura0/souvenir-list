@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "static_pages#home"
+  root "today#show"
 
   # GoogleのOAuth用設定
   get "login", to: "sessions#new"
@@ -23,6 +23,4 @@ Rails.application.routes.draw do
   end
   resources :recipients, only: %i[index new create edit update destroy]
   resources :tags, only: %i[index create edit update destroy]
-
-  get "today", to: "today#show"
 end

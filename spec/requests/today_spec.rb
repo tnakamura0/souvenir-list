@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Today", type: :request do
-  describe "GET /today" do
+  describe "GET /" do
     around do |example|
       travel_to(Date.new(2026, 8, 7)) do
         example.run
@@ -59,26 +59,26 @@ RSpec.describe "Today", type: :request do
         end
 
         it "今日の旅行を表示する" do
-          get today_path
+          get root_path
 
           expect(response).to have_http_status(:ok)
           expect(response.body).to include("今日の旅行")
         end
 
         it "過去の旅行を表示しない" do
-          get today_path
+          get root_path
 
           expect(response.body).not_to include("過去の旅行")
         end
 
         it "未来の旅行を表示しない" do
-          get today_path
+          get root_path
 
           expect(response.body).not_to include("未来の旅行")
         end
 
         it "他のユーザーの旅行を表示しない" do
-          get today_path
+          get root_path
 
           expect(response.body).not_to include("他のユーザーの旅行")
         end
@@ -106,13 +106,13 @@ RSpec.describe "Today", type: :request do
         end
 
         it "出発日が最も古い旅行を初期表示する" do
-          get today_path
+          get root_path
 
           expect(response.parsed_body.at_css("h1").text).to eq("出発日が古い旅行")
         end
 
         it "trip_idを指定すると指定した旅行を表示する" do
-          get today_path, params: { trip_id: today_trip_2.id }
+          get root_path, params: { trip_id: today_trip_2.id }
 
           expect(response.parsed_body.at_css("h1").text).to eq("出発日が新しい旅行")
         end
@@ -120,7 +120,7 @@ RSpec.describe "Today", type: :request do
 
       context "今日の旅行が存在しない場合" do
         it "空状態を表示する" do
-          get today_path
+          get root_path
 
           expect(response).to have_http_status(:ok)
           expect(response.body).to include("今日は旅行の予定がありません")
@@ -141,7 +141,7 @@ RSpec.describe "Today", type: :request do
           end
 
           it "404を返す" do
-            get today_path, params: { trip_id: past_trip.id }
+            get root_path, params: { trip_id: past_trip.id }
 
             expect(response).to have_http_status(:not_found)
           end
@@ -161,7 +161,7 @@ RSpec.describe "Today", type: :request do
           end
 
           it "404を返す" do
-            get today_path, params: { trip_id: other_trip.id }
+            get root_path, params: { trip_id: other_trip.id }
 
             expect(response).to have_http_status(:not_found)
           end
@@ -171,9 +171,10 @@ RSpec.describe "Today", type: :request do
 
     context "ログインしていない場合" do
       it "ログイン画面へリダイレクトする" do
-        get today_path
+        get root_path
 
         expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to be_nil
       end
     end
   end

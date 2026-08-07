@@ -3,7 +3,7 @@
 
   <%# 旅行切り替え用UI %>
   <% if @today_trips.size > 1 %>
-    <%= form_with url: today_path, method: :get, class: "mb-4" do |f| %>
+    <%= form_with url: root_path, method: :get, class: "mb-4" do |f| %>
       <%= f.select :trip_id,
                   options_from_collection_for_select(@today_trips, :id, :name, @trip.id),
                   {},
