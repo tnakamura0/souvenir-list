@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 
     if user.persisted?
       login user
-      redirect_to root_path, notice: t("sessions.login_success")
+      redirect_to today_path, notice: t("sessions.login_success")
     else
       redirect_to login_path, alert: t("sessions.login_failure")
     end
