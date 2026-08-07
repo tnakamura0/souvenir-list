@@ -161,7 +161,7 @@ RSpec.describe "Trips", type: :request do
           get trip_path(trip)
 
           expect(response).to have_http_status(:ok)
-          expect(response.body).to include("まだ相手が追加されていません")
+          expect(response.body).to include("お土産を渡す相手がまだ追加されていません")
           expect(response.body).to include("相手を追加する")
         end
 

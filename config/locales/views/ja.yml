@@ -35,16 +35,11 @@ ja:
       title: 新しい旅行を作成
     show:
       delete_confirmation: "%{trip_name}を削除しますか？"
-      add_recipient: 相手を追加
       recipients:
-        title: お土産を渡す相手
         purchased: 購入済み
         not_purchased: 未購入
         remove_confirmation: "%{recipient_name}をこの旅行から外しますか？"
         remove: 旅行から外す
-      empty:
-        message: まだ相手が追加されていません
-        action: 相手を追加する
       progress:
         title: 購入進捗
         completed: 全員分購入できました！
@@ -61,6 +56,12 @@ ja:
       return_date:
         label: 帰宅日
       cancel: キャンセル
+    recipient_list:
+      title: お土産を渡す相手
+      add: 相手を追加
+      empty:
+        message: お土産を渡す相手がまだ追加されていません
+        action: 相手を追加する
   recipients:
     index:
       title: 相手一覧
@@ -133,3 +134,8 @@ ja:
       create: 作成する
     tag:
       delete_confirmation: "%{tag_name}を削除しますか？"
+  today:
+    show:
+      empty:
+        message: 今日は旅行の予定がありません
+        action: 旅行を新規作成する
