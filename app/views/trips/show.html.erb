@@ -33,22 +33,4 @@
 </div>
 
 <%# お土産リスト %>
-<div class="flex items-center justify-between mb-3">
-  <h2 class="text-lg font-semibold"><%= t(".recipients.title") %></h2>
-  <%= link_to new_trip_trip_recipient_path(@trip),
-            class: "inline-flex items-center gap-1 rounded-xl border px-3 py-1.5" do %>
-    <span class="material-symbols-rounded">add</span>
-    <span><%= t(".add_recipient") %></span>
-  <% end %>
-</div>
-
-<% if @trip_recipients.present? %>
-  <div class="space-y-3">
-    <%= render @trip_recipients %>
-  </div>
-<% else %>
-  <div class="text-center py-12 border border-mist-100 rounded-2xl shadow-md">
-    <p class="text-sm mb-4"><%= t(".empty.message") %></p>
-    <%= link_to t(".empty.action"), new_trip_trip_recipient_path(@trip), class: "px-3 py-2 border rounded-xl" %>
-  </div>
-<% end %>
+<%= render "trips/recipient_list", trip: @trip, trip_recipients: @trip_recipients %>

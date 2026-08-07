@@ -1,0 +1,23 @@
+<div class="mb-3 flex items-center justify-between">
+  <h2 class="text-lg font-semibold"><%= t("trips.recipient_list.title") %></h2>
+
+  <%= link_to new_trip_trip_recipient_path(trip),
+              class: "inline-flex items-center gap-1 rounded-xl border px-3 py-1.5" do %>
+    <span class="material-symbols-rounded">add</span>
+    <span><%= t("trips.recipient_list.add") %></span>
+  <% end %>
+</div>
+
+<% if trip_recipients.present? %>
+  <div class="space-y-3">
+    <%= render trip_recipients %>
+  </div>
+<% else %>
+  <div class="rounded-2xl border border-mist-100 py-12 text-center shadow-md">
+    <p class="mb-4 text-sm"><%= t("trips.recipient_list.empty.message") %></p>
+
+    <%= link_to t("trips.recipient_list.empty.action"),
+                new_trip_trip_recipient_path(trip),
+                class: "rounded-xl border px-3 py-2" %>
+  </div>
+<% end %>

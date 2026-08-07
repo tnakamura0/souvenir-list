@@ -23,13 +23,13 @@ RSpec.describe "Sessions", type: :request do
         mock_google_auth
       end
 
-      it "ユーザーを作成してルートページへリダイレクトする" do
+      it "ユーザーを作成して今日の旅行へリダイレクトする" do
         expect {
           post "/auth/google_oauth2"
           follow_redirect!
         }.to change(User, :count).by(1)
 
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to root_path
         expect(flash[:notice]).to eq("ログインしました")
       end
 
@@ -100,7 +100,7 @@ RSpec.describe "Sessions", type: :request do
 
   describe "認証が必要なページへのアクセス" do
     it "未ログインの場合はログイン画面へリダイレクトする" do
-      get root_path
+      get trips_path
 
       expect(response).to redirect_to(login_path)
       expect(flash[:alert]).to eq("ログインしてください")
