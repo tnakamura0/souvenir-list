@@ -23,4 +23,6 @@ Rails.application.routes.draw do
   end
   resources :recipients, only: %i[index new create edit update destroy]
   resources :tags, only: %i[index create edit update destroy]
+
+  get "today", to: "today#show"
 end
