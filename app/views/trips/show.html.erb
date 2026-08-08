@@ -28,7 +28,9 @@
 
   <%# 進捗バー %>
   <% if @trip.total_count > 0 %>
-    <%= render "progress", trip: @trip %>
+    <div id="trip_progress">
+      <%= render "progress", trip: @trip %>
+    </div>
   <% end %>
 </div>
 
