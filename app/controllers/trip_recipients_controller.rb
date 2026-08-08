@@ -36,11 +36,14 @@ class TripRecipientsController < ApplicationController
 
   def update
     @trip = current_user.trips.find(params[:trip_id])
-    trip_recipient = @trip.trip_recipients.find(params[:id])
+    @trip_recipient = @trip.trip_recipients.find(params[:id])
 
-    trip_recipient.update!(trip_recipient_params)
+    @trip_recipient.update!(trip_recipient_params)
 
-    redirect_to trip_path(@trip), notice: t(".success")
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to trip_path(@trip) }
+    end
   end
 
   def destroy

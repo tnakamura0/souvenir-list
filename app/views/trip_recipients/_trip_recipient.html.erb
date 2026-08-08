@@ -1,69 +1,71 @@
-<div class="<%= class_names(
-  "flex items-center justify-between gap-4 rounded-xl border p-4",
-  {
-    "border-mist-200 bg-white" => !trip_recipient.purchased?,
-    "border-mist-300 bg-mist-100" => trip_recipient.purchased?
-  }
-) %>">
-  <div class="min-w-0 flex-1">
-    <%= render(
-          "shared/recipient_summary",
-          recipient: trip_recipient.recipient,
-          show_memo: false
-        ) %>
-  </div>
+<div id="<%= dom_id(trip_recipient) %>">
+  <div class="<%= class_names(
+    "flex items-center justify-between gap-4 rounded-xl border p-4",
+    {
+      "border-mist-200 bg-white" => !trip_recipient.purchased?,
+      "border-mist-300 bg-mist-100" => trip_recipient.purchased?
+    }
+  ) %>">
+    <div class="min-w-0 flex-1">
+      <%= render(
+            "shared/recipient_summary",
+            recipient: trip_recipient.recipient,
+            show_memo: false
+          ) %>
+    </div>
 
-  <div class="flex shrink-0 items-center gap-2">
-    <%= button_to trip_trip_recipient_path(
-                    trip_recipient.trip,
-                    trip_recipient
-                  ),
-                  method: :patch,
-                  params: {
-                    trip_recipient: {
-                      purchased: !trip_recipient.purchased?
-                    }
-                  },
-                  class: "
-                    inline-flex items-center gap-1
-                    rounded-lg px-2 py-1.5 text-sm
-                  " do %>
-      <span class="material-symbols-rounded text-[20px]!">
-        <%= trip_recipient.purchased? ?
-              "check_circle" :
-              "radio_button_unchecked" %>
-      </span>
+    <div class="flex shrink-0 items-center gap-2">
+      <%= button_to trip_trip_recipient_path(
+                      trip_recipient.trip,
+                      trip_recipient
+                    ),
+                    method: :patch,
+                    params: {
+                      trip_recipient: {
+                        purchased: !trip_recipient.purchased?
+                      }
+                    },
+                    class: "
+                      inline-flex items-center gap-1
+                      rounded-lg px-2 py-1.5 text-sm
+                    " do %>
+        <span class="material-symbols-rounded text-[20px]!">
+          <%= trip_recipient.purchased? ?
+                "check_circle" :
+                "radio_button_unchecked" %>
+        </span>
 
-      <span>
-        <%= trip_recipient.purchased? ?
-              t("trips.show.recipients.purchased") :
-              t("trips.show.recipients.not_purchased") %>
-      </span>
-    <% end %>
+        <span>
+          <%= trip_recipient.purchased? ?
+                t("trips.show.recipients.purchased") :
+                t("trips.show.recipients.not_purchased") %>
+        </span>
+      <% end %>
 
-    <%= button_to trip_trip_recipient_path(
-                    trip_recipient.trip,
-                    trip_recipient
-                  ),
-                  method: :delete,
-                  data: {
-                    turbo_confirm: t(
-                      "trips.show.recipients.remove_confirmation",
-                      recipient_name: trip_recipient.recipient.name
-                    )
-                  },
-                  class: "
-                    inline-flex items-center gap-1 rounded-lg
-                    px-2 py-1.5 text-sm text-mist-500
-                    hover:bg-mist-50 hover:text-mist-900
-                  " do %>
-      <span class="material-symbols-rounded text-[20px]!">
-        close
-      </span>
+      <%= button_to trip_trip_recipient_path(
+                      trip_recipient.trip,
+                      trip_recipient
+                    ),
+                    method: :delete,
+                    data: {
+                      turbo_confirm: t(
+                        "trips.show.recipients.remove_confirmation",
+                        recipient_name: trip_recipient.recipient.name
+                      )
+                    },
+                    class: "
+                      inline-flex items-center gap-1 rounded-lg
+                      px-2 py-1.5 text-sm text-mist-500
+                      hover:bg-mist-50 hover:text-mist-900
+                    " do %>
+        <span class="material-symbols-rounded text-[20px]!">
+          close
+        </span>
 
-      <span class="sr-only">
-        <%= t("trips.show.recipients.remove") %>
-      </span>
-    <% end %>
+        <span class="sr-only">
+          <%= t("trips.show.recipients.remove") %>
+        </span>
+      <% end %>
+    </div>
   </div>
 </div>
