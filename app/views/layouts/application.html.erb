@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
   </head>
 
-  <body class="<%= class_names("min-h-screen flex flex-col", { "pb-16 md:pb-0" => logged_in? } ) %>">
+  <body class="<%= class_names("font-sans min-h-screen flex flex-col bg-background text-text-primary", { "pb-16 md:pb-0" => logged_in? } ) %>">
     <%= render "shared/header" %>
     <% if logged_in? %>
       <%= render "shared/sidebar" %>
