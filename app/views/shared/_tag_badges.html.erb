@@ -1,14 +1,7 @@
 <% if recipient.tags.any? %>
-  <div class="<%= class_names(
-    "flex flex-wrap gap-1.5",
-    local_assigns[:class]
-  ) %>">
+  <div class="<%= class_names("flex flex-wrap gap-1.5", local_assigns[:class]) %>">
     <% recipient.tags.each do |tag| %>
-      <span class="
-        inline-flex items-center rounded-full
-        border border-mist-200 bg-mist-50
-        px-2 py-0.5 text-xs text-mist-600
-      ">
+      <span class="rounded-full bg-primary-soft px-2 py-0.5 text-xs font-medium text-primary">
         <%= tag.name %>
       </span>
     <% end %>

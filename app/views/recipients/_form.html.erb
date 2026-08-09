@@ -3,61 +3,77 @@
 
   <%# 名前 %>
   <div>
-    <%= f.label :name, t("recipients.form.name.label"), class: "block mb-1" %>
-    <%= f.text_field :name, placeholder: t("recipients.form.name.placeholder"), class: "w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400" %>
+    <%= f.label :name, class: "label flex items-center gap-2" do %>
+      <span><%= t("recipients.form.name.label") %></span>
+      <span class="rounded bg-danger-soft px-1.5 py-0.5 text-xs font-medium text-danger">
+        <%= t("common.required") %>
+      </span>
+    <% end %>
+    <%= f.text_field :name, placeholder: t("recipients.form.name.placeholder"), class: "form-control #{'input-error' if @recipient.errors[:name].present?}" %>
   </div>
 
   <%# 種別 %>
-  <p class=" mb-2"><%= t("recipients.form.kind.label") %></p>
-  <div class="grid grid-cols-2 gap-4">
-    <div>
-      <%= f.radio_button :kind,
-                        "individual",
-                        class: "peer sr-only",
-                        data: {
-                          action: "change->people-count-toggle#toggle",
-                        }
-      %>
-      <%= f.label :kind_individual, t("recipients.form.kind.individual"), class: "flex cursor-pointer items-center justify-center rounded-xl border border-mist-300 px-4 py-3 text-sm font-medium text-mist-700 transition peer-checked:border-mist-600 peer-checked:bg-mist-300" %>
-    </div>
+  <fieldset>
+    <legend class="label"><%= t("recipients.form.kind.label") %></legend>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= f.radio_button :kind,
+                          "individual",
+                          class: "peer sr-only",
+                          data: {
+                            action: "change->people-count-toggle#toggle",
+                          }
+        %>
+        <%= f.label :kind_individual, class: "flex cursor-pointer items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-border text-text-secondary font-medium transition hover:border-primary peer-checked:border-primary peer-checked:bg-primary-soft peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2" do %>
+          <span class="material-symbols-rounded">person</span>
+          <span><%= t("recipients.form.kind.individual") %></span>
+        <% end %>
+      </div>
 
-    <div>
-      <%= f.radio_button :kind,
-                        "group",
-                        class: "peer sr-only",
-                        data: {
-                          action: "change->people-count-toggle#toggle",
-                          people_count_toggle_target: "groupRadio"
-                        }
-      %>
-      <%= f.label :kind_group, t("recipients.form.kind.group"), class: "flex cursor-pointer items-center justify-center rounded-xl border border-mist-300 px-4 py-3 text-sm font-medium text-mist-700 transition peer-checked:border-mist-600 peer-checked:bg-mist-300" %>
+      <div>
+        <%= f.radio_button :kind,
+                          "group",
+                          class: "peer sr-only",
+                          data: {
+                            action: "change->people-count-toggle#toggle",
+                            people_count_toggle_target: "groupRadio"
+                          }
+        %>
+        <%= f.label :kind_group, class: "flex cursor-pointer items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-border text-text-secondary font-medium transition hover:border-primary peer-checked:border-primary peer-checked:bg-primary-soft peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2" do %>
+          <span class="material-symbols-rounded">group</span>
+          <span><%= t("recipients.form.kind.group") %></span>
+        <% end %>
+      </div>
     </div>
-  </div>
+  </fieldset>
 
   <%# グループの人数 %>
   <div class="hidden" data-people-count-toggle-target="field">
-    <%= f.label :people_count, t("recipients.form.people_count.label"), class: "block mb-1" %>
+    <%= f.label :people_count, class: "label flex items-center gap-2" do %>
+      <span><%= t("recipients.form.people_count.label") %></span>
+      <span class="rounded bg-danger-soft px-1.5 py-0.5 text-xs font-medium text-danger">
+        <%= t("common.required") %>
+      </span>
+    <% end %>
     <%= f.number_field :people_count,
                       placeholder: t("recipients.form.people_count.placeholder"),
                       min: 2,
                       step: 1,
-                      class: "w-full px-4 py-3 border border-mist-200 rounded focus:border-2 focus:border-mist-400",
+                      class: "form-control #{'input-error' if @recipient.errors[:people_count].present?}",
                       data: { people_count_toggle_target: "input" }
     %>
   </div>
 
   <%# メモ %>
   <div>
-    <%= f.label :memo, t("recipients.form.memo.label"), class: "block mb-1" %>
-    <%= f.textarea :memo, placeholder: t("recipients.form.memo.placeholder"), class: "w-full border border-mist-200 rounded px-4 py-3 focus:border-2 focus:border-mist-400" %>
+    <%= f.label :memo, t("recipients.form.memo.label"), class: "label" %>
+    <%= f.textarea :memo, placeholder: t("recipients.form.memo.placeholder"), class: "form-control min-h-28 resize-y" %>
   </div>
 
   <%# タグ関連 %>
   <%# 既存タグ一覧表示 %>
   <div>
-    <p class="mb-2 block">
-      <%= t("recipients.form.tags.label") %>
-    </p>
+    <p class="mb-2 block"><%= t("recipients.form.tags.label") %></p>
 
     <% if @tags.present? %>
       <div class="flex flex-wrap gap-2">
@@ -67,15 +83,14 @@
 
             <span
               class="
-                inline-flex rounded-full border border-mist-200
-                px-3 py-1.5 text-sm text-mist-600
+                inline-flex rounded-full border border-border
+                px-3 py-1.5 text-sm
                 transition
-                hover:border-mist-400
-                peer-checked:border-mist-600
-                peer-checked:bg-mist-600
-                peer-checked:text-white
+                hover:border-primary
+                peer-checked:bg-primary
+                peer-checked:text-text-inverse
                 peer-focus-visible:ring-2
-                peer-focus-visible:ring-mist-500
+                peer-focus-visible:ring-primary
                 peer-focus-visible:ring-offset-2
               "
             >
@@ -85,7 +100,7 @@
         <% end %>
       </div>
     <% else %>
-      <p class="text-sm text-mist-500">
+      <p class="text-sm text-text-secondary">
         <%= t("recipients.form.tags.empty") %>
       </p>
     <% end %>
@@ -95,20 +110,15 @@
   <div>
     <%= f.text_field :new_tag_name,
                     placeholder: t("recipients.form.new_tag_name.placeholder"),
-                    class: "
-                      w-full rounded border border-mist-200
-                      px-4 py-3 text-sm
-                      focus:border-mist-400 focus:ring-mist-400
-                    " %>
-
-    <p class="mt-1 text-sm text-mist-500">
+                    class: "form-control" %>
+    <p class="mt-1 text-sm text-text-muted">
       <%= t("recipients.form.new_tag_name.description") %>
     </p>
   </div>
 
   <%# 登録・キャンセルボタン %>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <%= f.submit class: "font-medium text-white bg-mist-600 block w-full px-4 py-3 border border-mist-500 rounded-2xl" %>
-    <%= link_to t("recipients.form.cancel"), cancel_path, class: "font-medium text-center px-4 py-3 border border-mist-400 rounded-2xl" %>
+    <%= link_to t("recipients.form.cancel"), cancel_path, class: "btn-secondary text-center" %>
+    <%= f.submit class: "btn-primary" %>
   </div>
 <% end %>

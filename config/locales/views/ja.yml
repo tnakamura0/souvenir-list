@@ -1,6 +1,7 @@
 ja:
   common:
     back: 戻る
+    required: 必須
     edit: 編集
     delete: 削除
     update: 更新
@@ -65,22 +66,22 @@ ja:
   recipients:
     index:
       title: 相手一覧
-      description: お土産を渡す相手を管理できます
       new_recipient: 新しい相手
       manage_tags: タグを管理
       tag_filter:
         title: タグで絞り込む
-        label: タグ
         all: すべてのタグ
         submit: 絞り込む
       empty:
         title: 相手がまだ登録されていません
         description: 家族・同僚・友人などを登録しましょう
-        button: 最初の相手を登録する
+        action: 最初の相手を登録する
     new:
       title: 新しい相手を登録
+      description: お土産を渡したい相手の情報を入力してください
     edit:
       title: 相手情報を編集
+      description: 相手の情報を編集できます
     form:
       name:
         label: 名前
@@ -93,7 +94,7 @@ ja:
         label: 人数
         placeholder: 例：10
       memo:
-        label: メモ（任意）
+        label: メモ
         placeholder: 例：お酒好き、甘いものは苦手
       tags:
         label: タグ
