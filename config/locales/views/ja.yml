@@ -1,6 +1,7 @@
 ja:
   common:
     back: 戻る
+    required_notice: すべての項目が必須です。
     required: 必須
     edit: 編集
     delete: 削除
@@ -34,6 +35,7 @@ ja:
         action: 最初の旅行を作成する
     new:
       title: 新しい旅行を作成
+      description: 旅行の日程や目的地を入力してください
     show:
       delete_confirmation: "%{trip_name}を削除しますか？"
       recipients:
@@ -43,8 +45,11 @@ ja:
         remove: 旅行から外す
       progress:
         title: 購入進捗
-        completed: 全員分購入できました！
+        completed: 全員分購入完了！
         purchased: "%{purchased_count} / %{total_count} 件購入済み"
+    edit:
+      title: 旅行を編集
+      description: 旅行の情報を編集できます
     form:
       name:
         label: 旅行名
@@ -117,7 +122,9 @@ ja:
       recipient_count: "%{count}件表示中"
       select_all: "表示中の%{count}件をすべて選択"
       submit: 選択した相手を追加
-      empty: 追加できる相手がいません
+      empty:
+        message: 追加できる相手がいません
+        action: 相手を登録する
       selected_count: 件選択中
       submit: 旅行へ追加
   tags:

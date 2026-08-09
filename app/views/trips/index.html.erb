@@ -1,6 +1,6 @@
 <div class="flex items-center justify-between mb-6">
-  <h1 class="font-bold text-2xl text-mist-900"><%= t(".title") %></h1>
-  <%= link_to new_trip_path, class: "flex items-center gap-1.5 px-4 py-2 text-sm text-white bg-mist-600 hover:bg-mist-700 rounded-xl" do %>
+  <h1 class="page-title"><%= t(".title") %></h1>
+  <%= link_to new_trip_path, class: "btn-secondary flex items-center gap-2" do %>
     <span class="material-symbols-rounded">add</span>
     <span><%= t(".new_trip") %></span>
   <% end %>
@@ -11,9 +11,17 @@
     <%= render @trips %>
   </div>
 <% else %>
-  <div class="text-center py-10">
-    <p class="font-medium text-mist-500 mb-2"><%= t(".empty.title") %></p>
-    <p class="text-sm text-mist-400 mb-6"><%= t(".empty.description") %></p>
-    <%= link_to t(".empty.action"), new_trip_path, class: "px-6 py-3 font-medium text-white bg-mist-600 hover:bg-mist-700 rounded-2xl" %>
+  <div class="card px-6 py-12 text-center">
+    <div class="mx-auto mb-4 flex size-12 items-center justify-center rounded-2xl bg-primary-soft text-primary">
+      <span class="material-symbols-rounded text-2xl">travel_luggage_and_bags</span>
+    </div>
+    <p class="mb-2 font-semibold"><%= t(".empty.title") %></p>
+    <p class="mx-auto mb-6 max-w-sm text-sm text-text-secondary">
+      <%= t(".empty.description") %>
+    </p>
+    <%= link_to new_trip_path, class: "btn-primary inline-flex items-center gap-2 px-6 py-3" do %>
+      <span class="material-symbols-rounded">add</span>
+      <span><%= t(".empty.action") %></span>
+    <% end %>
   </div>
 <% end %>
