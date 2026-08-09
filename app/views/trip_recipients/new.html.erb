@@ -2,15 +2,15 @@
 <% content_for :hide_footer, true %>
 
 <div class="mb-6">
-  <%= link_to trip_path(@trip), class: "inline-flex items-center gap-1 text-sm text-mist-400 hover:text-mist-700" do %>
+  <%= link_to trip_path(@trip), class: "back-link" do %>
     <span class="material-symbols-rounded">chevron_left</span>
     <span><%= t("common.back") %></span>
   <% end %>
 </div>
 
 <div class="mb-6">
-  <h1 class="font-bold text-2xl"><%= t(".title") %></h1>
-  <p class="mt-1 text-sm text-mist-500"><%= t(".description", trip_name: @trip.name) %></p>
+  <h1 class="page-title"><%= t(".title") %></h1>
+  <p class="page-description"><%= t(".description", trip_name: @trip.name) %></p>
 </div>
 
 <%= form_with url: new_trip_trip_recipient_path(@trip), method: :get, class: "mb-4" do |f| %>
@@ -24,9 +24,9 @@
                                 include_blank: t(".tag_filter.all"),
                                 selected: @selected_tag&.id
                               },
-                              class: "w-full border border-mist-200 px-3 py-2" %>
+                              class: "select" %>
     </div>
-    <%= f.submit t(".tag_filter.submit"), class: "shrink-0 rounded-xl bg-mist-600 px-4 py-2 text-white" %>
+    <%= f.submit t(".tag_filter.submit"), class: "btn-secondary shrink-0" %>
   </div>
 <% end %>
 
@@ -36,14 +36,14 @@
                 class: "md:pb-4" do %>
 
     <div class="mb-4 flex items-center justify-between">
-      <p class="text-sm text-mist-500">
+      <p class="text-text-secondary">
         <%= t(".recipient_count", count: @recipients.size) %>
       </p>
 
       <% if @recipients.present? %>
         <button
           type="button"
-          class="rounded-xl border border-mist-300 px-3 py-2 text-sm text-mist-700 hover:bg-mist-100 hover:border-mist-500"
+          class="btn-secondary px-3"
           data-action="recipient-selection#selectAll"
         >
           <%= t(".select_all", count: @recipients.size) %>
@@ -60,28 +60,27 @@
     <div
       class="
         fixed inset-x-0 bottom-0 z-20
-        border-t border-mist-200 bg-white
+        border-t border-border bg-surface
         px-4 py-3
-        md:static md:mt-6 md:border-0 md:bg-transparent md:px-0
+        md:static md:border-0 md:bg-transparent md:px-0
       "
     >
       <div class="mx-auto max-w-3xl">
-        <p class="mb-2 text-center text-mist-600">
+        <p class="mb-2 text-center">
           <span
-            class="font-bold text-mist-900"
+            class="font-bold text-xl"
             data-recipient-selection-target="selectedCount"
           >
             0
           </span>
-          <%= t(".selected_count") %>
+          <span class="text-lg"><%= t(".selected_count") %></span>
         </p>
 
         <div class="flex gap-3">
           <%= link_to t("common.cancel"),
                       trip_path(@trip),
                       class: "
-                        flex-1 rounded-xl border border-mist-300
-                        px-4 py-3 text-center text-sm text-mist-700
+                        flex-1 btn-secondary text-center
                       " %>
 
           <%= submit_tag t(".submit"),
@@ -90,17 +89,20 @@
                           recipient_selection_target: "submit"
                         },
                         class: "
-                          flex-1 rounded-xl bg-mist-600 px-4 py-3
-                          text-sm font-medium text-white
+                          flex-1 btn-primary
                           disabled:cursor-not-allowed
-                          disabled:bg-mist-300
+                          disabled:opacity-50
                         " %>
         </div>
       </div>
     </div>
   <% end %>
 <% else %>
-  <div class="rounded-xl border border-mist-200 bg-white p-6 text-center">
-    <p class="text-sm text-mist-600"><%= t(".empty") %></p>
+  <div class="card p-6 text-center">
+    <p class="mb-4 font-medium"><%= t(".empty.message") %></p>
+    <%= link_to new_recipient_path, class: "btn-secondary inline-flex items-center gap-2" do %>
+      <span class="material-symbols-rounded">person_add</span>
+      <span><%= t(".empty.action") %></span>
+    <% end %>
   </div>
 <% end %>

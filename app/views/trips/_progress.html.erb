@@ -1,14 +1,14 @@
 <% progress_percentage = trip.progress_percentage %>
 
-<div class="mt-5 border-t border-mist-100 pt-4">
+<div class="mt-4 border-t border-border pt-4">
   <div class="mb-2 flex items-center justify-between">
-    <p class="text-sm font-medium"><%= t("trips.show.progress.title") %></p>
+    <p class="font-medium"><%= t("trips.show.progress.title") %></p>
 
     <p class="text-sm font-semibold"><%= progress_percentage %>%</p>
   </div>
 
   <div
-    class="h-2.5 w-full overflow-hidden rounded-full bg-mist-100"
+    class="h-2.5 w-full overflow-hidden rounded-full bg-primary/10"
     role="progressbar"
     aria-label="<%= t("trips.show.progress.title") %>"
     aria-valuenow="<%= progress_percentage %>"
@@ -16,14 +16,17 @@
     aria-valuemax="100"
   >
     <div
-      class="h-full rounded-full bg-mist-600 transition-all duration-300"
+      class="h-full rounded-full bg-primary transition-all duration-300"
       style="width: <%= progress_percentage %>%"
     ></div>
   </div>
 
-  <div class="mt-2 flex items-center justify-between text-xs text-mist-500">
+  <div class="mt-2 flex items-center justify-between text-text-secondary text-sm">
     <% if progress_percentage == 100 %>
-      <p class="font-medium text-mist-700"><%= t("trips.show.progress.completed") %></p>
+      <p class="inline-flex items-center gap-1 font-medium text-success">
+        <span class="material-symbols-rounded text-accent">celebration</span>
+        <%= t("trips.show.progress.completed") %>
+      </p>
     <% else %>
       <p>
         <%= t("trips.show.progress.purchased", 

@@ -1,11 +1,5 @@
-<div id="<%= dom_id(trip_recipient) %>">
-  <div class="<%= class_names(
-    "flex items-center justify-between gap-4 rounded-xl border p-4",
-    {
-      "border-mist-200 bg-white" => !trip_recipient.purchased?,
-      "border-mist-300 bg-mist-100" => trip_recipient.purchased?
-    }
-  ) %>">
+<div id="<%= dom_id(trip_recipient) %>" class="card p-4">
+  <div class="flex items-center justify-between gap-4">
     <div class="min-w-0 flex-1">
       <%= render(
             "shared/recipient_summary",
@@ -14,25 +8,23 @@
           ) %>
     </div>
 
-    <div class="flex shrink-0 items-center gap-2">
-      <%= button_to trip_trip_recipient_path(
-                      trip_recipient.trip,
-                      trip_recipient
-                    ),
+    <div class="flex shrink-0 items-center gap-1">
+      <%= button_to trip_trip_recipient_path(trip_recipient.trip, trip_recipient),
                     method: :patch,
                     params: {
                       trip_recipient: {
                         purchased: !trip_recipient.purchased?
                       }
                     },
-                    class: "
-                      inline-flex items-center gap-1
-                      rounded-lg px-2 py-1.5 text-sm
-                    " do %>
+                    class: class_names(
+                      "inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm transition-colors",
+                      {
+                        "text-success" => trip_recipient.purchased?,
+                        "text-text-secondary hover:text-primary" => !trip_recipient.purchased?
+                      }
+                    ) do %>
         <span class="material-symbols-rounded text-[20px]!">
-          <%= trip_recipient.purchased? ?
-                "check_circle" :
-                "radio_button_unchecked" %>
+          <%= trip_recipient.purchased? ? "check_circle" : "radio_button_unchecked" %>
         </span>
 
         <span>
@@ -42,10 +34,7 @@
         </span>
       <% end %>
 
-      <%= button_to trip_trip_recipient_path(
-                      trip_recipient.trip,
-                      trip_recipient
-                    ),
+      <%= button_to trip_trip_recipient_path(trip_recipient.trip, trip_recipient),
                     method: :delete,
                     data: {
                       turbo_confirm: t(
@@ -54,13 +43,13 @@
                       )
                     },
                     class: "
-                      inline-flex items-center gap-1 rounded-lg
-                      px-2 py-1.5 text-sm text-mist-500
-                      hover:bg-mist-50 hover:text-mist-900
+                      inline-flex items-center justify-center
+                      rounded-lg p-2
+                      text-text-muted
+                      transition-colors
+                      hover:text-danger
                     " do %>
-        <span class="material-symbols-rounded text-[20px]!">
-          close
-        </span>
+        <span class="material-symbols-rounded text-[20px]!">close</span>
 
         <span class="sr-only">
           <%= t("trips.show.recipients.remove") %>
