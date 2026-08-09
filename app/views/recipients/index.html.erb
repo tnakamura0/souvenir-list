@@ -1,23 +1,18 @@
-<div class="flex items-center justify-between mb-6">
-  <div>
-    <h1 class="font-bold text-2xl text-mist-900 mb-0.5"><%= t(".title") %></h1>
-    <p class="text-sm text-mist-500"><%= t(".description") %></p>
-  </div>
-  <%= link_to new_recipient_path, class: "flex items-center gap-1.5 px-4 py-2 text-sm text-white bg-mist-600 hover:bg-mist-700 rounded-xl" do %>
+<div class="mb-6 flex items-center justify-between">
+  <h1 class="page-title"><%= t(".title") %></h1>
+  <%= link_to new_recipient_path, class: "flex items-center gap-1.5 btn-secondary" do %>
     <span class="material-symbols-rounded">add</span>
     <span><%= t(".new_recipient") %></span>
   <% end %>
 </div>
 
 <%# タグ関係 %>
-<div class="mb-6 rounded-xl border border-mist-200 bg-white p-4">
+<div class="card mb-6 p-4">
   <div class="mb-3 flex items-center justify-between gap-3">
-    <h2 class="font-medium text-mist-900">
-      <%= t(".tag_filter.title") %>
-    </h2>
+    <h2 class="font-medium"><%= t(".tag_filter.title") %></h2>
 
     <%= link_to tags_path,
-                class: "inline-flex shrink-0 items-center gap-1 text-sm text-mist-500 hover:text-mist-800" do %>
+                class: "inline-flex shrink-0 items-center gap-1 text-sm text-secondary hover:text-primary" do %>
       <span><%= t(".manage_tags") %></span>
       <span class="material-symbols-rounded">chevron_forward</span>
     <% end %>
@@ -26,10 +21,6 @@
   <%= form_with url: recipients_path, method: :get do |f| %>
     <div class="flex items-end gap-2">
       <div class="min-w-0 flex-1">
-        <%= f.label :tag_id,
-                    t(".tag_filter.label"),
-                    class: "mb-1 block text-sm text-mist-600" %>
-
         <%= f.collection_select :tag_id,
                                 @tags,
                                 :id,
@@ -38,18 +29,10 @@
                                   include_blank: t(".tag_filter.all"),
                                   selected: @selected_tag&.id
                                 },
-                                class: "
-                                  w-full rounded-xl border border-mist-200
-                                  bg-white px-3 py-2 text-sm
-                                  focus:border-mist-400 focus:ring-mist-400
-                                " %>
+                                class: "select" %>
       </div>
 
-      <%= f.submit t(".tag_filter.submit"),
-                  class: "
-                    shrink-0 rounded-xl bg-mist-600 px-4 py-2
-                    text-sm text-white hover:bg-mist-700
-                  " %>
+      <%= f.submit t(".tag_filter.submit"), class: "shrink-0 btn-secondary" %>
     </div>
   <% end %>
 </div>
@@ -60,9 +43,12 @@
   </div>
 <% else %>
   <%# 相手を1つも作成していない場合の表示 %>
-  <div class="text-center py-10">
-    <p class="font-medium text-mist-500 mb-2"><%= t(".empty.title") %></p>
-    <p class="text-sm text-mist-400 mb-6"><%= t(".empty.description") %></p>
-    <%= link_to t(".empty.button"), new_recipient_path, class: "px-6 py-3 font-medium text-white bg-mist-600 hover:bg-mist-700 rounded-2xl" %>
+  <div class="card py-10 text-center">
+    <p class="mb-2 font-medium"><%= t(".empty.title") %></p>
+    <p class="mb-6 text-sm text-text-secondary"><%= t(".empty.description") %></p>
+    <%= link_to new_recipient_path, class: "btn-primary inline-flex items-center gap-2 px-6 py-3" do %>
+      <span class="material-symbols-rounded">person_add</span>
+      <span><%= t(".empty.action") %></span>
+    <% end %>
   </div>
 <% end %>
