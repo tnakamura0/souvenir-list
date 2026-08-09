@@ -8,12 +8,12 @@
   /* プライマリーカラー */
   --color-primary: var(--color-teal-600);
   --color-primary-hover: var(--color-teal-700);
-  --color-primary-soft: var(--color-teal-50); /* Secondary Buttonや選択中カードの背景 */
+  --color-primary-soft: var(--color-teal-50);
   --color-primary-soft-hover: var(--color-teal-100);
 
   /* 背景色 */
-  --color-background: oklch(99% 0.003 220); /* 画面全体。少しだけTealを含んだ白 */
-  --color-surface: oklch(99.3% 0.002 220); /* フォームやカード */
+  --color-background: oklch(99% 0.003 220);
+  --color-surface: oklch(99.3% 0.002 220);
   --color-surface-hover: oklch(97% 0.006 220);
 
   /* 枠の色 */
@@ -122,7 +122,7 @@
   @apply w-full rounded-xl border border-border bg-surface px-3 py-2 transition-colors;
 
   &:hover {
-    @apply border-primary
+    @apply border-primary;
   }
 
   &:focus-visible {
