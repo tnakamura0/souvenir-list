@@ -1,5 +1,7 @@
 <div class="flex items-center justify-between mb-6">
-  <h1 class="page-title"><%= t(".title") %></h1>
+  <div class="page-header">
+    <h1 class="page-title"><%= t(".title") %></h1>
+  </div>
   <%= link_to new_trip_path, class: "btn-secondary flex items-center gap-2" do %>
     <span class="material-symbols-rounded">add</span>
     <span><%= t(".new_trip") %></span>
