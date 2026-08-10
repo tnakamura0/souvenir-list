@@ -1,37 +1,54 @@
-<aside class="hidden md:flex flex-col fixed left-0 top-14 bottom-0 w-56 overflow-y-auto bg-white border-r border-mist-200 z-5">
+<aside class="hidden md:flex flex-col fixed left-0 top-14 bottom-0 w-56 overflow-y-auto bg-surface border-r border-border z-5">
 
   <%# ユーザー情報 %>
-  <div class="p-4 border-b border-mist-100 flex items-center gap-3">
+  <div class="pl-6 py-4 border-b border-mist-100 flex items-center gap-3">
     <% if current_user.avatar_url.present? %>
       <img src="<%= current_user.avatar_url %>" alt="<%= current_user.name %>" class="w-8 h-8 rounded-full shrink-0">
     <% else %>
       <span class="material-symbols-rounded text-[32px]! shrink-0">account_circle</span>
     <% end %>
-    <p class="text-sm font-medium text-mist-900 truncate"><%= current_user.name %></p>
+    <p class="text-sm font-medium truncate"><%= current_user.name %></p>
   </div>
 
   <%# ナビゲーション %>
   <nav class="flex flex-1 flex-col gap-0.5 px-2 py-3">
-    <%= link_to trips_path, class: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium" do %>
-      <span class="material-symbols-rounded">travel</span>
-      <span class="text-sm font-medium"><%= t(".trips") %></span>
+    <%= link_to root_path,
+          class: class_names(
+            "flex items-center gap-3 pl-5 py-2.5 rounded-xl font-medium",
+            "bg-primary-soft text-primary" => navigation_active?(:today),
+            "text-text-secondary hover:bg-surface-hover hover:text-text-primary" => !navigation_active?(:today)
+          ) do %>
+      <span class="material-symbols-rounded" aria-hidden="true">today</span>
+      <span class="font-medium"><%= t(".today") %></span>
     <% end %>
 
-    <%= link_to root_path, class: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium" do %>
-      <span class="material-symbols-rounded">today</span>
-      <span class="text-sm font-medium"><%= t(".today") %></span>
+    <%= link_to trips_path,
+          class: class_names(
+            "flex items-center gap-3 pl-5 py-2.5 rounded-xl font-medium",
+            "bg-primary-soft text-primary" => navigation_active?(:trips),
+            "text-text-secondary hover:bg-surface-hover hover:text-text-primary" => !navigation_active?(:trips)
+          ) do %>
+      <span class="material-symbols-rounded" aria-hidden="true">travel</span>
+      <span class="font-medium"><%= t(".trips") %></span>
     <% end %>
 
-    <%= link_to recipients_path, class: "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium" do %>
-      <span class="material-symbols-rounded">group</span>
-      <span class="text-sm font-medium"><%= t(".recipients") %></span>
+    <%= link_to recipients_path,
+          class: class_names(
+            "flex items-center gap-3 pl-5 py-2.5 rounded-xl font-medium",
+            "bg-primary-soft text-primary" => navigation_active?(:recipients),
+            "text-text-secondary hover:bg-surface-hover hover:text-text-primary" => !navigation_active?(:recipients)
+          ) do %>
+      <span class="material-symbols-rounded" aria-hidden="true">emoji_people</span>
+      <span class="font-medium"><%= t(".recipients") %></span>
     <% end %>
   </nav>
 
   <%# ログアウト %>
-  <div class="px-2 py-3 border-t border-mist-100">
-    <%= button_to logout_path, method: :delete, class: "flex gap-2 text-red-500 bg-red-50 px-3 py-2.5 rounded" do %>
-      <span class="material-symbols-rounded">logout</span>
+  <div class="pl-5 py-3 border-t border-mist-100">
+    <%= button_to logout_path,
+                  method: :delete,
+                  class: "flex gap-2 px-3 py-2.5 rounded-lg text-text-secondary transition hover:bg-surface-hover hover:text-danger" do %>
+      <span class="material-symbols-rounded" aria-hidden="true">logout</span>
       <span><%= t(".logout") %></span>
       <% end %>
   </div>
