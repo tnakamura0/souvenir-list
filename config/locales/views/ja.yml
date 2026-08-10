@@ -144,6 +144,7 @@ ja:
       delete_confirmation: "%{tag_name}を削除しますか？"
   today:
     show:
+      today_badge: 今日の旅行
       empty:
-        message: 今日は旅行の予定がありません
+        message: 今日は旅行の予定がありません。
         action: 旅行を新規作成する
