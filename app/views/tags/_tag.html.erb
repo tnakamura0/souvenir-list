@@ -1,16 +1,18 @@
 <%= turbo_frame_tag tag, class: "block" do %>
-  <div class="bg-white hover:bg-mist-50 rounded-3xl border border-mist-100 hover:border-mist-200 shadow-sm p-5 flex items-center justify-between">
-    <div class="truncate">
+  <div class="card flex min-h-16 items-center justify-between gap-3 px-6 py-3 md:px-8">
+    <div class="min-w-0 flex-1 truncate">
       <%= tag.name %>
     </div>
 
-    <div class="flex items-center gap-2 shrink-0">
-      <%= link_to t("common.edit"),
-                  edit_tag_path(tag),
-                  class: "text-xs text-mist-400 hover:text-mist-700 px-3 py-1.5 border border-mist-200 rounded-xl" %>
+    <div class="flex shrink-0 items-center gap-2">
+      <%= link_to edit_tag_path(tag),
+                  class: "btn-secondary flex items-center gap-1.5 px-2 py-1",
+                  aria: { label: t("common.edit") } do %>
+        <span class="material-symbols-rounded" aria-hidden="true">edit</span>
+        <span class="hidden md:inline"><%= t("common.edit") %></span>
+      <% end %>
 
-      <%= button_to t("common.delete"),
-                    tag_path(tag),
+      <%= button_to tag_path(tag),
                     method: :delete,
                     data: {
                       turbo_confirm: t(
@@ -19,7 +21,11 @@
                       )
                     },
                     form: { data: { turbo_frame: "_top" } }, # 削除時はページ全体を遷移対象とする
-                    class: "text-xs text-red-400 hover:text-red-600 px-3 py-1.5 border border-red-100 rounded-xl" %>
+                    class: "btn-danger flex items-center gap-1.5 px-2 py-1",
+                    aria: { label: t("common.delete") } do %>
+        <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+        <span class="hidden md:inline"><%= t("common.delete") %></span>
+      <% end %>
     </div>
   </div>
 <% end %>
