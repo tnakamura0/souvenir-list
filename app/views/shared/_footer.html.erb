@@ -1,9 +1,9 @@
-<footer class="mt-12 border-t border-border bg-surface">
+<footer class="mt-12 border-t border-border/60 bg-surface">
   <div class="max-w-2xl mx-auto px-4 py-6 flex flex-col items-center gap-2 text-xs text-text-muted">
     <nav class="flex gap-4">
-      <%= link_to t(".terms"), "#", class: "hover:underline" %>
-      <%= link_to t(".privacy_policy"), "#", class: "hover:underline" %>
+      <%= link_to t(".terms"), "#", class: "hover:underline hover:text-text-secondary" %>
+      <%= link_to t(".privacy_policy"), "#", class: "hover:underline hover:text-text-secondary" %>
     </nav>
-    <p>&copy; 2026 tnakamura0</p>
+    <small class="text-xs">&copy; <%= Date.current.year %> OmiMemo</small>
   </div>
 </footer>
