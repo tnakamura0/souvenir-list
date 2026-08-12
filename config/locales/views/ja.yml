@@ -1,5 +1,7 @@
 ja:
   common:
+    terms: 利用規約
+    privacy_policy: プライバシーポリシー
     back: 戻る
     required_notice: すべての項目が必須です。
     required: 必須
@@ -24,6 +26,44 @@ ja:
       logout: ログアウト
   sessions:
     new:
+      hero:
+        title:
+          primary: お土産の買い忘れをなくして、
+          accent: 旅行をもっと楽しもう。
+        description: 家族や友人、職場など、お土産を渡したい相手を旅行前にリストアップ。旅行中は買った相手をチェックするだけの、シンプルなお土産管理アプリです。
+        agreement_html: "ログインすると、%{terms}および%{privacy_policy}に同意したものとみなします。"
+      problems:
+        heading: PROBLEMS
+        title: こんな経験はありませんか？
+        recipients:
+          title: 誰に買うか思い出せない
+          description: お土産売り場に着いてから、渡す相手を一から思い出すことに。
+        hurry:
+          title: 帰り際に慌てて買ってしまう
+          description: 空港や駅で時間がなくなり、じっくり選べないまま購入してしまう。
+        forgot:
+          title: 買い忘れがないか気になる
+          description: 「あの人の分、買ったっけ？」と旅行中もつい気になってしまう。
+      how_to:
+        heading: HOW TO USE
+        title: 使い方はかんたん3ステップ
+        step1:
+          title: 旅行前に渡す相手を登録
+          description: 家族・友人・職場など、お土産を渡したい相手をあらかじめリストアップします。
+        step2:
+          title: 旅行中に買った相手をチェック
+          description: お土産を購入したらワンタップで購入済みに。残りの相手をすぐ確認できます。
+        step3:
+          title: 全員分そろったら完了
+          description: 買い忘れを気にする必要はありません。あとは心置きなく旅行を楽しめます。
+      screen_shot:
+        heading: SIMPLE & EASY
+        title: 旅行中も迷わず使える
+        description: スマートフォンから、購入状況をすぐに確認できます。
+        image_alt: 今日の旅行画面の利用イメージ
+      cta:
+        title: 安心して、旅行を楽しもう。
+        google_sign_in_description: Googleアカウントですぐに始められます
       google_sign_in_alt: Googleでログイン
   trips:
     index:
