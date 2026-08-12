@@ -1,8 +1,220 @@
-<div>
-  <h1 class="font-bold text-4xl">Sessions#new</h1>
+<div class="space-y-20 md:space-y-24">
+  <%# ファーストビュー %>
+  <section class="flex flex-col items-center text-center">
+    <%= image_tag "logo.svg",
+                  alt: "OmiMemo",
+                  class: "mb-8 relative -left-1 w-auto" %>
 
-  <%= button_to "/auth/google_oauth2", method: :post, data: { turbo: false } do %>
-    <%= image_tag "google-sign-in-ja.svg", alt: t(".google_sign_in_alt") %>
-  <% end %>
+    <h1 class="text-2xl md:text-4xl font-bold leading-relaxed tracking-wide">
+      <%= t(".hero.title.primary") %><br>
+      <span class="text-primary"><%= t(".hero.title.accent") %></span>
+    </h1>
 
+    <p class="mt-5 w-full max-w-xl text-left leading-7 text-text-secondary">
+      <%= t(".hero.description") %>
+    </p>
+
+    <div class="mt-8">
+      <%= button_to "/auth/google_oauth2",
+                    method: :post,
+                    data: { turbo: false },
+                    class: "transition-transform hover:scale-[1.02] active:scale-[0.98]" do %>
+        <%= image_tag "google-sign-in-ja-light.svg",
+                      alt: t(".google_sign_in_alt") %>
+      <% end %>
+    </div>
+
+    <p class="mt-4 text-xs leading-5 text-text-muted">
+      <%= t(
+            ".hero.agreement_html",
+            terms:
+              link_to(
+                t("common.terms"),
+                "#",
+                class: "underline underline-offset-2 transition-colors hover:text-primary"
+              ),
+            privacy_policy:
+              link_to(
+                t("common.privacy_policy"),
+                "#",
+                class: "underline underline-offset-2 transition-colors hover:text-primary"
+              )
+            ) %>
+    </p>
+  </section>
+
+  <%# よくある悩み %>
+  <section>
+    <div class="mb-8 text-center">
+      <p class="mb-2 text-sm font-semibold text-primary">
+        <%= t(".problems.heading") %>
+      </p>
+
+      <h2 class="text-xl md:text-2xl font-bold">
+        <%= t(".problems.title") %>
+      </h2>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-3">
+      <div class="card p-5">
+        <span
+          class="material-symbols-rounded mb-4 text-[28px]! text-primary" aria-hidden="true"
+        >
+          psychology_alt
+        </span>
+
+        <h3 class="font-semibold">
+          <%= t(".problems.recipients.title") %>
+        </h3>
+
+        <p class="mt-2 text-sm leading-6 text-text-secondary">
+          <%= t(".problems.recipients.description") %>
+        </p>
+      </div>
+
+      <div class="card p-5">
+        <span
+          class="material-symbols-rounded mb-4 text-[28px]! text-primary" aria-hidden="true"
+        >
+          schedule
+        </span>
+
+        <h3 class="font-semibold">
+          <%= t(".problems.hurry.title") %>
+        </h3>
+
+        <p class="mt-2 text-sm leading-6 text-text-secondary">
+          <%= t(".problems.hurry.description") %>
+        </p>
+      </div>
+
+      <div class="card p-5">
+        <span
+          class="material-symbols-rounded mb-4 text-[28px]! text-primary" aria-hidden="true"
+        >
+          sentiment_dissatisfied
+        </span>
+
+        <h3 class="font-semibold">
+          <%= t(".problems.forgot.title") %>
+        </h3>
+
+        <p class="mt-2 text-sm leading-6 text-text-secondary">
+          <%= t(".problems.forgot.description") %>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <%# 使い方 %>
+  <section>
+    <div class="mb-10 text-center">
+      <p class="mb-2 text-sm font-semibold text-primary">
+        <%= t(".how_to.heading") %>
+      </p>
+
+      <h2 class="text-xl md:text-2xl font-bold">
+        <%= t(".how_to.title") %>
+      </h2>
+    </div>
+
+    <ol class="mx-auto max-w-2xl space-y-5">
+      <li class="card flex gap-4 p-5 md:p-6">
+        <div
+          class="flex size-8 md:size-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-text-inverse"
+        >
+          1
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold">
+            <%= t(".how_to.step1.title") %>
+          </h3>
+
+          <p class="mt-2 leading-6 text-text-secondary">
+            <%= t(".how_to.step1.description") %>
+          </p>
+        </div>
+      </li>
+
+      <li class="card flex gap-4 p-5 md:p-6">
+        <div
+          class="flex size-8 md:size-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-text-inverse"
+        >
+          2
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold">
+            <%= t(".how_to.step2.title") %>
+          </h3>
+
+          <p class="mt-2 leading-6 text-text-secondary">
+            <%= t(".how_to.step2.description") %>
+          </p>
+        </div>
+      </li>
+
+      <li class="card flex gap-4 p-5 md:p-6">
+        <div
+          class="flex size-8 md:size-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-text-inverse"
+        >
+          3
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold">
+            <%= t(".how_to.step3.title") %>
+          </h3>
+
+          <p class="mt-2 leading-6 text-text-secondary">
+            <%= t(".how_to.step3.description") %>
+          </p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <%# スクリーンショット %>
+  <section>
+    <div class="mb-8 text-center">
+      <p class="mb-2 text-sm font-semibold text-primary">
+        <%= t(".screen_shot.heading") %>
+      </p>
+
+      <h2 class="text-xl md:text-2xl font-bold">
+        <%= t(".screen_shot.title") %>
+      </h2>
+
+      <p class="mt-3 text-text-secondary">
+        <%= t(".screen_shot.description") %>
+      </p>
+    </div>
+
+    <%= image_tag "screen_shot.png",
+              alt: t(".screen_shot.image_alt"),
+              class: "mx-auto w-full max-w-3xl rounded-3xl md:w-auto md:max-h-[720px]" %>
+
+  </section>
+
+  <%# 最後のCTA %>
+  <section class="mx-auto w-full max-w-2xl rounded-3xl bg-primary-soft px-5 py-10 text-center md:px-10">
+    <h2 class="text-xl md:text-2xl font-bold">
+      <%= t(".cta.title") %>
+    </h2>
+
+    <div class="mt-7 flex justify-center">
+      <%= button_to "/auth/google_oauth2",
+                    method: :post,
+                    data: { turbo: false },
+                    class: "transition-transform hover:scale-[1.02] active:scale-[0.98]" do %>
+        <%= image_tag "google-sign-in-ja-light.svg",
+                      alt: t(".google_sign_in_alt") %>
+      <% end %>
+    </div>
+
+    <p class="mt-3 text-xs text-text-muted">
+      <%= t(".cta.google_sign_in_description") %>
+    </p>
+  </section>
 </div>
