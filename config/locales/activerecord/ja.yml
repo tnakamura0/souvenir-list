@@ -23,3 +23,9 @@ ja:
         memo: メモ
       tag:
         name: タグ名
+    errors:
+      models:
+        trip:
+          attributes:
+            return_date:
+              after_departure_date: は出発日以降の日付を入力してください
