@@ -77,6 +77,12 @@ RSpec.describe Trip, type: :model do
       it "無効である" do
         expect(trip).to be_invalid
       end
+
+      it "return_dateにエラーが追加されること" do
+        trip.validate
+
+        expect(trip.errors[:return_date]).to include("は出発日以降の日付を入力してください")
+      end
     end
   end
 
