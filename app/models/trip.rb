@@ -10,7 +10,10 @@ class Trip < ApplicationRecord
   validates :return_date, presence: true
 
   validates :return_date,
-            comparison: { greater_than_or_equal_to: :departure_date },
+            comparison: {
+              greater_than_or_equal_to: :departure_date,
+              message: :after_departure_date
+            },
             if: -> { departure_date.present? && return_date.present? }
 
   def total_count
