@@ -5,8 +5,17 @@
   <% end %>
 
   <div class="flex gap-2">
-    <%= link_to t("common.edit"), edit_trip_path(@trip), class: "btn-secondary px-3 py-1" %>
-    <%= button_to t("common.delete"), trip_path(@trip), method: :delete, data: { turbo_confirm: t(".delete_confirmation", trip_name: @trip.name) }, class: "btn-danger px-3 py-1" %>
+    <%= link_to edit_trip_path(@trip), class: "btn-secondary inline-flex items-center gap-1.5 px-3 py-1" do %>
+      <span class="material-symbols-rounded text-base" aria-hidden="true">edit</span>
+      <span><%= t("common.edit") %></span>
+    <% end %>
+    <%= button_to trip_path(@trip),
+                  method: :delete,
+                  data: { turbo_confirm: t(".delete_confirmation", trip_name: @trip.name) },
+                  class: "btn-danger inline-flex items-center gap-1.5 px-3 py-1" do %>
+      <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+      <span><%= t("common.delete") %></span>
+    <% end %>
   </div>
 </div>
 
