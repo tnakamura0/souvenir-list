@@ -75,7 +75,7 @@ ja:
         action: 最初の旅行を作成する
     new:
       title: 新しい旅行を作成
-      description: 旅行の日程や目的地を入力してください
+      description: 旅行の日程や目的地を入力してください。
     show:
       delete_confirmation: "%{trip_name}を削除しますか？"
       recipients:
@@ -89,7 +89,7 @@ ja:
         purchased: "%{purchased_count} / %{total_count} 件購入済み"
     edit:
       title: 旅行を編集
-      description: 旅行の情報を編集できます
+      description: 旅行の情報を編集できます。
     form:
       name:
         label: 旅行名
@@ -106,7 +106,7 @@ ja:
       title: 相手
       add: 相手を追加
       empty:
-        message: お土産を渡す相手がまだ追加されていません
+        message: お土産を渡す相手がまだ追加されていません。
         action: 相手を追加する
   recipients:
     index:
@@ -119,14 +119,14 @@ ja:
         submit: 絞り込む
       empty:
         title: 相手がまだ登録されていません
-        description: 家族・同僚・友人などを登録しましょう
+        description: 家族・同僚・友人などを登録しましょう。
         action: 最初の相手を登録する
     new:
       title: 新しい相手を作成
-      description: お土産を渡したい相手の情報を入力してください
+      description: お土産を渡したい相手の情報を入力してください。
     edit:
       title: 相手情報を編集
-      description: 相手の情報を編集できます
+      description: 相手の情報を編集できます。
     form:
       name:
         label: 名前
@@ -143,11 +143,11 @@ ja:
         placeholder: 例：お酒好き、甘いものは苦手
       tags:
         label: タグ
-        description: この相手に付けるタグを選択してください
+        description: この相手に付けるタグを選択してください。
         empty: 登録されているタグはありません
       new_tag_name:
         placeholder: 新しいタグ名を入力
-        description: 既存のタグか新しいタグを設定できます
+        description: 既存のタグを選択するか、新しいタグを作成できます。
       cancel: キャンセル
     recipient:
       group_badge: "%{people_count}人グループ"
@@ -155,7 +155,7 @@ ja:
   trip_recipients:
     new:
       title: 旅行に相手を追加
-      description: "%{trip_name}でお土産を渡す相手を選んでください"
+      description: "%{trip_name}でお土産を渡す相手を選んでください。"
       tag_filter:
         all: すべて表示
         submit: 絞り込む
@@ -163,7 +163,7 @@ ja:
       select_all: "表示中の%{count}件をすべて選択"
       submit: 選択した相手を追加
       empty:
-        message: 追加できる相手がいません
+        message: 追加できる相手がいません。
         action: 相手を登録する
       selected_count: 件選択中
       submit: 旅行へ追加
@@ -172,10 +172,10 @@ ja:
       title: タグ一覧
       description: タグを作成すると、相手を分類して探しやすくできます。
       empty:
-        message: タグがまだ作成されていません
+        message: タグがまだ作成されていません。
     edit:
       title: タグ編集
-      description: タグの名前を変更できます
+      description: タグの名前を変更できます。
     form:
       name:
         placeholder: 例：家族、職場、友人
