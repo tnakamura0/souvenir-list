@@ -43,7 +43,7 @@
 }
 
 @utility page-title {
-  @apply text-2xl font-bold;
+  @apply text-2xl font-bold tracking-wider;
 }
 
 @utility page-description {

@@ -1,5 +1,7 @@
 <div class="mb-3 flex items-center justify-between">
-  <h2 class="text-lg font-semibold"><%= t("trips.recipient_list.title") %></h2>
+  <div class="border-l-3 border-primary pl-3">
+    <h2 class="text-lg font-semibold tracking-wide"><%= t("trips.recipient_list.title") %></h2>
+  </div>
 
   <%= link_to new_trip_trip_recipient_path(trip),
               class: "btn-secondary flex items-center gap-1.5 px-3 py-1.5" do %>
