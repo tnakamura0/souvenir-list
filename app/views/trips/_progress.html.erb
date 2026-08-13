@@ -16,7 +16,7 @@
     aria-valuemax="100"
   >
     <div
-      class="h-full rounded-full bg-primary transition-all duration-300"
+      class="h-full rounded-full <%= progress_percentage == 100 ? 'bg-success' : 'bg-primary' %> transition-all duration-300"
       style="width: <%= progress_percentage %>%"
     ></div>
   </div>
@@ -24,8 +24,8 @@
   <div class="mt-2 flex items-center justify-between text-text-secondary text-sm">
     <% if progress_percentage == 100 %>
       <p class="inline-flex items-center gap-1 font-medium text-success">
-        <span class="material-symbols-rounded text-accent">celebration</span>
-        <%= t("trips.show.progress.completed") %>
+        <span class="material-symbols-rounded" aria-hidden="true">task_alt</span>
+        <span><%= t("trips.show.progress.completed") %></span>
       </p>
     <% else %>
       <p>
