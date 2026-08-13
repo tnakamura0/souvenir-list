@@ -103,7 +103,7 @@ ja:
         label: 帰宅日
       cancel: キャンセル
     recipient_list:
-      title: お土産を渡す相手
+      title: 相手
       add: 相手を追加
       empty:
         message: お土産を渡す相手がまだ追加されていません
