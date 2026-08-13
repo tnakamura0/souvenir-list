@@ -122,7 +122,7 @@ ja:
         description: 家族・同僚・友人などを登録しましょう
         action: 最初の相手を登録する
     new:
-      title: 新しい相手を登録
+      title: 新しい相手を作成
       description: お土産を渡したい相手の情報を入力してください
     edit:
       title: 相手情報を編集
@@ -179,7 +179,6 @@ ja:
     form:
       name:
         placeholder: 例：家族、職場、友人
-      create: 作成する
     tag:
       delete_confirmation: "%{tag_name}を削除しますか？"
   today:
