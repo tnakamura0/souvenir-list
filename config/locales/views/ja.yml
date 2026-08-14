@@ -104,7 +104,7 @@ ja:
       cancel: キャンセル
     recipient_list:
       title: 相手
-      add: 相手を追加
+      add: 追加
       empty:
         message: お土産を渡す相手がまだ追加されていません。
         action: 相手を追加する
