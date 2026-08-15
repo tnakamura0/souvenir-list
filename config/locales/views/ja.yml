@@ -1,4 +1,7 @@
 ja:
+  meta:
+    title: OmiMemo | 旅行のお土産管理アプリ
+    description: 旅行のお土産を渡す相手や購入状況をまとめて管理できるアプリです。買い忘れを防ぎ、安心して旅行を楽しめます。
   common:
     terms: 利用規約
     privacy_policy: プライバシーポリシー
