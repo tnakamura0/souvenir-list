@@ -71,6 +71,8 @@ ja:
   pages:
     terms:
       title: 利用規約
+    privacy:
+      title: プライバシーポリシー
   trips:
     index:
       title: 旅行一覧

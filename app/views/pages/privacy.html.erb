@@ -1,0 +1,81 @@
+<div class="p-2">
+  <h1 class="mb-4 md:mb-6 font-bold text-2xl md:text-3xl"><%= t(".title") %></h1>
+  <div class="space-y-6">
+    <p class="policy-text">
+      OmiMemo運営者（以下「当社」といいます。）は、本サービスにおけるお客様の個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます。）を定めます。
+    </p>
+
+    <section>
+      <h2 class="policy-heading">お客様から取得する情報</h2>
+      <p class="policy-text">
+        本サービスでは、Google OAuthを利用した認証を提供しています。<br>
+        <br>
+        お客様がGoogleアカウントでログインした場合、当社はGoogleから以下の情報を取得します。
+      </p>
+      <ul class="policy-text mt-2 list-disc space-y-1 pl-6">
+        <li>氏名（ニックネームやペンネームを含みます。）</li>
+        <li>メールアドレス</li>
+        <li>プロフィール画像</li>
+        <li>Googleアカウントを識別するためのID</li>
+      </ul>
+      <p class="policy-text">
+        <br>
+        これらの情報は、本サービスへのログイン認証およびアカウント管理のために利用します。
+      </p>
+    </section>
+
+    <section>
+      <h2 class="policy-heading">お客様の情報を利用する目的</h2>
+      <p class="policy-text">
+        当社は、お客様から取得した情報を、以下の目的のために利用します。
+      </p>
+      <ul class="policy-text mt-2 list-disc space-y-1 pl-6">
+        <li>当社サービスに関する登録の受付、お客様の本人確認、認証のため</li>
+        <li>お客様の当社サービスの利用履歴を管理するため</li>
+        <li>お客様からのお問い合わせに対応するため</li>
+        <li>当社の規約や法令に違反する行為に対応するため</li>
+        <li>以上の他、当社サービスの提供、維持、保護及び改善のため</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="policy-heading">安全管理のために講じた措置</h2>
+      <p class="policy-text">当社が、お客様から取得した情報に関して安全管理のために講じた措置につきましては、末尾記載のお問い合わせ先にご連絡をいただきましたら、法令の定めに従い個別にご回答させていただきます。</p>
+    </section>
+
+    <section>
+      <h2 class="policy-heading">第三者提供</h2>
+      <p class="policy-text">
+        当社は、お客様から取得する情報のうち、個人データ（個人情報保護法第１６条第３項）に該当するものについては、あらかじめお客様の同意を得ずに、第三者（日本国外にある者を含みます。）に提供しません。
+        ただし、次の場合は除きます。
+      </p>
+      <ul class="policy-text mt-2 list-disc space-y-1 pl-6">
+        <li>個人データの取扱いを外部に委託する場合</li>
+        <li>当社や当社サービスが買収された場合</li>
+        <li>事業パートナーと共同利用する場合（具体的な共同利用がある場合は、その内容を別途公表します。）</li>
+        <li>その他、法律によって合法的に第三者提供が許されている場合</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="policy-heading">プライバシーポリシーの変更</h2>
+      <p class="policy-text">
+        当社は、必要に応じて、このプライバシーポリシーの内容を変更します。この場合、変更後のプライバシーポリシーの施行時期と内容を適切な方法により周知または通知します。
+      </p>
+    </section>
+
+    <section>
+      <h2 class="policy-heading">お問い合わせ</h2>
+      <p class="policy-text">
+        お客様の情報の開示、情報の訂正、利用停止、削除をご希望の場合は、以下のメールアドレスにご連絡ください。
+      </p>
+      <p class="mt-2">
+        <%= mail_to "contact@omimemo.com",
+                    "contact@omimemo.com",
+                    class: "text-primary underline underline-offset-2 hover:text-primary-hover" %>
+      </p>
+    </section>
+  </div>
+
+  <p class="mt-12 text-sm text-text-muted">2026年8月15日 制定</p>
+</div>
