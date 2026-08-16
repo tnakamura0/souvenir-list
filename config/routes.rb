@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "today#show"
 
+  get "/terms", to: "pages#terms"
+
   # GoogleのOAuth用設定
   get "login", to: "sessions#new"
   get "auth/:provider/callback", to: "sessions#create"

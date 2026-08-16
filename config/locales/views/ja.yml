@@ -68,6 +68,9 @@ ja:
         title: 安心して、旅行を楽しもう。
         google_sign_in_description: Googleアカウントですぐに始められます
       google_sign_in_alt: Googleでログイン
+  pages:
+    terms:
+      title: 利用規約
   trips:
     index:
       title: 旅行一覧

@@ -1,0 +1,11 @@
+require "rails_helper"
+
+RSpec.describe "Pages", type: :request do
+  describe "GET /terms" do
+    it "正常に表示される" do
+      get terms_path
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
+end

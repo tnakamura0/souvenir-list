@@ -38,15 +38,13 @@
   </head>
 
   <body class="<%= class_names("font-sans min-h-screen flex flex-col bg-background text-text-primary", { "pb-16 md:pb-0" => logged_in? } ) %>">
-    <% if logged_in? %>
-      <%= render "shared/header" %>
-      <%= render "shared/sidebar" %>
-    <% end %>
+    <%= render "shared/header" unless content_for?(:hide_header) %>
+    <%= render "shared/sidebar" if logged_in? %>
 
     <div class="flex flex-col flex-1 <%= "md:pl-56" if logged_in? %>">
       <main class="<%= class_names(
                         "container mx-auto px-5 flex-1 pt-10 pb-24",
-                        logged_in? ? "max-w-2xl" : "max-w-5xl"
+                        content_for?(:wide_layout) ? "max-w-5xl" : "max-w-2xl"
                       ) %>">
         <%= render "shared/flash_message" %>
         <%= yield %>
