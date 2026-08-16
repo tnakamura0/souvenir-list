@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   root "today#show"
 
   get "/terms", to: "pages#terms"
+  get "/privacy", to: "pages#privacy"
 
   # GoogleのOAuth用設定
   get "login", to: "sessions#new"
