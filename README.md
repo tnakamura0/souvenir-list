@@ -1,3 +1,8 @@
+# OmiMemo
+サービスURL：http://omimemo.com
+
+![OmiMemo OGP](app/assets/images/ogp.png)
+
 ## 1. サービス概要
 
 旅行や出張でお土産を買う人が、買い忘れの不安から解放され、最後まで安心して旅行を楽しめるサービスです。
