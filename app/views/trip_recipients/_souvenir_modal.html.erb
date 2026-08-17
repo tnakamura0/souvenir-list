@@ -1,0 +1,18 @@
+<dialog 
+  class="m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border-0 bg-surface p-0 shadow-xl backdrop:bg-black/20"
+  data-modal-target="dialog"
+  data-action="click->modal#closeOnBackdrop"
+  >
+  <div class="p-3 md:p-6">
+    <h2 class="mb-3 text-lg font-medium">
+      <%= t("trips.show.recipients.souvenir.title") %>
+    </h2>
+
+    <%= form_with model: [trip_recipient.trip, trip_recipient], class: "flex items-center justify-between gap-2" do |f| %>
+      <%= f.label :souvenir_name, t("trips.show.recipients.souvenir.label"), class: "sr-only" %>
+      <%= f.text_field :souvenir_name, placeholder: t("trips.show.recipients.souvenir.placeholder"), class: "form-control flex-1 pl-2 py-2" %>
+
+      <%= f.submit t("trips.show.recipients.souvenir.submit"), class: "btn-primary" %>
+    <% end %>
+  </div>
+</dialog>
