@@ -91,6 +91,15 @@ ja:
         not_purchased: 未購入
         remove_confirmation: "%{recipient_name}をこの旅行から外しますか？"
         remove: 旅行から外す
+        menu:
+          open: メニューを開く
+          add_souvenir: お土産を入力
+        souvenir:
+          title: お土産を入力
+          label: 品目名
+          placeholder: 例：東京ばな奈
+          submit: 保存
+          display: お土産
       progress:
         title: 購入進捗
         completed: 全員分購入完了！

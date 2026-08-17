@@ -58,6 +58,6 @@ class TripRecipientsController < ApplicationController
   private
 
   def trip_recipient_params
-    params.require(:trip_recipient).permit(:purchased)
+    params.require(:trip_recipient).permit(:purchased, :souvenir_name)
   end
 end

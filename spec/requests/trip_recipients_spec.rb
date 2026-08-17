@@ -271,6 +271,28 @@ RSpec.describe "TripRecipients", type: :request do
           expect(other_trip_recipient.reload).not_to be_purchased
         end
       end
+
+      context "お土産品目を更新する場合" do
+        it "品目名を更新する" do
+          patch trip_trip_recipient_path(trip, trip_recipient), params: {
+            trip_recipient: {
+              souvenir_name: "東京ばな奈"
+            }
+          }
+
+          expect(trip_recipient.reload.souvenir_name).to eq("東京ばな奈")
+        end
+
+        it "旅行詳細画面へリダイレクトする" do
+          patch trip_trip_recipient_path(trip, trip_recipient), params: {
+            trip_recipient: {
+              souvenir_name: "東京ばな奈"
+            }
+          }
+
+          expect(response).to redirect_to(trip_path(trip))
+        end
+      end
     end
 
     context "ログインしていない場合" do
