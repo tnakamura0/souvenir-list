@@ -109,18 +109,11 @@ ja:
       description: 旅行の情報を編集できます。
     form:
       name:
-        label: 旅行名
         placeholder: 例：札幌出張、大阪家族旅行
       destination:
-        label: 目的地
         placeholder: 例：北海道、大阪
-      departure_date:
-        label: 出発日
-      return_date:
-        label: 帰宅日
-      cancel: キャンセル
     recipient_list:
-      title: 相手
+      title: お土産を渡す相手
       add: 追加
       empty:
         message: お土産を渡す相手がまだ追加されていません。
@@ -155,26 +148,16 @@ ja:
       description: 相手の情報を編集できます。
     form:
       name:
-        label: 名前
         placeholder: 例：父親、営業部 A 部長、山田さん
-      kind:
-        label: 種別
-        individual: 個人
-        group: グループ
       people_count:
-        label: 人数
         placeholder: 例：10
       memo:
-        label: メモ
         placeholder: 例：お酒好き、甘いものは苦手
       tags:
-        label: タグ
-        description: この相手に付けるタグを選択してください。
         empty: 登録されているタグはありません
       new_tag_name:
         placeholder: 新しいタグ名を入力
         description: 既存のタグを選択するか、新しいタグを作成できます。
-      cancel: キャンセル
     recipient:
       group_badge: "%{people_count}人グループ"
       delete_confirmation: "%{recipient_name}を削除しますか？"
@@ -206,7 +189,7 @@ ja:
       name:
         placeholder: 例：家族、職場、友人
     tag:
-      delete_confirmation: "%{tag_name}を削除しますか？"
+      delete_confirmation: "%{tag_name}タグを削除しますか？"
   today:
     show:
       today_badge: 今日の旅行

@@ -4,7 +4,7 @@
   <%# 名前 %>
   <div>
     <%= f.label :name, class: "label flex items-center gap-2" do %>
-      <span><%= t("recipients.form.name.label") %></span>
+      <span><%= Recipient.human_attribute_name(:name) %></span>
       <span class="rounded bg-danger-soft px-1.5 py-0.5 text-xs font-medium text-danger">
         <%= t("common.required") %>
       </span>
@@ -14,7 +14,7 @@
 
   <%# 種別 %>
   <fieldset>
-    <legend class="label"><%= t("recipients.form.kind.label") %></legend>
+    <legend class="label"><%= Recipient.human_attribute_name(:kind) %></legend>
     <div class="grid grid-cols-2 gap-4">
       <div>
         <%= f.radio_button :kind,
@@ -26,7 +26,7 @@
         %>
         <%= f.label :kind_individual, class: "flex cursor-pointer items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-border text-text-secondary font-medium transition hover:border-primary peer-checked:border-primary peer-checked:bg-primary-soft peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2" do %>
           <span class="material-symbols-rounded">person</span>
-          <span><%= t("recipients.form.kind.individual") %></span>
+          <span><%= t("activerecord.attributes.recipient.kinds.individual") %></span>
         <% end %>
       </div>
 
@@ -41,7 +41,7 @@
         %>
         <%= f.label :kind_group, class: "flex cursor-pointer items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-border text-text-secondary font-medium transition hover:border-primary peer-checked:border-primary peer-checked:bg-primary-soft peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2" do %>
           <span class="material-symbols-rounded">group</span>
-          <span><%= t("recipients.form.kind.group") %></span>
+          <span><%= t("activerecord.attributes.recipient.kinds.group") %></span>
         <% end %>
       </div>
     </div>
@@ -50,7 +50,7 @@
   <%# グループの人数 %>
   <div class="hidden" data-people-count-toggle-target="field">
     <%= f.label :people_count, class: "label flex items-center gap-2" do %>
-      <span><%= t("recipients.form.people_count.label") %></span>
+      <span><%= Recipient.human_attribute_name(:people_count) %></span>
       <span class="rounded bg-danger-soft px-1.5 py-0.5 text-xs font-medium text-danger">
         <%= t("common.required") %>
       </span>
@@ -66,14 +66,14 @@
 
   <%# メモ %>
   <div>
-    <%= f.label :memo, t("recipients.form.memo.label"), class: "label" %>
+    <%= f.label :memo, class: "label" %>
     <%= f.textarea :memo, placeholder: t("recipients.form.memo.placeholder"), class: "form-control min-h-28 resize-y" %>
   </div>
 
   <%# タグ関連 %>
   <%# 既存タグ一覧表示 %>
   <div>
-    <p class="mb-2 block"><%= t("recipients.form.tags.label") %></p>
+    <p class="mb-2 block"><%= Recipient.human_attribute_name(:tags) %></p>
 
     <% if @tags.present? %>
       <div class="flex flex-wrap gap-2">
@@ -118,7 +118,7 @@
 
   <%# 登録・キャンセルボタン %>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <%= link_to t("recipients.form.cancel"), cancel_path, class: "btn-secondary text-center" %>
+    <%= link_to t("common.cancel"), cancel_path, class: "btn-secondary text-center" %>
     <%= f.submit class: "btn-primary" %>
   </div>
 <% end %>

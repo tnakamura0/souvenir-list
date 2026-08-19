@@ -10,7 +10,7 @@
       <div class="flex items-center gap-1.5 text-text-secondary">
         <span class="material-symbols-rounded">calendar_today</span>
         <span>
-          <%= trip.departure_date.strftime("%Y/%-m/%-d") %> 〜 <%= trip.return_date.strftime("%Y/%-m/%-d") %>
+          <%= l(trip.departure_date) %> 〜 <%= l(trip.return_date) %>
         </span>
       </div>
     </div>
