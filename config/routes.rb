@@ -24,6 +24,6 @@ Rails.application.routes.draw do
   resources :trips, only: %i[index new create show edit update destroy] do
     resources :trip_recipients, only: %i[new create update destroy]
   end
-  resources :recipients, only: %i[index new create edit update destroy]
+  resources :recipients, only: %i[index new create show edit update destroy]
   resources :tags, only: %i[index create edit update destroy]
 end

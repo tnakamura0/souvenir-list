@@ -23,6 +23,16 @@ class RecipientsController < ApplicationController
     end
   end
 
+  def show
+    @recipient = current_user.recipients.find(params[:id])
+    @souvenir_history = @recipient.trip_recipients
+                                  .where(purchased: true)
+                                  .where.not(souvenir_name: [ nil, "" ])
+                                  .joins(:trip)
+                                  .includes(:trip)
+                                  .order("trips.departure_date DESC")
+  end
+
   def edit
     @recipient = current_user.recipients.find(params[:id])
     @tags = current_user.tags

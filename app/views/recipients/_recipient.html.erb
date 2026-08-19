@@ -1,29 +1,6 @@
-<div class="card flex flex-col gap-1 p-5 md:flex-row md:items-start md::justify-between">
-  <div class="min-w-0 flex-1">
-    <%= render(
-          "shared/recipient_summary",
-          recipient: recipient
-        ) %>
-  </div>
-
-  <div class="flex shrink-0 items-center justify-end gap-2">
-    <%= link_to edit_recipient_path(recipient),
-                class: "btn-secondary inline-flex items-center gap-1.5 px-3 py-1 text-sm" do %>
-      <span class="material-symbols-rounded text-base" aria-hidden="true">edit</span>
-      <span><%= t("common.edit") %></span>
-    <% end %>
-
-    <%= button_to recipient_path(recipient),
-                  method: :delete,
-                  data: {
-                    turbo_confirm: t(
-                      "recipients.recipient.delete_confirmation",
-                      recipient_name: recipient.name
-                    )
-                  },
-                  class: "btn-danger inline-flex items-center gap-1.5 px-3 py-1 text-sm" do %>
-      <span class="material-symbols-rounded" aria-hidden="true">delete</span>
-      <span><%= t("common.delete") %></span>
-    <% end %>
-  </div>
+<div class="card p-5">
+  <%= render(
+        "shared/recipient_summary",
+        recipient: recipient
+      ) %>
 </div>

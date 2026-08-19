@@ -21,6 +21,9 @@ ja:
         kind: 種別
         people_count: 人数
         memo: メモ
+        kinds:
+          individual: 個人
+          group: グループ
       tag:
         name: タグ名
     errors:
