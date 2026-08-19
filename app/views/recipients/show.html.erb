@@ -120,9 +120,9 @@
 
               <p class="mt-1 flex items-center gap-1.5">
                 <span class="material-symbols-rounded text-[20px]!" aria-hidden="true">calendar_today</span>
-                <%= trip_recipient.trip.departure_date.strftime("%Y/%-m/%-d") %>
+                <%= l(trip_recipient.trip.departure_date) %>
                 〜
-                <%= trip_recipient.trip.return_date.strftime("%Y/%-m/%-d") %>
+                <%= l(trip_recipient.trip.return_date) %>
               </p>
             </div>
           </div>
