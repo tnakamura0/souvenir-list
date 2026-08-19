@@ -141,6 +141,15 @@ ja:
     new:
       title: 新しい相手を作成
       description: お土産を渡したい相手の情報を入力してください。
+    show:
+      title: 相手詳細
+      description: 相手の情報とお土産履歴を確認できます。
+      souvenir_list:
+        title: お土産履歴
+        souvenir: お土産
+        empty:
+          title: お土産履歴がありません
+          description: 購入済みのお土産が表示されます。
     edit:
       title: 相手情報を編集
       description: 相手の情報を編集できます。

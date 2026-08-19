@@ -1,0 +1,163 @@
+<div class="mb-6">
+  <%= link_to recipients_path, class: "back-link" do %>
+    <span class="material-symbols-rounded" aria-hidden="true">chevron_left</span>
+    <span><%= t("common.back") %></span>
+  <% end %>
+</div>
+
+<div class="mb-8">
+  <div class="flex items-center justify-between">
+    <h1 class="page-header page-title"><%= t(".title") %></h1>
+
+    <%# ケバブメニュー %>
+    <div class="relative" data-controller="kebab-menu" data-action="click@window->kebab-menu#closeOnOutside">
+      <button
+        type="button"
+        class="text-text-muted hover:text-text-primary"
+        data-action="click->kebab-menu#toggle"
+      >
+        <span class="material-symbols-rounded">more_vert</span>
+
+        <span class="sr-only">
+          <%= t("trips.show.recipients.menu.open") %>
+        </span>
+      </button>
+
+      <div
+        class="absolute right-0 top-full z-20 mt-1 hidden w-40 rounded-lg border border-border bg-surface p-1 shadow-lg"
+        data-kebab-menu-target="menu">
+        <%= link_to edit_recipient_path(@recipient),
+                class: "block w-full rounded-md px-3 py-2 hover:bg-surface-hover" do %>
+          <span><%= t("common.edit") %></span>
+        <% end %>
+
+        <%= button_to recipient_path(@recipient),
+              method: :delete,
+                  data: {
+                    turbo_confirm: t(
+                      "recipients.recipient.delete_confirmation",
+                      recipient_name: @recipient.name
+                    )
+                  },
+                  class: "w-full rounded-md px-3 py-2 text-left text-danger hover:bg-danger-soft" do %>
+          <span><%= t("common.delete") %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <p class="page-description"><%= t(".description") %></p>
+
+  <div class="card mt-5 p-5 md:p-6">
+    <div class="mb-4 flex items-start justify-between gap-4">
+      <div>
+        <h2 class="text-xl font-semibold">
+          <%= @recipient.name %>
+        </h2>
+
+        <p class="mt-1 text-sm text-text-secondary">
+          <% if @recipient.kind_group? %>
+            <%= t("recipients.recipient.group_badge", people_count: @recipient.people_count) %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+
+    <% if @recipient.tags.present? %>
+      <div class="mb-4 flex flex-wrap gap-2">
+        <% @recipient.tags.each do |tag| %>
+          <span class="rounded-full bg-primary-soft px-2.5 py-1 text-xs font-medium text-primary">
+            <%= tag.name %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @recipient.memo.present? %>
+      <div class="border-t border-border pt-4">
+        <p class="mb-1 text-sm font-medium text-text-secondary">
+          <%= Recipient.human_attribute_name(:memo) %>
+        </p>
+        <p class="leading-6">
+          <%= @recipient.memo %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<section>
+  <div class="mb-4 flex items-center gap-2">
+    <span class="material-symbols-rounded text-primary" aria-hidden="true">
+      history
+    </span>
+    <h2 class="text-xl font-semibold tracking-wide">
+      <%= t(".souvenir_list.title") %>
+    </h2>
+  </div>
+
+  <% if @souvenir_history.present? %>
+    <div class="space-y-3">
+      <% @souvenir_history.each do |trip_recipient| %>
+        <article class="card p-5 md:p-6">
+          <div class="mb-4">
+            <%= link_to trip_path(trip_recipient.trip),
+                        class: "group inline-flex items-center gap-1 font-semibold transition-colors hover:text-primary" do %>
+              <span><%= trip_recipient.trip.name %></span>
+              <span class="material-symbols-rounded text-lg text-text-muted transition-colors group-hover:text-primary"
+                    aria-hidden="true">
+                chevron_right
+              </span>
+            <% end %>
+
+            <div class="mt-1 text-sm text-text-secondary">
+              <p class="flex items-center gap-1.5">
+                <span class="material-symbols-rounded text-[20px]!" aria-hidden="true">
+                  location_on
+                </span>
+                <%= trip_recipient.trip.destination %>
+              </p>
+
+              <p class="mt-1 flex items-center gap-1.5">
+                <span class="material-symbols-rounded text-[20px]!" aria-hidden="true">calendar_today</span>
+                <%= trip_recipient.trip.departure_date.strftime("%Y/%-m/%-d") %>
+                〜
+                <%= trip_recipient.trip.return_date.strftime("%Y/%-m/%-d") %>
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-primary-soft px-4 py-3">
+            <p class="mb-1 text-xs font-medium text-text-secondary">
+              <%= t(".souvenir_list.souvenir") %>
+            </p>
+
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-rounded text-primary" aria-hidden="true">
+                shopping_bag
+              </span>
+              <p class="font-medium">
+                <%= trip_recipient.souvenir_name %>
+              </p>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="card px-4 py-10 text-center">
+      <span class="material-symbols-rounded mb-2 text-4xl text-text-muted"
+            aria-hidden="true">
+        history
+      </span>
+
+      <p class="font-medium">
+        <%= t(".souvenir_list.empty.title") %>
+      </p>
+
+      <p class="mt-1 text-sm text-text-secondary">
+        <%= t(".souvenir_list.empty.description") %>
+      </p>
+    </div>
+  <% end %>
+</section>
