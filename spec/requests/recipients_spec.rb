@@ -298,6 +298,108 @@ RSpec.describe "Recipients", type: :request do
     end
   end
 
+  describe "GET /recipients/:id" do
+    context "ログインしている場合" do
+      let(:user) { create(:user) }
+      let(:recipient) { create(:recipient, user:) }
+
+      before do
+        login_as(user)
+      end
+
+      it "相手詳細画面を表示する" do
+        get recipient_path(recipient)
+
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "購入済みかつ品目名があるお土産履歴を表示する" do
+        trip = create(:trip, user:)
+        create(:trip_recipient, trip:, recipient:, purchased: true, souvenir_name: "東京ばな奈")
+
+        get recipient_path(recipient)
+
+        expect(response.body).to include("東京ばな奈")
+      end
+
+      it "お土産履歴を旅行の出発日が新しい順に表示する" do
+        old_trip = create(
+          :trip,
+          user:,
+          name: "古い旅行",
+          departure_date: Date.new(2026, 5, 1),
+          return_date: Date.new(2026, 5, 3)
+        )
+
+        new_trip = create(
+          :trip,
+          user:,
+          name: "新しい旅行",
+          departure_date: Date.new(2026, 8, 1),
+          return_date: Date.new(2026, 8, 3)
+        )
+
+        create(
+          :trip_recipient,
+          trip: old_trip,
+          recipient:,
+          purchased: true,
+          souvenir_name: "古いお土産"
+        )
+
+        create(
+          :trip_recipient,
+          trip: new_trip,
+          recipient:,
+          purchased: true,
+          souvenir_name: "新しいお土産"
+        )
+
+        get recipient_path(recipient)
+
+        expect(response.body.index("新しい旅行")).to be < response.body.index("古い旅行")
+      end
+
+      it "未購入のお土産は表示しない" do
+        trip = create(:trip, user:)
+        create(:trip_recipient, trip:, recipient:, purchased: false, souvenir_name: "東京ばな奈")
+
+        get recipient_path(recipient)
+
+        expect(response.body).not_to include("東京ばな奈")
+      end
+
+      it "品目名が空の履歴を表示しない" do
+        trip = create(:trip, user:)
+        create(:trip_recipient, trip:, recipient:, purchased: true, souvenir_name: "")
+
+        get recipient_path(recipient)
+
+        expect(response.body).not_to include(trip.name)
+      end
+
+      it "他のユーザーが作成した相手の詳細画面を表示しない" do
+        other_user = create(:user)
+        other_recipient = create(:recipient, user: other_user)
+
+        get recipient_path(other_recipient)
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context "ログインしていない場合" do
+      let(:recipient) { create(:recipient) }
+
+      it "ログイン画面にリダイレクトする" do
+        get recipient_path(recipient)
+
+        expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("ログインしてください")
+      end
+    end
+  end
+
   describe "GET /recipients/:id/edit" do
     context "ログインしている場合" do
       let(:user) { create(:user) }
