@@ -27,7 +27,7 @@ class RecipientsController < ApplicationController
     @recipient = current_user.recipients.find(params[:id])
     @souvenir_history = @recipient.trip_recipients
                                   .where(purchased: true)
-                                  .where.not(souvenir_name: [nil, ""])
+                                  .where.not(souvenir_name: [ nil, "" ])
                                   .joins(:trip)
                                   .includes(:trip)
                                   .order("trips.departure_date DESC")
