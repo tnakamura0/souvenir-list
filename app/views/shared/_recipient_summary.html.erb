@@ -1,7 +1,14 @@
 <div class="min-w-0">
   <%# 名前・グループバッジ %>
   <div class="flex min-w-0 flex-wrap items-center gap-2">
-    <span class="min-w-0 truncate font-medium"><%= recipient.name %></span>
+    <% if local_assigns.fetch(:show_link, true) %>
+      <%= link_to recipient_path(recipient), class: "flex min-w-0 items-center gap-1 hover:text-primary" do %>
+        <span class="min-w-0 truncate font-medium"><%= recipient.name %></span>
+        <span class="material-symbols-rounded shrink-0" aria-hidden="true">chevron_right</span>
+      <% end %>
+    <% else %>
+      <span class="min-w-0 truncate font-medium"><%= recipient.name %></span>
+    <% end %>
 
     <% if recipient.kind_group? %>
       <span class="
