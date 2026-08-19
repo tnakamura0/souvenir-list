@@ -1,5 +1,5 @@
 <div class="mb-6">
-  <%= link_to recipients_path, class: "back-link" do %>
+  <%= link_to recipient_path(@recipient), class: "back-link" do %>
     <span class="material-symbols-rounded">chevron_left</span>
     <span><%= t("common.back") %></span>
   <% end %>
@@ -16,5 +16,5 @@
 </div>
 
 <div class="card p-5 md:p-6">
-  <%= render "form", recipient: @recipient, cancel_path: recipients_path %>
+  <%= render "form", recipient: @recipient, cancel_path: recipient_path(@recipient) %>
 </div>
