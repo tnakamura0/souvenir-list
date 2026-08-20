@@ -96,6 +96,10 @@
   &:hover {
     @apply bg-surface-hover border-primary;
   }
+
+  &:focus-visible {
+    @apply border-primary outline-none ring-2 ring-primary/20;
+  }
 }
 
 @utility label {
