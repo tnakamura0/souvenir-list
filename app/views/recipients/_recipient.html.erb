@@ -1,6 +1,7 @@
-<div class="card p-5">
+<%= link_to recipient_path(recipient), class: "card card-hover block mb-3 p-5" do %>
   <%= render(
-        "shared/recipient_summary",
-        recipient: recipient
-      ) %>
-</div>
+      "shared/recipient_summary",
+      recipient: recipient,
+      show_link: false
+    ) %>
+<% end %>
