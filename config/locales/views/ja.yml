@@ -85,6 +85,8 @@ ja:
       title: 新しい旅行を作成
       description: 旅行の日程や目的地を入力してください。
     show:
+      title: 旅行詳細
+      description: 旅行の情報とお土産の購入状況を確認できます。
       delete_confirmation: "%{trip_name}を削除しますか？"
       recipients:
         purchased: 購入済み

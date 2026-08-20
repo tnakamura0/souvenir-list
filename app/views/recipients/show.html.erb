@@ -26,22 +26,20 @@
       <div
         class="absolute right-0 top-full z-20 mt-1 hidden w-40 rounded-lg border border-border bg-surface p-1 shadow-lg"
         data-kebab-menu-target="menu">
-        <%= link_to edit_recipient_path(@recipient),
-                class: "block w-full rounded-md px-3 py-2 hover:bg-surface-hover" do %>
-          <span><%= t("common.edit") %></span>
-        <% end %>
+        <%= link_to t("common.edit"),
+                    edit_recipient_path(@recipient),
+                    class: "block w-full rounded-md px-3 py-2 hover:bg-surface-hover" %>
 
-        <%= button_to recipient_path(@recipient),
-              method: :delete,
-                  data: {
-                    turbo_confirm: t(
-                      "recipients.recipient.delete_confirmation",
-                      recipient_name: @recipient.name
-                    )
-                  },
-                  class: "w-full rounded-md px-3 py-2 text-left text-danger hover:bg-danger-soft" do %>
-          <span><%= t("common.delete") %></span>
-        <% end %>
+        <%= button_to t("common.delete"),
+                      recipient_path(@recipient),
+                      method: :delete,
+                      data: {
+                        turbo_confirm: t(
+                          "recipients.recipient.delete_confirmation",
+                          recipient_name: @recipient.name
+                        )
+                      },
+                      class: "w-full rounded-md px-3 py-2 text-left text-danger hover:bg-danger-soft" %>
       </div>
     </div>
   </div>
@@ -87,10 +85,7 @@
 </div>
 
 <section>
-  <div class="mb-4 flex items-center gap-2">
-    <span class="material-symbols-rounded text-primary" aria-hidden="true">
-      history
-    </span>
+  <div class="mb-4 border-l-2 border-primary pl-3">
     <h2 class="text-xl font-semibold tracking-wide">
       <%= t(".souvenir_list.title") %>
     </h2>
@@ -120,9 +115,7 @@
 
               <p class="mt-1 flex items-center gap-1.5">
                 <span class="material-symbols-rounded text-[20px]!" aria-hidden="true">calendar_today</span>
-                <%= l(trip_recipient.trip.departure_date) %>
-                〜
-                <%= l(trip_recipient.trip.return_date) %>
+                <%= l(trip_recipient.trip.departure_date) %> 〜 <%= l(trip_recipient.trip.return_date) %>
               </p>
             </div>
           </div>

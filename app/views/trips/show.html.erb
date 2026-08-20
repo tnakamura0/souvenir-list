@@ -1,47 +1,66 @@
-<div class="mb-6 flex items-center justify-between">
+<div class="mb-6">
   <%= link_to trips_path, class: "back-link" do %>
     <span class="material-symbols-rounded">chevron_left</span>
     <span><%= t("common.back") %></span>
   <% end %>
-
-  <div class="flex gap-2">
-    <%= link_to edit_trip_path(@trip), class: "btn-secondary inline-flex items-center gap-1.5 px-3 py-1" do %>
-      <span class="material-symbols-rounded text-base" aria-hidden="true">edit</span>
-      <span><%= t("common.edit") %></span>
-    <% end %>
-    <%= button_to trip_path(@trip),
-                  method: :delete,
-                  data: { turbo_confirm: t(".delete_confirmation", trip_name: @trip.name) },
-                  class: "btn-danger inline-flex items-center gap-1.5 px-3 py-1" do %>
-      <span class="material-symbols-rounded" aria-hidden="true">delete</span>
-      <span><%= t("common.delete") %></span>
-    <% end %>
-  </div>
 </div>
 
-<div class="card mb-4 p-4 md:p-5">
-  <%# 旅行詳細表示 %>
-  <div class="min-w-0 space-y-1">
-    <h1 class="text-lg font-semibold truncate"><%= @trip.name %></h1>
-    <p class="flex items-center gap-1 text-sm text-text-secondary">
-      <span class="material-symbols-rounded">location_on</span>
-      <span class="truncate"><%= @trip.destination %></span>
-    </p>
+<div class="mb-8">
+  <div class="flex items-center justify-between">
+    <h1 class="page-header page-title"><%= t(".title") %></h1>
 
-    <div class="flex items-center gap-1.5 text-sm text-text-secondary">
-      <span class="material-symbols-rounded">calendar_today</span>
-      <span>
-        <%= l(@trip.departure_date) %> 〜 <%= l(@trip.return_date) %>
-      </span>
+    <%# ケバブメニュー %>
+    <div class="relative" data-controller="kebab-menu" data-action="click@window->kebab-menu#closeOnOutside">
+      <button
+        type="button"
+        class="text-text-muted hover:text-text-primary"
+        data-action="click->kebab-menu#toggle"
+      >
+        <span class="material-symbols-rounded">more_vert</span>
+
+        <span class="sr-only">
+          <%= t("trips.show.recipients.menu.open") %>
+        </span>
+      </button>
+      <div 
+        class="absolute right-0 top-full z-20 mt-1 hidden w-40 rounded-lg border border-border bg-surface p-1 shadow-lg"
+        data-kebab-menu-target="menu">
+        <%= link_to t("common.edit"),
+                    edit_trip_path(@trip),
+                    class: "block w-full rounded-md px-3 py-2 hover:bg-surface-hover" %>
+      
+        <%= button_to t("common.delete"),
+                      trip_path(@trip),
+                      method: :delete,
+                      data: { turbo_confirm: t(".delete_confirmation", trip_name: @trip.name) },
+                      class: "w-full rounded-md px-3 py-2 text-left bg-danger-soft text-danger" %>
+      </div>
     </div>
   </div>
+  <p class="page-description"><%= t(".description") %></p>
 
-  <%# 進捗バー %>
-  <% if @trip.total_count > 0 %>
-    <div id="trip_progress">
-      <%= render "progress", trip: @trip %>
+  <div class="card mt-5 p-5 md:p-6">
+    <%# 旅行詳細表示 %>
+    <div class="min-w-0 space-y-1">
+      <h2 class="text-xl font-semibold truncate"><%= @trip.name %></h2>
+      <p class="flex items-center gap-1 text-sm text-text-secondary">
+        <span class="material-symbols-rounded">location_on</span>
+        <span class="truncate"><%= @trip.destination %></span>
+      </p>
+
+      <div class="flex items-center gap-1.5 text-sm text-text-secondary">
+        <span class="material-symbols-rounded">calendar_today</span>
+        <span><%= l(@trip.departure_date) %> 〜 <%= l(@trip.return_date) %></span>
+      </div>
     </div>
-  <% end %>
+
+    <%# 進捗バー %>
+    <% if @trip.total_count > 0 %>
+      <div id="trip_progress">
+        <%= render "progress", trip: @trip %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <%# お土産リスト %>
