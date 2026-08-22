@@ -89,6 +89,12 @@ RSpec.describe User, type: :model do
           avatar_url: "https://example.com/auth-avatar.png"
         )
       end
+
+      it "初期タグを生成する" do
+        user = described_class.find_or_create_from_auth_hash(auth_hash)
+
+        expect(user.tags.pluck(:name)).to contain_exactly("家族", "職場")
+      end
     end
 
     context "同じgoogle_uidのユーザーが存在する場合" do
@@ -123,6 +129,12 @@ RSpec.describe User, type: :model do
           google_uid: "google-uid-123",
           avatar_url: "https://example.com/auth-avatar.png"
         )
+      end
+
+      it "初期タグを生成しない" do
+        expect do
+          described_class.find_or_create_from_auth_hash(auth_hash)
+        end.not_to change(Tag, :count)
       end
     end
   end

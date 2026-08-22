@@ -189,7 +189,7 @@ ja:
       description: タグの名前を変更できます。
     form:
       name:
-        placeholder: 例：家族、職場、友人
+        placeholder: 例：友人、親戚
     tag:
       delete_confirmation: "%{tag_name}タグを削除しますか？"
   today:
