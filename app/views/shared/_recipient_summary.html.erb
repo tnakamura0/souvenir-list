@@ -1,7 +1,7 @@
 <div class="min-w-0">
   <%# 名前・グループバッジ %>
   <div class="flex min-w-0 flex-wrap items-center gap-2">
-    <% if local_assigns.fetch(:show_link, true) %>
+    <% if show_link %>
       <%= link_to recipient_path(recipient), class: "flex min-w-0 items-center gap-1 hover:text-primary" do %>
         <span class="min-w-0 truncate font-medium"><%= recipient.name %></span>
         <span class="material-symbols-rounded shrink-0" aria-hidden="true">chevron_right</span>
@@ -21,10 +21,10 @@
   </div>
 
   <%# タグ %>
-  <%= render("shared/tag_badges", recipient: recipient, class: "mt-2") %>
+  <%= render("shared/tag_badges", recipient: recipient) %>
 
   <%# メモ %>
-  <% if local_assigns.fetch(:show_memo, true) && recipient.memo.present? %>
+  <% if show_memo && recipient.memo.present? %>
     <p class="mt-2 truncate text-sm text-text-secondary"><%= recipient.memo %></p>
   <% end %>
 </div>
