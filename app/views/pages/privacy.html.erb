@@ -22,6 +22,14 @@
         <br>
         これらの情報は、本サービスへのログイン認証およびアカウント管理のために利用します。
       </p>
+      <br>
+      <p class="policy-text">また、Google Analyticsの利用に伴い、以下の情報を取得する場合があります。</p>
+      <ul class="policy-text mt-2 list-disc space-y-1 pl-6">
+        <li>Cookie等を利用して生成される識別情報</li>
+        <li>本サービスの閲覧・利用状況</li>
+        <li>ブラウザや端末に関する情報</li>
+        <li>おおよその位置情報</li>
+      </ul>
     </section>
 
     <section>
@@ -32,6 +40,7 @@
       <ul class="policy-text mt-2 list-disc space-y-1 pl-6">
         <li>当社サービスに関する登録の受付、お客様の本人確認、認証のため</li>
         <li>お客様の当社サービスの利用履歴を管理するため</li>
+        <li>当社サービスにおけるお客様の行動履歴を分析し、当社サービスの維持改善に役立てるため</li>
         <li>お客様からのお問い合わせに対応するため</li>
         <li>当社の規約や法令に違反する行為に対応するため</li>
         <li>以上の他、当社サービスの提供、維持、保護及び改善のため</li>
@@ -58,6 +67,33 @@
     </section>
 
     <section>
+      <h2 class="policy-heading">アクセス解析ツール</h2>
+      <div class="policy-text">
+        <p>当社は、本サービスの利用状況を把握し、サービスの改善に役立てるため、Google LLCが提供する「Google Analytics」を利用しています。</p>
+        <p class="mt-3">Google Analyticsでは、Cookie等を利用して、本サービスの閲覧・利用状況、ブラウザや端末に関する情報、おおよその位置情報等を収集します。</p>
+        <p class="mt-3">Googleによるデータの取扱いについては、Googleのプライバシーポリシーおよび「Googleのサービスを使用するサイトやアプリから収集した情報のGoogleによる使用」をご確認ください。</p>
+
+        <p class="mt-2">
+          <%= link_to "Google プライバシーポリシー",
+                      "https://policies.google.com/privacy?hl=ja",
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      class: "text-primary underline underline-offset-2 hover:text-primary-hover" %>
+        </p>
+
+        <p class="mt-2">
+          <%= link_to "Googleのサービスを使用するサイトやアプリから収集した情報のGoogleによる使用",
+                      "https://policies.google.com/technologies/partner-sites?hl=ja",
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      class: "text-primary underline underline-offset-2 hover:text-primary-hover" %>
+        </p>
+
+        <p class="mt-3">また、お客様はブラウザの設定でCookieを無効にすることにより、Cookieを利用した情報の収集を制限することができます。</p>
+      </div>
+    </section>
+
+    <section>
       <h2 class="policy-heading">プライバシーポリシーの変更</h2>
       <p class="policy-text">
         当社は、必要に応じて、このプライバシーポリシーの内容を変更します。この場合、変更後のプライバシーポリシーの施行時期と内容を適切な方法により周知または通知します。
@@ -77,5 +113,8 @@
     </section>
   </div>
 
-  <p class="mt-12 text-sm text-text-muted">2026年8月15日 制定</p>
+  <div class="mt-12 space-y-2">
+    <p class="text-sm text-text-muted">2026年8月15日 制定</p>
+    <p class="text-sm text-text-muted">2026年8月25日 改訂</p>
+  </div>
 </div>
