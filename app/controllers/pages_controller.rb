@@ -6,8 +6,4 @@ class PagesController < ApplicationController
 
   def privacy
   end
-
-  def sentry_test
-    raise "Sentry test error"
-  end
 end
