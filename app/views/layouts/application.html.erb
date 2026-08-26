@@ -47,6 +47,8 @@
         gtag('config', 'G-50C6ZGBEWS');
       </script>
     <% end %>
+    
+    <%= Sentry.get_trace_propagation_meta.html_safe %>
   </head>
 
   <body class="<%= class_names("font-sans min-h-screen flex flex-col bg-background text-text-primary", { "pb-16 md:pb-0" => logged_in? } ) %>">
