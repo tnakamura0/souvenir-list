@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get "/terms", to: "pages#terms"
   get "/privacy", to: "pages#privacy"
+  get "/sentry-test", to: "pages#sentry_test"
 
   # GoogleのOAuth用設定
   get "login", to: "sessions#new"
