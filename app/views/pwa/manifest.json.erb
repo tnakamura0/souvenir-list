@@ -1,22 +1,23 @@
 {
-  "name": "App",
+  "id": "/",
+  "name": "OmiMemo",
+  "short_name": "OmiMemo",
   "icons": [
     {
-      "src": "/icon.png",
+      "src": "<%= image_path("icon-192.png") %>",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "192x192"
     },
     {
-      "src": "/icon.png",
+      "src": "<%= image_path("icon-512.png") %>",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "maskable"
+      "sizes": "512x512"
     }
   ],
   "start_url": "/",
   "display": "standalone",
   "scope": "/",
-  "description": "App.",
-  "theme_color": "red",
-  "background_color": "red"
+  "description": "旅行のお土産の買い忘れを防ぐ管理アプリ",
+  "theme_color": "#009689",
+  "background_color": "#FAFCFD"
 }
