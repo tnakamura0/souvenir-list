@@ -13,6 +13,13 @@ ja:
     update: 更新
     cancel: キャンセル
     open_menu: メニューを開く
+  errors:
+    not_found:
+      meta_title: ページが見つかりません | OmiMemo
+      title: ページが見つかりません
+      description: お探しのページは削除されたか、URLが変更された可能性があります。
+      back_home: ホームへ戻る
+      back_top: トップページへ戻る
   shared:
     header:
       logout: ログアウト
