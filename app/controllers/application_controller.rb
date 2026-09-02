@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user
   before_action :require_login
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
@@ -27,5 +29,11 @@ class ApplicationController < ActionController::Base
 
   def require_login
     redirect_to login_path, alert: t("application.require_login") unless logged_in?
+  end
+
+  private
+
+  def render_not_found
+    render "errors/not_found", layout: "error", status: :not_found
   end
 end

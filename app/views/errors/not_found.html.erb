@@ -1,0 +1,17 @@
+<div class="text-center">
+  <%= image_tag "logo.svg", alt: "OmiMemo", class: "inline-block h-12 w-auto" %>
+  <p class="mt-18 font-bold text-4xl text-primary">404</p>
+
+  <h1 class="page-title mt-4 text-text-primary"><%= t(".title") %></h1>
+  <p class="page-description mt-1 text-text-secondary">
+    <%= t(".description") %>
+  </p>
+
+  <div class="mt-10">
+    <% if current_user %>
+      <%= link_to t(".back_home"), root_path, class: "btn-primary px-6 py-3" %>
+    <% else %>
+      <%= link_to t(".back_top"), login_path, class: "btn-primary px-6 py-3" %>
+    <% end %>
+  </div>
+</div>
