@@ -8,5 +8,12 @@ RSpec.describe "Errors", type: :request do
       expect(response).to have_http_status(:not_found)
       expect(response.body).to include("ページが見つかりません")
     end
+
+    it "存在しない画像URLでも404画面を表示する" do
+      get "/not-found-image.png"
+
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to include("ページが見つかりません")
+    end
   end
 end

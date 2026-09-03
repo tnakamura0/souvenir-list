@@ -34,6 +34,6 @@ class ApplicationController < ActionController::Base
   private
 
   def render_not_found
-    render "errors/not_found", layout: "error", status: :not_found
+    render "errors/not_found", layout: "error", formats: :html, status: :not_found
   end
 end
