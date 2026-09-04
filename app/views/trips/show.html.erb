@@ -9,8 +9,12 @@
   <div class="flex items-center justify-between">
     <h1 class="page-header page-title"><%= t(".title") %></h1>
 
-    <%# ケバブメニュー %>
-    <div class="relative" data-controller="kebab-menu" data-action="click@window->kebab-menu#closeOnOutside">
+    <%# ケバブメニューと削除ダイアログ %>
+    <div
+      class="relative"
+      data-controller="kebab-menu modal"
+      data-action="click@window->kebab-menu#closeOnOutside"
+    >
       <button
         type="button"
         class="text-text-muted hover:text-text-primary"
@@ -22,6 +26,7 @@
           <%= t("common.open_menu") %>
         </span>
       </button>
+
       <div 
         class="absolute right-0 top-full z-20 mt-1 hidden w-40 rounded-lg border border-border bg-surface p-1 shadow-lg"
         data-kebab-menu-target="menu">
@@ -29,14 +34,24 @@
                     edit_trip_path(@trip),
                     class: "block w-full rounded-md px-3 py-2 hover:bg-surface-hover" %>
       
-        <%= button_to t("common.delete"),
-                      trip_path(@trip),
-                      method: :delete,
-                      data: { turbo_confirm: t(".delete_confirmation", trip_name: @trip.name) },
-                      class: "w-full rounded-md px-3 py-2 text-left bg-danger-soft text-danger" %>
+          <button
+            type="button"
+            data-action="kebab-menu#close modal#open"
+            class="w-full rounded-md px-3 py-2 text-left text-danger hover:bg-danger-soft"
+          >
+            <%= t("common.delete") %>
+          </button>
       </div>
+
+      <%= render "shared/delete_confirmation_dialog",
+            title: t(".delete_dialog.title", trip_name: @trip.name),
+            message: t(".delete_dialog.message"),
+            action_text: t("common.delete_action"),
+            delete_path: trip_path(@trip),
+            form_data: {} %>
     </div>
   </div>
+
   <p class="page-description"><%= t(".description") %></p>
 
   <div class="card mt-5 p-5 md:p-6">

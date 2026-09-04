@@ -10,6 +10,7 @@ ja:
     required: 必須
     edit: 編集
     delete: 削除
+    delete_action: 削除する
     update: 更新
     cancel: キャンセル
     open_menu: メニューを開く
@@ -95,12 +96,16 @@ ja:
     show:
       title: 旅行詳細
       description: 旅行の情報とお土産の購入状況を確認できます。
-      delete_confirmation: "%{trip_name}を削除しますか？"
+      delete_dialog:
+        title: "%{trip_name} を削除しますか？"
+        message: この操作は取り消せません。
       recipients:
         purchased: 購入済み
         not_purchased: 未購入
-        remove_confirmation: "%{recipient_name}をこの旅行から外しますか？"
         remove: 旅行から外す
+        remove_dialog:
+          title: "%{recipient_name} をこの旅行から外しますか？"
+          action_text: 外す
         menu:
           add_souvenir: お土産を入力
         souvenir:
@@ -146,6 +151,9 @@ ja:
     show:
       title: 相手詳細
       description: 相手の情報とお土産履歴を確認できます。
+      delete_dialog:
+        title: "%{recipient_name} を削除しますか？"
+        message: この操作は取り消せません。
       souvenir_list:
         title: お土産履歴
         souvenir: お土産
@@ -169,7 +177,6 @@ ja:
         description: 既存のタグを選択するか、新しいタグを作成できます。
     recipient:
       group_badge: "%{people_count}人グループ"
-      delete_confirmation: "%{recipient_name}を削除しますか？"
   trip_recipients:
     new:
       title: 旅行に相手を追加

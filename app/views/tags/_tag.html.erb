@@ -12,20 +12,25 @@
         <span class="hidden md:inline"><%= t("common.edit") %></span>
       <% end %>
 
-      <%= button_to tag_path(tag),
-                    method: :delete,
-                    data: {
-                      turbo_confirm: t(
-                        "tags.tag.delete_confirmation",
-                        tag_name: tag.name
-                      )
-                    },
-                    form: { data: { turbo_frame: "_top" } }, # 削除時はページ全体を遷移対象とする
-                    class: "btn-danger flex items-center gap-1.5 px-2 py-1",
-                    aria: { label: t("common.delete") } do %>
-        <span class="material-symbols-rounded" aria-hidden="true">delete</span>
-        <span class="hidden md:inline"><%= t("common.delete") %></span>
-      <% end %>
+      <div data-controller="modal">
+        <button
+          type="button"
+          data-action="modal#open"
+          class="btn-danger flex items-center gap-1.5 px-2 py-1"
+          aria-label="<%= t("common.delete") %>"
+        >
+          <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+          <span class="hidden md:inline"><%= t("common.delete") %></span>
+        </button>
+
+        <%= render "shared/delete_confirmation_dialog",
+                    title: t("tags.tag.delete_confirmation", tag_name: tag.name),
+                    message: "",
+                    action_text: t("common.delete_action"),
+                    delete_path: tag_path(tag),
+                    form_data: { turbo_frame: "_top" } # 削除時はページ全体を遷移対象とする
+        %>
+      </div>
     </div>
   </div>
 <% end %>
