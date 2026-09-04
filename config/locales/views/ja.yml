@@ -105,7 +105,6 @@ ja:
         remove: 旅行から外す
         remove_dialog:
           title: "%{recipient_name} をこの旅行から外しますか？"
-          action_text: 外す
         menu:
           add_souvenir: お土産を入力
         souvenir:
