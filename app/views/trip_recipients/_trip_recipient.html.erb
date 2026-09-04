@@ -10,7 +10,7 @@
 
       <% if trip_recipient.souvenir_name.present? %>
         <div class="mt-2 flex min-w-0 items-center gap-1.5 text-sm text-text-secondary">
-          <span class="material-symbols-rounded shrink-0 text-accent text-[18px]!">
+          <span class="material-symbols-rounded shrink-0 text-primary text-[18px]!">
             shopping_bag
           </span>
           <span class="truncate font-medium">
@@ -31,7 +31,7 @@
                     class: class_names(
                       "inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm transition-colors",
                       {
-                        "text-success" => trip_recipient.purchased?,
+                        "text-primary" => trip_recipient.purchased?,
                         "text-text-secondary hover:text-primary" => !trip_recipient.purchased?
                       }
                     ) do %>
