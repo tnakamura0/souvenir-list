@@ -46,7 +46,12 @@
         </span>
       <% end %>
 
-      <div class="relative" data-controller="kebab-menu" data-action="click@window->kebab-menu#closeOnOutside">
+      <%# ケバブメニューと削除ダイアログ %>
+      <div
+        class="relative"
+        data-controller="kebab-menu"
+        data-action="click@window->kebab-menu#closeOnOutside"
+      >
         <button
           type="button"
           class="
@@ -73,22 +78,27 @@
             type="button"
             class="w-full rounded-md px-3 py-2 text-left text-sm hover:bg-surface-hover"
             data-action="click->kebab-menu#close click->modal#open"
+            data-modal-dialog-param="souvenir"
           >
             <%= t("trips.show.recipients.menu.add_souvenir") %>
           </button>
 
-          <%= button_to trip_trip_recipient_path(trip_recipient.trip, trip_recipient),
-                        method: :delete,
-                        data: {
-                          turbo_confirm: t(
-                            "trips.show.recipients.remove_confirmation",
-                            recipient_name: trip_recipient.recipient.name
-                          )
-                        },
-                        class: "w-full rounded-md px-3 py-2 text-left text-sm text-danger hover:bg-danger-soft" do %>
+          <button
+            type="button"
+            data-action="kebab-menu#close modal#open"
+            data-modal-dialog-param="delete"
+            class="w-full rounded-md px-3 py-2 text-left text-sm text-danger hover:bg-danger-soft"
+          >
             <%= t("trips.show.recipients.remove") %>
-          <% end %>
+          </button>
         </div>
+
+        <%= render "shared/delete_confirmation_dialog",
+            title: t("trips.show.recipients.remove_dialog.title", recipient_name: trip_recipient.recipient.name),
+            message: "",
+            action_text: t("trips.show.recipients.remove"),
+            delete_path: trip_trip_recipient_path(trip_recipient.trip, trip_recipient),
+            form_data: {} %>
       </div>
     </div>
   </div>

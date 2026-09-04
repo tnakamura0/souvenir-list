@@ -9,8 +9,12 @@
   <div class="flex items-center justify-between">
     <h1 class="page-header page-title"><%= t(".title") %></h1>
 
-    <%# ケバブメニュー %>
-    <div class="relative" data-controller="kebab-menu" data-action="click@window->kebab-menu#closeOnOutside">
+    <%# ケバブメニューと削除ダイアログ %>
+    <div
+      class="relative"
+      data-controller="kebab-menu modal"
+      data-action="click@window->kebab-menu#closeOnOutside"
+    >
       <button
         type="button"
         class="text-text-muted hover:text-text-primary"
@@ -30,17 +34,21 @@
                     edit_recipient_path(@recipient),
                     class: "block w-full rounded-md px-3 py-2 hover:bg-surface-hover" %>
 
-        <%= button_to t("common.delete"),
-                      recipient_path(@recipient),
-                      method: :delete,
-                      data: {
-                        turbo_confirm: t(
-                          "recipients.recipient.delete_confirmation",
-                          recipient_name: @recipient.name
-                        )
-                      },
-                      class: "w-full rounded-md px-3 py-2 text-left text-danger hover:bg-danger-soft" %>
+          <button
+            type="button"
+            data-action="kebab-menu#close modal#open"
+            class="w-full rounded-md px-3 py-2 text-left text-danger hover:bg-danger-soft"
+          >
+            <%= t("common.delete") %>
+          </button>
       </div>
+
+      <%= render "shared/delete_confirmation_dialog",
+            title: t(".delete_dialog.title", recipient_name: @recipient.name),
+            message: t(".delete_dialog.message"),
+            action_text: t("common.delete_action"),
+            delete_path: recipient_path(@recipient),
+            form_data: {} %>
     </div>
   </div>
 
