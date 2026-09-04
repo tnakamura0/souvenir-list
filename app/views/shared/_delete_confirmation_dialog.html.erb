@@ -1,0 +1,32 @@
+<%#
+  パーシャル呼び出し時は以下の引数も必要
+  - title
+  - message
+  - action_text
+  - delete_path
+  - form_data：基本は空の{}でいい。Turbo Frameでの削除の際は遷移対象を指定する
+%>
+
+<dialog
+  class="m-auto w-[calc(100%-2rem)] max-w-sm rounded-3xl border-0 bg-surface p-0 shadow-xl backdrop:bg-black/20"
+  data-modal-target="dialog"
+  data-action="click->modal#closeOnBackdrop"
+  data-modal-name="delete"
+  >
+  <div class="text-center py-6 md:py-8">
+    <h2 class="text-lg font-medium"><%= title %></h2>
+    <p class="mt-2 text-text-secondary"><%= message %></p>
+
+    <div class="mt-4 inline-flex items-center gap-3 md:gap-5">
+      <button class="btn-secondary" data-action="modal#close">
+        <%= t("common.cancel") %>
+      </button>
+
+      <%= button_to action_text,
+                    delete_path,
+                    method: :delete,
+                    form: { data: form_data },
+                    class: "btn-danger" %>
+    </div>
+  </div>
+</dialog>
