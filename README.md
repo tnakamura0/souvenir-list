@@ -45,13 +45,17 @@ OmiMemoでは、旅行ごとにお土産を渡す相手を登録し、「誰に�
 
 ### 「今日の旅行」機能
 
-旅行当日に、お土産を渡す相手の購入状況をすぐに確認できます。
+<img src="docs/images/today.png">
 
-[![Image from Gyazo](https://i.gyazo.com/3ba84449c14d620df85474cac9ba6b99.gif)](https://gyazo.com/3ba84449c14d620df85474cac9ba6b99)
+旅行当日に、お土産を渡す相手の購入状況をすぐに確認できます。
 
 ログイン直後に表示されるように導線を設計し、購入状況を確認するまでの画面遷移を減らしました。
 
+[![Image from Gyazo](https://i.gyazo.com/3ba84449c14d620df85474cac9ba6b99.gif)](https://gyazo.com/3ba84449c14d620df85474cac9ba6b99)
+
 ### お土産購入チェック機能
+
+<img src="docs/images/purchased.png">
 
 お土産を購入した相手にチェックをつけると「未購入」から「購入済み」に切り替わります。
 チェック時には進捗バーも同時に更新されるため、一目で全体の購入状況を確認できます。
@@ -60,17 +64,23 @@ OmiMemoでは、旅行ごとにお土産を渡す相手を登録し、「誰に�
 
 ### タグによる相手の一括追加機能
 
+<img src="docs/images/tag.png">
+
 お土産を渡す相手をタグで絞り込み、まとめて旅行に追加できます。
 
 [![Image from Gyazo](https://i.gyazo.com/b6698d9d8a73efea6a9605594341bd6c.gif)](https://gyazo.com/b6698d9d8a73efea6a9605594341bd6c)
 
 ### お土産品目入力機能
 
+<img src="docs/images/souvenir_name.png">
+
 相手ごとに購入予定・購入したお土産の品目名を記録できます。記録した品目名は、購入後にお土産履歴として残ります。
 
 [![Image from Gyazo](https://i.gyazo.com/6137e1723ce25083862176b47ffdff04.gif)](https://gyazo.com/6137e1723ce25083862176b47ffdff04)
 
 ### お土産履歴確認機能
+
+<img src="docs/images/souvenir_history.png">
 
 品目名を入力した購入済みのお土産は、相手詳細画面で履歴として確認できます。過去に何を購入したかを振り返り、次回のお土産選びに活用できます。
 
