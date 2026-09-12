@@ -236,6 +236,17 @@ RSpec.describe "TripRecipients", type: :request do
 
           expect(response).to redirect_to(trip_path(trip))
         end
+
+        it "Turbo Streamの形式で進捗バーを含んだレスポンスが返る" do
+          patch trip_trip_recipient_path(trip, trip_recipient), params: {
+            trip_recipient: {
+              purchased: true
+            }
+          }, as: :turbo_stream
+
+          expect(response.media_type).to eq(Mime[:turbo_stream])
+          expect(response.body).to include("trip_progress")
+        end
       end
 
       context "購入済みの場合" do
