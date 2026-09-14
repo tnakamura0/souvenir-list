@@ -76,7 +76,7 @@ ja:
       cta:
         title: 安心して、旅行を楽しもう。
         google_sign_in_description: Googleアカウントですぐに始められます
-      google_sign_in_alt: Googleでログイン
+      google_sign_in: Googleでログイン
   pages:
     terms:
       title: 利用規約

@@ -3,7 +3,7 @@
 
 <div class="space-y-20 md:space-y-24">
   <%# ファーストビュー %>
-  <section class="flex flex-col items-center text-center">
+  <section id="hero" class="flex flex-col items-center text-center">
     <%= image_tag "logo.svg",
                   alt: "OmiMemo",
                   class: "mb-8 relative -left-1 w-auto" %>
@@ -20,9 +20,10 @@
     <div class="mt-8">
       <%= button_to "/auth/google_oauth2",
                     method: :post,
-                    data: { turbo: false } do %>
+                    data: { turbo: false },
+                    aria: { label: t(".google_sign_in") } do %>
         <%= image_tag "google-sign-in-ja-light.svg",
-                      alt: t(".google_sign_in_alt"),
+                      alt: "",
                       width: 180,
                       height: 40 %>
       <% end %>
@@ -202,7 +203,7 @@
   </section>
 
   <%# 最後のCTA %>
-  <section class="mx-auto w-full max-w-2xl rounded-3xl bg-primary-soft px-5 py-10 text-center md:px-10">
+  <section id="cta" class="mx-auto w-full max-w-2xl rounded-3xl bg-primary-soft px-5 py-10 text-center md:px-10">
     <h2 class="text-xl md:text-2xl font-bold">
       <%= t(".cta.title") %>
     </h2>
@@ -210,9 +211,10 @@
     <div class="mt-7 flex justify-center">
       <%= button_to "/auth/google_oauth2",
                     method: :post,
-                    data: { turbo: false } do %>
+                    data: { turbo: false },
+                    aria: { label: t(".google_sign_in") } do %>
         <%= image_tag "google-sign-in-ja-light.svg",
-                      alt: t(".google_sign_in_alt"),
+                      alt: "",
                       width: 180,
                       height: 40 %>
       <% end %>
