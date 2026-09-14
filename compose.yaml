@@ -7,6 +7,7 @@ services:
       - "3000:3000"
     command: bash -c "rm -f tmp/pids/server.pid && ./bin/dev"
     tty: true
+    init: true
     stdin_open: true
     environment:
       TZ: Asia/Tokyo
