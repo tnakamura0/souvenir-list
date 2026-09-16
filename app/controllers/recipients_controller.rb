@@ -13,8 +13,10 @@ class RecipientsController < ApplicationController
   end
 
   def create
-    @recipient = current_user.recipients.build(recipient_params)
-    if save_recipient_with_new_tag(@recipient)
+    @recipient = current_user.recipients.build
+    @form = RecipientForm.new(recipient: @recipient, user: current_user, attributes: recipient_params)
+
+    if @form.save
       redirect_to recipients_path, notice: t(".success")
     else
       @tags = current_user.tags
@@ -40,9 +42,9 @@ class RecipientsController < ApplicationController
 
   def update
     @recipient = current_user.recipients.find(params[:id])
-    @recipient.assign_attributes(recipient_params)
+    @form = RecipientForm.new(recipient: @recipient, user: current_user, attributes: recipient_params)
 
-    if save_recipient_with_new_tag(@recipient)
+    if @form.save
       redirect_to recipients_path, notice: t(".success")
     else
       @tags = current_user.tags
@@ -65,22 +67,5 @@ class RecipientsController < ApplicationController
     permitted[:tag_ids] = current_user.tags.where(id: permitted[:tag_ids]).pluck(:id)
 
     permitted
-  end
-
-  def save_recipient_with_new_tag(recipient)
-    ActiveRecord::Base.transaction do
-      recipient.save!
-
-      tag_name = recipient.new_tag_name.to_s.strip
-
-      if tag_name.present?
-        tag = current_user.tags.find_or_create_by!(name: tag_name)
-        recipient.tags << tag unless recipient.tags.exists?(tag.id)
-      end
-    end
-
-    true
-  rescue ActiveRecord::RecordInvalid
-    false
   end
 end
