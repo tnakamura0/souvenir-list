@@ -561,7 +561,7 @@ RSpec.describe "Recipients", type: :request do
                   name: ""
                 }
               }
-            }.not_to change { recipient.reload.name }
+            }.not_to(change { recipient.reload.name })
           end
 
           it "相手編集画面を再表示する" do
@@ -588,7 +588,7 @@ RSpec.describe "Recipients", type: :request do
                 name: "更新後の名前"
               }
             }
-          }.not_to change { recipient.reload.name }
+          }.not_to(change { recipient.reload.name })
 
           expect(response).to have_http_status(:not_found)
         end

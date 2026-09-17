@@ -59,7 +59,7 @@ RSpec.describe Recipient, type: :model do
 
     it "指定したタグが関連付いている相手だけを返す" do
       matching_recipient = create(:recipient, user:)
-      other_recipient = create(:recipient, user:)
+      create(:recipient, user:)
 
       matching_recipient.tags << tag
 

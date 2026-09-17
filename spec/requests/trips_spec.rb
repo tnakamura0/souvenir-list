@@ -304,7 +304,7 @@ RSpec.describe "Trips", type: :request do
                 name: "更新後の旅行名"
               }
             }
-          }.not_to change { trip.reload.name }
+          }.not_to(change { trip.reload.name })
 
           expect(response).to have_http_status(:not_found)
         end
