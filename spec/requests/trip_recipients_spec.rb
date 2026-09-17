@@ -20,7 +20,7 @@ RSpec.describe "TripRecipients", type: :request do
         end
 
         it "自分が作成した未追加の相手を表示する" do
-          recipient = create(:recipient, user:, name: "友人")
+          create(:recipient, user:, name: "友人")
 
           get new_trip_trip_recipient_path(trip)
 
@@ -37,7 +37,7 @@ RSpec.describe "TripRecipients", type: :request do
         end
 
         it "他のユーザーが作成した相手を表示しない" do
-          other_recipient = create(:recipient, user: other_user, name: "他のユーザーの友人")
+          create(:recipient, user: other_user, name: "他のユーザーの友人")
 
           get new_trip_trip_recipient_path(trip)
 
@@ -314,7 +314,7 @@ RSpec.describe "TripRecipients", type: :request do
               purchased: true
             }
           }
-        }.not_to change { trip_recipient.reload.purchased }
+        }.not_to(change { trip_recipient.reload.purchased })
 
         expect(response).to redirect_to(login_path)
       end

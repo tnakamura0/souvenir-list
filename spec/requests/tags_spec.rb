@@ -226,7 +226,7 @@ RSpec.describe "Tags", type: :request do
           it "タグを更新できない" do
             expect {
               patch tag_path(tag), params: invalid_params
-            }.not_to change { tag.reload.name }
+            }.not_to(change { tag.reload.name })
           end
 
           it "422ステータスを返す" do
@@ -257,7 +257,7 @@ RSpec.describe "Tags", type: :request do
         it "タグを更新できない" do
           expect {
             patch tag_path(tag), params: valid_params
-          }.not_to change { tag.reload.name }
+          }.not_to(change { tag.reload.name })
         end
 
         it "404を返す" do
