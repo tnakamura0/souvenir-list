@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_17_063901) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_23_094801) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "push_subscriptions", force: :cascade do |t|
+    t.string "auth", null: false
+    t.datetime "created_at", null: false
+    t.text "endpoint", null: false
+    t.string "p256dh", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["endpoint"], name: "index_push_subscriptions_on_endpoint", unique: true
+    t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
+  end
 
   create_table "recipient_tags", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -78,6 +89,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_17_063901) do
     t.index ["google_uid"], name: "index_users_on_google_uid", unique: true
   end
 
+  add_foreign_key "push_subscriptions", "users"
   add_foreign_key "recipient_tags", "recipients"
   add_foreign_key "recipient_tags", "tags"
   add_foreign_key "recipients", "users"
