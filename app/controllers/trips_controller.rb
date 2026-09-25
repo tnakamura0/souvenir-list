@@ -10,7 +10,7 @@ class TripsController < ApplicationController
   def create
     @trip = current_user.trips.build(trip_params)
     if @trip.save
-      redirect_to trips_path, notice: t(".success")
+      redirect_to trip_path(@trip), notice: t(".success")
     else
       flash.now[:alert] = t(".failure")
       render :new, status: :unprocessable_content
