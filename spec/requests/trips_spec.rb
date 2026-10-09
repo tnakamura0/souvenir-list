@@ -83,7 +83,9 @@ RSpec.describe "Trips", type: :request do
           }
         }.to change(user.trips, :count).by(1)
 
-        expect(response).to redirect_to(trips_path)
+        new_trip = Trip.last
+
+        expect(response).to redirect_to(trip_path(new_trip))
         expect(flash[:notice]).to eq("旅行を作成しました")
       end
 
