@@ -49,8 +49,8 @@
       <%# ケバブメニューと削除ダイアログ %>
       <div
         class="relative"
-        data-controller="kebab-menu"
-        data-action="click@window->kebab-menu#closeOnOutside"
+        data-controller="dropdown"
+        data-action="click@window->dropdown#closeOnOutside"
       >
         <button
           type="button"
@@ -61,7 +61,7 @@
             transition-colors
             hover:text-text-primary
           "
-          data-action="click->kebab-menu#toggle"
+          data-action="click->dropdown#toggle"
         >
           <span class="material-symbols-rounded">more_vert</span>
 
@@ -72,12 +72,12 @@
 
         <div
           class="absolute right-0 top-full z-20 mt-1 hidden w-40 rounded-lg border border-border bg-surface p-1 shadow-lg"
-          data-kebab-menu-target="menu"
+          data-dropdown-target="menu"
         >
           <button
             type="button"
             class="w-full rounded-md px-3 py-2 text-left text-sm hover:bg-surface-hover"
-            data-action="click->kebab-menu#close click->modal#open"
+            data-action="click->dropdown#close click->modal#open"
             data-modal-dialog-param="souvenir"
           >
             <%= t("trips.show.recipients.menu.add_souvenir") %>
@@ -85,7 +85,7 @@
 
           <button
             type="button"
-            data-action="kebab-menu#close modal#open"
+            data-action="dropdown#close modal#open"
             data-modal-dialog-param="delete"
             class="w-full rounded-md px-3 py-2 text-left text-sm text-danger hover:bg-danger-soft"
           >
