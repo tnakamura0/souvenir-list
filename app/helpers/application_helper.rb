@@ -7,6 +7,8 @@ module ApplicationHelper
       controller_name.in?(%w[trips trip_recipients])
     when :recipients
       controller_name.in?(%w[recipients tags])
+    when :settings
+      controller_name.in?(%w[settings])
     end
   end
 end

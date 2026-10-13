@@ -43,6 +43,19 @@
     <% end %>
   </nav>
 
+  <%# 通知設定 %>
+  <div class="pl-5">
+    <%= link_to notifications_settings_path,
+          class: class_names(
+            "flex gap-2 px-3 py-2.5 rounded-xl font-medium",
+            "bg-primary-soft text-primary" => navigation_active?(:settings),
+            "text-text-secondary hover:bg-surface-hover hover:text-text-primary" => !navigation_active?(:settings)
+          ) do %>
+      <span class="material-symbols-rounded" aria-hidden="true">settings</span>
+      <span class="font-medium"><%= t("shared.sidebar.notifications") %></span>
+    <% end %>
+  </div>
+
   <%# ログアウト %>
   <div class="pl-5 py-3 border-t border-mist-100">
     <%= button_to logout_path,
