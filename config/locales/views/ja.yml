@@ -23,6 +23,8 @@ ja:
       back_top: トップページへ戻る
   shared:
     header:
+      menu: メニューを開く
+      notifications: 通知設定
       logout: ログアウト
     footer:
       terms: 利用規約
@@ -35,7 +37,25 @@ ja:
       trips: 旅行
       today: 今日
       recipients: 相手
+      notifications: 通知設定
       logout: ログアウト
+    notification_guide:
+      close: 通知機能の案内を閉じる
+      title: お土産の買い忘れを通知
+      description: 帰宅日の朝7時に未購入のお土産がある場合、OmiMemoからお知らせします。
+      setup: 通知を設定する
+      install: OmiMemoをインストール
+      install_help: インストール方法を見る
+      installed: インストールが完了しました。OmiMemoをアプリから開いてください。
+    pwa_install_guide:
+      title: OmiMemoをインストール
+      safari:
+        title: iPhone / iPadの場合
+        description: Safariの共有ボタンから「ホーム画面に追加」を選択してください。
+      other:
+        title: その他のブラウザの場合
+        description: ブラウザのメニューから「アプリをインストール」や「ホーム画面に追加」を選択してください。
+      close: 閉じる
   sessions:
     new:
       hero:
@@ -211,3 +231,17 @@ ja:
       empty:
         message: 今日は旅行の予定がありません。
         action: 旅行を新規作成する
+  settings:
+    notifications:
+      title: 通知設定
+      description: お土産の買い忘れ通知を設定できます。
+      reminder:
+        title: 帰宅日の未購入通知
+        description: 帰宅日の朝7時に未購入のお土産がある場合、OmiMemoからお知らせします。
+      setup:
+        title: 通知を受け取るには
+        description: 通知を受け取るために、OmiMemoをアプリとしてインストールして通知を許可してください。
+        enable_notifications: 通知を設定する
+        install: OmiMemoをインストール
+        install_help: インストール方法を見る
+        installed: インストールが完了しました。OmiMemoをアプリから開いてください。
