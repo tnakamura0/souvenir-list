@@ -1,0 +1,75 @@
+<div class="card relative p-4 sm:p-5 mb-5"
+      data-controller="notification-guide pwa-install"
+>
+  <button
+    type="button"
+    class="absolute top-4 right-4 inline-flex size-8 items-center justify-center rounded-full text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary"
+    data-action="notification-guide#close"
+    aria-label="<% t("shared.notification_guide.close") %>"
+  >
+    <span class="material-symbols-rounded text-xl" aria-hidden="true">
+      close
+    </span>
+  </button>
+
+  <div class="flex gap-3 pr-8">
+    <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+      <span class="material-symbols-rounded" aria-hidden="true">
+        notifications
+      </span>
+    </div>
+
+    <div>
+      <h2 class="font-semibold text-text-primary">
+        <%= t("shared.notification_guide.title") %>
+      </h2>
+
+      <p class="mt-1 text-sm leading-6 text-text-secondary">
+        <%= t("shared.notification_guide.description") %>
+      </p>
+    </div>
+  </div>
+
+  <div data-controller="modal" class="mt-4 text-center">
+    <%# PWAとして起動している場合 %>
+    <%= link_to t("shared.notification_guide.setup"),
+                notifications_settings_path,
+                class: "btn-primary inline-flex w-full items-center justify-center sm:w-auto",
+                data: { pwa_install_target: "notification" },
+                hidden: true %>
+
+    <%# beforeinstallpromptを利用できる場合は、
+        Stimulus実装時にインストールボタンへ切り替える %>
+    <button
+      type="button"
+      class="btn-primary"
+      data-pwa-install-target="install"
+      data-action="pwa-install#install"
+      hidden
+    >
+      <%= t("shared.notification_guide.install") %>
+    </button>
+
+    <%# beforeinstallpromptを利用できない場合は、
+        Stimulus実装時に「インストール方法を見る」へ切り替える %>
+    <button
+      type="button"
+      class="btn-secondary"
+      data-pwa-install-target="installHelp"
+      data-action="modal#open"
+      hidden
+    >
+      <%= t("shared.notification_guide.install_help") %>
+    </button>
+
+    <p
+      class="text-text-secondary"
+      data-pwa-install-target="installed"
+      hidden
+    >
+      <%= t("shared.notification_guide.installed") %>
+    </p>
+
+    <%= render "shared/pwa_install_guide" %>
+  </div>
+</div>

@@ -12,13 +12,13 @@
     <%# ケバブメニューと削除ダイアログ %>
     <div
       class="relative"
-      data-controller="kebab-menu modal"
-      data-action="click@window->kebab-menu#closeOnOutside"
+      data-controller="dropdown modal"
+      data-action="click@window->dropdown#closeOnOutside"
     >
       <button
         type="button"
         class="text-text-muted hover:text-text-primary"
-        data-action="click->kebab-menu#toggle"
+        data-action="click->dropdown#toggle"
       >
         <span class="material-symbols-rounded">more_vert</span>
 
@@ -29,14 +29,14 @@
 
       <div
         class="absolute right-0 top-full z-20 mt-1 hidden w-40 rounded-lg border border-border bg-surface p-1 shadow-lg"
-        data-kebab-menu-target="menu">
+        data-dropdown-target="menu">
         <%= link_to t("common.edit"),
                     edit_recipient_path(@recipient),
                     class: "block w-full rounded-md px-3 py-2 hover:bg-surface-hover" %>
 
           <button
             type="button"
-            data-action="kebab-menu#close modal#open"
+            data-action="dropdown#close modal#open"
             class="w-full rounded-md px-3 py-2 text-left text-danger hover:bg-danger-soft"
           >
             <%= t("common.delete") %>

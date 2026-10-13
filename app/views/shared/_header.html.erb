@@ -5,12 +5,44 @@
     <% end %>
 
     <% if logged_in? %>
-      <%= button_to logout_path,
-                    method: :delete,
-                    aria: { label: t(".logout") },
-                    class: "md:hidden text-text-secondary" do %>
-        <span class="material-symbols-rounded">logout</span>
-      <% end %>
+      <div
+        class="relative md:hidden"
+        data-controller="dropdown"
+        data-action="click@window->dropdown#closeOnOutside"
+        >
+        <button
+          type="button"
+          class="flex items-center justify-center text-text-secondary"
+          aria-label="<% t("shared.header.menu") %>"
+          data-action="dropdown#toggle"
+        >
+          <span class="material-symbols-rounded" aria-hidden="true">
+            menu
+          </span>
+        </button>
+
+        <div
+          class="hidden absolute right-0 top-full mt-2 w-44 rounded-xl border border-border bg-surface p-2 shadow-lg"
+          data-dropdown-target="menu"
+        >
+          <%= link_to notifications_settings_path,
+                      class: "flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-text-primary" do %>
+            <span class="material-symbols-rounded text-xl" aria-hidden="true">
+              notifications
+            </span>
+            <%= t("shared.header.notifications") %>
+          <% end %>
+
+          <%= button_to logout_path,
+                        method: :delete,
+                        class: "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-text-primary" do %>
+            <span class="material-symbols-rounded text-xl" aria-hidden="true">
+              logout
+            </span>
+            <%= t("shared.header.logout") %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   </div>
 </header>

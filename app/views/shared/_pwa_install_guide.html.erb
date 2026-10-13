@@ -1,0 +1,30 @@
+<dialog
+  class="m-auto w-[calc(100%-2rem)] max-w-sm rounded-3xl border-0 bg-surface p-0 shadow-xl backdrop:bg-black/20"
+  data-modal-target="dialog"
+  data-action="click->modal#closeOnBackdrop"
+  >
+  <div class="text-center py-6 md:py-8">
+    <h2 class="text-xl font-medium"><%= t("shared.pwa_install_guide.title") %></h2>
+    <div class="mt-4 mx-4 space-y-5 text-left">
+      <div class="space-y-1">
+        <h3 class="text-lg font-medium"><%= t("shared.pwa_install_guide.safari.title") %></h3>
+        <p>
+          <%= t("shared.pwa_install_guide.safari.description") %>
+        </p>
+      </div>
+
+      <div class="space-y-1">
+        <h3 class="font-medium"><%= t("shared.pwa_install_guide.other.title") %></h3>
+        <p>
+          <%= t("shared.pwa_install_guide.other.description") %>
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <button class="btn-secondary" data-action="modal#close">
+        <%= t("shared.pwa_install_guide.close") %>
+      </button>
+    </div>
+  </div>
+</dialog>

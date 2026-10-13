@@ -1,0 +1,94 @@
+<div class="mx-auto w-full max-w-2xl">
+  <div class="page-header">
+    <h1 class="page-title"><%= t(".title") %></h1>
+  </div>
+
+  <p class="page-description">
+    <%= t(".description") %>
+  </p>
+
+  <div class="mt-8 space-y-6">
+    <section class="card p-5 sm:p-6">
+      <div class="flex gap-3">
+        <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+          <span class="material-symbols-rounded" aria-hidden="true">
+            notifications
+          </span>
+        </div>
+
+        <div>
+          <h2 class="font-semibold text-text-primary">
+            <%= t(".reminder.title") %>
+          </h2>
+
+          <p class="mt-1 text-sm leading-6 text-text-secondary">
+            <%= t(".reminder.description") %>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card p-5 sm:p-6" data-controller="pwa-install modal">
+      <div class="flex gap-3">
+        <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+          <span class="material-symbols-rounded" aria-hidden="true">
+            info
+          </span>
+        </div>
+
+        <div>
+          <h2 class="font-semibold text-text-primary">
+            <%= t(".setup.title") %>
+          </h2>
+
+          <p class="mt-2 text-sm leading-6 text-text-secondary">
+            <%= t(".setup.description") %>
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-5 text-center">
+        <%# PWAとして起動している場合 %>
+        <button
+          type="button"
+          class="btn-primary w-full sm:w-auto"
+          data-pwa-install-target="notification"
+          hidden
+        >
+          <%= t(".setup.enable_notifications") %>
+        </button>
+
+        <%# 未インストールの場合 %>
+        <button
+          type="button"
+          class="btn-primary w-full sm:w-auto"
+          data-pwa-install-target="install"
+          data-action="pwa-install#install"
+          hidden
+        >
+          <%= t(".setup.install") %>
+        </button>
+
+        <button
+          type="button"
+          class="btn-secondary sm:w-auto"
+          data-pwa-install-target="installHelp"
+          data-action="modal#open"
+          hidden
+        >
+          <%= t(".setup.install_help") %>
+        </button>
+
+        <p
+          class="text-text-secondary"
+          data-pwa-install-target="installed"
+          hidden
+        >
+          <%= t(".setup.installed") %>
+        </p>
+
+        <%= render "shared/pwa_install_guide" %>
+      </div>
+    </section>
+  </div>
+</div>

@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   resources :recipients, only: %i[index new create show edit update destroy]
   resources :tags, only: %i[index create edit update destroy]
   resources :push_subscriptions, only: %i[create]
+  resource :settings, only: [] do
+    get :notifications
+  end
 
   match "*path", to: "errors#not_found", via: :all
 end
