@@ -49,14 +49,49 @@
 
       <div class="mt-5 text-center">
         <%# PWAとして起動している場合 %>
-        <button
-          type="button"
-          class="btn-primary w-full sm:w-auto"
+        <div
           data-pwa-install-target="notification"
+          data-controller="notification-permission"
           hidden
         >
-          <%= t(".setup.enable_notifications") %>
-        </button>
+          <%# 通知許可前 %>
+          <button
+            type="button"
+            class="btn-primary w-full sm:w-auto"
+            data-notification-permission-target="default"
+            data-action="notification-permission#request"
+            hidden
+          >
+            <%= t(".setup.enable_notifications") %>
+          </button>
+
+          <%# 通知許可済み %>
+          <p
+            class="text-text-secondary"
+            data-notification-permission-target="granted"
+            hidden
+          >
+            <%= t(".setup.permission_granted") %>
+          </p>
+
+          <%# 通知拒否済み %>
+          <p
+            class="text-text-secondary"
+            data-notification-permission-target="denied"
+            hidden
+          >
+            <%= t(".setup.permission_denied") %>
+          </p>
+
+          <%# Notification API非対応 %>
+          <p
+            class="text-text-secondary"
+            data-notification-permission-target="unsupported"
+            hidden
+          >
+            <%= t(".setup.permission_unsupported") %>
+          </p>
+        </div>
 
         <%# 未インストールの場合 %>
         <button
