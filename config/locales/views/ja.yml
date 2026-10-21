@@ -245,3 +245,6 @@ ja:
         install: OmiMemoをインストール
         install_help: インストール方法を見る
         installed: インストールが完了しました。OmiMemoをアプリから開いてください。
+        permission_granted: 通知は許可されています
+        permission_denied: 通知が拒否されています。通知を受け取るには、端末の設定から通知を許可してください。
+        permission_unsupported: この環境では通知を利用できません
