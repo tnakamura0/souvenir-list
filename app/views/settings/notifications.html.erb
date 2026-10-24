@@ -52,6 +52,7 @@
         <div
           data-pwa-install-target="notification"
           data-controller="notification-permission"
+          data-notification-permission-vapid-public-key-value="<%= Rails.application.credentials.dig(:vapid, :public_key) %>"
           hidden
         >
           <%# 通知許可前 %>
@@ -73,6 +74,33 @@
           >
             <%= t(".setup.permission_granted") %>
           </p>
+
+          <%# Push Subscription登録中 %>
+          <p
+            class="text-text-secondary"
+            data-notification-permission-target="registering"
+            role="status"
+            hidden
+          >
+            <%= t(".setup.registering") %>
+          </p>
+
+          <%# Push Subscription登録失敗 %>
+          <div
+            data-notification-permission-target="failed"
+            hidden
+          >
+            <p class="text-text-secondary" role="alert">
+              <%= t(".setup.registration_failed") %>
+            </p>
+            <button
+              type="button"
+              class="btn-secondary mt-3"
+              data-action="notification-permission#registerPushSubscription"
+            >
+              <%= t(".setup.retry") %>
+            </button>
+          </div>
 
           <%# 通知拒否済み %>
           <p
